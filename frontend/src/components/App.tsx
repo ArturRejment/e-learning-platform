@@ -1,14 +1,16 @@
-import { Routes, Route, Navigate } from 'react-router-dom';
-//components
-import Home from './home/Home';
-import Login from './auth/Login';
-import Register from './auth/Register';
-//assets
-import { routerPaths } from '../assets';
-//styles
+// styles
 import './App.scss';
 
-function App() {
+import { Navigate, Route, Routes } from 'react-router-dom';
+
+// assets
+import { routerPaths } from '../assets';
+import Login from './auth/Login';
+import Register from './auth/Register';
+// components
+import Home from './home/Home';
+
+const App = () => {
   return (
     <Routes>
       <Route path={routerPaths.login} element={<Login />} />
@@ -17,6 +19,6 @@ function App() {
       <Route path="*" element={<Navigate to={routerPaths.home} replace />} />
     </Routes>
   );
-}
+};
 
 export default App;
