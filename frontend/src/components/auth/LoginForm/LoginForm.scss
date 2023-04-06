@@ -1,0 +1,100 @@
+@import '../../../style/colors';
+@import '../../../style/fonts';
+
+.login-form {
+  width: calc(100% - 40px);
+  max-width: 400px;
+  background-color: $clr-light;
+  padding: 60px 40px;
+  border-radius: 15px;
+  box-shadow: 0px 0px 40px -10px $clr-dark;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-bottom: auto;
+
+  &__header {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+
+  &__error-msg {
+    color: $clr-accent;
+    font-size: 1rem;
+    font-weight: 400;
+    margin-bottom: 20px;
+  }
+
+  &__group {
+    width: 100%;
+    margin-bottom: 15px;
+  }
+
+  &__label {
+    color: $clr-grey;
+    font-size: 0.9rem;
+  }
+
+  &__input {
+    width: 100%;
+    padding: 8px 0;
+    outline: none;
+    background-color: $clr-light;
+    border: none;
+    border-bottom: 2px solid $clr-grey;
+    color: $clr-grey;
+
+    &:-webkit-autofill,
+    &:-webkit-autofill:hover,
+    &:-webkit-autofill:focus,
+    &:-webkit-autofill:active {
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: $clr-grey !important;
+      transition: all 0s 50000s, border-bottom 0.4s ease-in-out;
+      -webkit-transition: all 0s 50000s, border-bottom 0.4s ease-in-out;
+      font-family: $font-primary;
+      -webkit-font-family: $font-primary;
+    }
+  }
+
+  &__error {
+    text-align: left;
+    color: $clr-accent;
+    margin-top: 5px;
+    font-size: 0.8rem;
+  }
+
+  &__button {
+    margin: 25px 0 45px 0;
+    width: 100%;
+    padding: 15px;
+    border: none;
+    outline: none;
+    color: $clr-light;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+    background-image: linear-gradient(
+      to right,
+      $clr-accent 70%,
+      $clr-primary 99%
+    );
+    background-size: 300% 100%;
+
+    &:hover {
+      background-position: 100% 0;
+    }
+  }
+
+  &__note {
+    font-size: 0.8rem;
+    text-align: center;
+  }
+
+  &__register-button {
+    text-decoration: none;
+    margin-left: 5px;
+    cursor: pointer;
+    color: $clr-accent;
+    font-weight: bold;
+  }
+}

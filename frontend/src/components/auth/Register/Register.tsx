@@ -1,5 +1,6 @@
-import RegisterForm from '../RegisterForm';
 import './Register.scss';
+
+import RegisterForm from '../RegisterForm';
 
 const Register = () => {
   return (

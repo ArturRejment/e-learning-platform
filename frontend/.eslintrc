@@ -36,6 +36,7 @@
     "react/react-in-jsx-scope": "off",
     "@typescript-eslint/no-unused-expressions": "warn",
     "@typescript-eslint/no-unused-vars": "warn",
+    "react/no-unescaped-entities": "off",
     "react/function-component-definition": [
       2,
       {
@@ -50,6 +51,22 @@
       },
       {
         "usePrettierrc": true
+      }
+    ],
+    "jsx-a11y/label-has-associated-control": [
+      "error",
+      {
+        "required": {
+          "some": ["nesting", "id"]
+        }
+      }
+    ],
+    "jsx-a11y/label-has-for": [
+      "error",
+      {
+        "required": {
+          "some": ["nesting", "id"]
+        }
       }
     ]
   },
