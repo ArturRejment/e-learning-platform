@@ -11,6 +11,7 @@ const Login = () => {
   const [error, setError] = useState<string>('');
 
   const handleLogin = async (data: LoginDto, reset: () => void) => {
+    // eslint-disable-next-line no-console
     console.log('DATA', data);
     setError('Something went wrong!');
     reset();

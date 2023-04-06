@@ -24,46 +24,6 @@
     margin-bottom: 20px;
   }
 
-  &__group {
-    width: 100%;
-    margin-bottom: 15px;
-  }
-
-  &__label {
-    color: $clr-grey;
-    font-size: 0.9rem;
-  }
-
-  &__input {
-    width: 100%;
-    padding: 8px 0;
-    outline: none;
-    background-color: $clr-light;
-    border: none;
-    border-bottom: 2px solid $clr-grey;
-    color: $clr-grey;
-
-    &:-webkit-autofill,
-    &:-webkit-autofill:hover,
-    &:-webkit-autofill:focus,
-    &:-webkit-autofill:active {
-      background-clip: text;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: $clr-grey !important;
-      transition: all 0s 50000s, border-bottom 0.4s ease-in-out;
-      -webkit-transition: all 0s 50000s, border-bottom 0.4s ease-in-out;
-      font-family: $font-primary;
-      -webkit-font-family: $font-primary;
-    }
-  }
-
-  &__error {
-    text-align: left;
-    color: $clr-accent;
-    margin-top: 5px;
-    font-size: 0.8rem;
-  }
-
   &__button {
     margin: 25px 0 45px 0;
     width: 100%;

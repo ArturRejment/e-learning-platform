@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 
 import { routerPaths } from '../../../assets';
 import { LoginDto, loginDtoSchema } from '../../../types';
+import StyledInput from '../StyledInput';
 
 type Props = {
   submit: (data: LoginDto, reset: () => void) => void;
@@ -32,33 +33,20 @@ const LoginForm = ({ submit, error }: Props) => {
       {error && <h2 className="login-form__error-msg">{error}</h2>}
 
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="login-form__group">
-          <label htmlFor="email" className="login-form__label">
-            E-mail
-          </label>
-          <input
-            id="email"
-            className="login-form__input"
-            type="text"
-            aria-label="email"
-            {...register('email')}
-          />
-          <p className="login-form__error">{errors.email?.message}</p>
-        </div>
-
-        <div className="login-form__group">
-          <label htmlFor="password" className="login-form__label">
-            Password
-          </label>
-          <input
-            id="password"
-            className="login-form__input"
-            type="password"
-            aria-label="password"
-            {...register('password')}
-          />
-          <p className="login-form__error">{errors.password?.message}</p>
-        </div>
+        <StyledInput<'email'>
+          label="E-mail"
+          name="email"
+          type="text"
+          register={register('email')}
+          error={errors.email?.message}
+        />
+        <StyledInput<'password'>
+          label="Password"
+          name="password"
+          type="password"
+          register={register('password')}
+          error={errors.password?.message}
+        />
 
         <button className="login-form__button" type="submit">
           Login
