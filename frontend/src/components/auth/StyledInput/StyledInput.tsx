@@ -28,6 +28,9 @@ const StyledInput = <T extends string>({
         type={type}
         aria-label={name}
         {...register}
+        onBlur={(e) => {
+          e.target.dispatchEvent(new Event('input', { bubbles: true }));
+        }}
       />
       <p className="styled-input__error">{error}</p>
     </div>

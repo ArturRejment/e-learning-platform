@@ -1,4 +1,4 @@
-import './Login.scss';
+import '../shared/wrapperStyles.scss';
 
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -18,8 +18,8 @@ const Login = () => {
   };
 
   return (
-    <div className="login">
-      <Link className="login__back-button" to={routerPaths.home}>
+    <div className="wrapper">
+      <Link className="wrapper__back-button" to={routerPaths.home}>
         Back
       </Link>
       <LoginForm submit={handleLogin} error={error} />

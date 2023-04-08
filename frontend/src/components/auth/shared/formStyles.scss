@@ -1,7 +1,7 @@
 @import '../../../style/colors';
 @import '../../../style/fonts';
 
-.login-form {
+.form {
   width: calc(100% - 40px);
   max-width: 400px;
   background-color: $clr-light;
@@ -50,7 +50,7 @@
     text-align: center;
   }
 
-  &__register-button {
+  &__accent-button {
     text-decoration: none;
     margin-left: 5px;
     cursor: pointer;

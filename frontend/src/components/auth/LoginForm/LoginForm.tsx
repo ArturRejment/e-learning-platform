@@ -1,4 +1,4 @@
-import './LoginForm.scss';
+import '../shared/formStyles.scss';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { SubmitHandler, useForm } from 'react-hook-form';
@@ -28,9 +28,9 @@ const LoginForm = ({ submit, error }: Props) => {
   };
 
   return (
-    <div className="login-form">
-      <h1 className="login-form__header">Login</h1>
-      {error && <h2 className="login-form__error-msg">{error}</h2>}
+    <div className="form">
+      <h1 className="form__header">Login</h1>
+      {error && <h2 className="form__error-msg">{error}</h2>}
 
       <form onSubmit={handleSubmit(onSubmit)}>
         <StyledInput<'email'>
@@ -40,6 +40,7 @@ const LoginForm = ({ submit, error }: Props) => {
           register={register('email')}
           error={errors.email?.message}
         />
+
         <StyledInput<'password'>
           label="Password"
           name="password"
@@ -48,16 +49,13 @@ const LoginForm = ({ submit, error }: Props) => {
           error={errors.password?.message}
         />
 
-        <button className="login-form__button" type="submit">
+        <button className="form__button" type="submit">
           Login
         </button>
 
-        <p className="login-form__note">
+        <p className="form__note">
           Don't have an account?
-          <Link
-            className="login-form__register-button"
-            to={routerPaths.register}
-          >
+          <Link className="form__accent-button" to={routerPaths.register}>
             Register
           </Link>
         </p>
