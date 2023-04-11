@@ -2,7 +2,6 @@ from django.contrib import admin
 from django.urls import include, path
 from drf_spectacular.views import (SpectacularAPIView, SpectacularRedocView,
                                    SpectacularSwaggerView)
-from generate_codes.views import generate_codes_view
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -13,5 +12,4 @@ urlpatterns = [
         SpectacularSwaggerView.as_view(url_name="schema"),
         name="swagger-ui",
     ),
-    path("generate_codes/<int:num_codes>/", generate_codes_view , name="generate_codes"),
 ]
