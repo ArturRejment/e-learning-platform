@@ -1,9 +1,10 @@
 import '../shared/wrapperStyles.scss';
 
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 
 import { routerPaths } from '../../../assets';
+import { useAppSelector } from '../../../hooks';
 import { useLoginMutation } from '../../../services';
 import { FormError, LoginDto } from '../../../types';
 import LoginForm from '../LoginForm';
@@ -12,6 +13,9 @@ const Login = () => {
   const [error, setError] = useState<string>('');
   const [backendErrors, setBackendErrors] = useState<Partial<LoginDto>>({});
   const [login, { isLoading }] = useLoginMutation();
+  const isAuthenticated: boolean = useAppSelector(
+    ({ auth }) => auth.isAuthenticated,
+  );
 
   const handleLogin = async (data: LoginDto, reset: () => void) => {
     try {
@@ -24,7 +28,9 @@ const Login = () => {
     }
   };
 
-  return (
+  return isAuthenticated ? (
+    <Navigate to={routerPaths.home} />
+  ) : (
     <div className="wrapper">
       <Link className="wrapper__back-button" to={routerPaths.home}>
         Back
