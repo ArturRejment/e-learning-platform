@@ -10,3 +10,8 @@ export const loginDtoSchema = z.object({
 });
 
 export type LoginDto = z.infer<typeof loginDtoSchema>;
+
+export type LoginResponseDto = {
+  access: string;
+  refresh: string;
+};
