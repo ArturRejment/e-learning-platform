@@ -13,7 +13,9 @@ SECRET_KEY = env("DJANGO_SECRET", "secret")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool(int(env("DJANGO_DEBUG", 1)))
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
+CORS_ORIGIN_ALLOW_ALL = True
+CSRF_TRUSTED_ORIGINS = ["http://localhost:5173"]
 
 
 # Application definition
@@ -38,7 +40,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    'djangorestframework_camel_case.middleware.CamelCaseMiddleWare',
+    "djangorestframework_camel_case.middleware.CamelCaseMiddleWare",
 ]
 
 ROOT_URLCONF = "core.urls"
