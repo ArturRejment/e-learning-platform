@@ -17,6 +17,7 @@ drf-spectacular = "^0.26.1"
 django-stubs = "^1.16.0"
 mypy = "1.1.1"
 djangorestframework-stubs = {extras = ["compatible-mypy"], version = "^1.10.0"}
+djangorestframework-camel-case = "^1.4.2"
 
 [build-system]
 requires = ["poetry-core"]
