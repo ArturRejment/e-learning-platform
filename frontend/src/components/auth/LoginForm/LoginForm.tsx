@@ -6,14 +6,17 @@ import { Link } from 'react-router-dom';
 
 import { routerPaths } from '../../../assets';
 import { LoginDto, loginDtoSchema } from '../../../types';
+import Spinner from '../../utils/Spinner';
 import StyledInput from '../StyledInput';
 
 type Props = {
   submit: (data: LoginDto, reset: () => void) => void;
   error: string;
+  backendErrors: Partial<LoginDto>;
+  isLoading: boolean;
 };
 
-const LoginForm = ({ submit, error }: Props) => {
+const LoginForm = ({ submit, error, backendErrors, isLoading }: Props) => {
   const {
     register,
     handleSubmit,
@@ -38,7 +41,7 @@ const LoginForm = ({ submit, error }: Props) => {
           name="email"
           type="text"
           register={register('email')}
-          error={errors.email?.message}
+          error={errors.email?.message || backendErrors?.email}
         />
 
         <StyledInput<'password'>
@@ -46,11 +49,11 @@ const LoginForm = ({ submit, error }: Props) => {
           name="password"
           type="password"
           register={register('password')}
-          error={errors.password?.message}
+          error={errors.password?.message || backendErrors?.password}
         />
 
         <button className="form__button" type="submit">
-          Login
+          {isLoading ? <Spinner /> : 'Login'}
         </button>
 
         <p className="form__note">

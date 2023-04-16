@@ -9,15 +9,13 @@ export const registerDtoSchema = z
     }),
     password: z
       .string()
-      .min(6, { message: 'Password must be at least 6 characters' }),
-    confirmPassword: z
-      .string()
-      .min(1, { message: 'Confirm Password is required' }),
-    registrationToken: z
-      .string()
-      .min(1, { message: 'Registration Token is required' }),
+      .min(8, { message: 'Password must be at least 8 characters' }),
+    rePassword: z.string().min(1, { message: 'Confirm Password is required' }),
+    // registrationToken: z
+    //   .string()
+    //   .min(1, { message: 'Registration Token is required' }),
   })
-  .refine((data) => data.password === data.confirmPassword, {
+  .refine((data) => data.password === data.rePassword, {
     path: ['confirmPassword'],
     message: "Passwords don't match",
   });

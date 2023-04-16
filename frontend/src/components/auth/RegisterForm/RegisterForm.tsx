@@ -6,14 +6,17 @@ import { Link } from 'react-router-dom';
 
 import { routerPaths } from '../../../assets';
 import { RegisterDto, registerDtoSchema } from '../../../types';
+import Spinner from '../../utils/Spinner';
 import StyledInput from '../StyledInput';
 
 type Props = {
   submit: (data: RegisterDto, reset: () => void) => void;
   error: string;
+  backendErrors: Partial<RegisterDto>;
+  isLoading: boolean;
 };
 
-const RegisterForm = ({ submit, error }: Props) => {
+const RegisterForm = ({ submit, error, backendErrors, isLoading }: Props) => {
   const {
     register,
     handleSubmit,
@@ -38,7 +41,7 @@ const RegisterForm = ({ submit, error }: Props) => {
           name="firstName"
           type="text"
           register={register('firstName')}
-          error={errors.firstName?.message}
+          error={errors.firstName?.message || backendErrors?.firstName}
         />
 
         <StyledInput<'lastName'>
@@ -46,7 +49,7 @@ const RegisterForm = ({ submit, error }: Props) => {
           name="lastName"
           type="text"
           register={register('lastName')}
-          error={errors.lastName?.message}
+          error={errors.lastName?.message || backendErrors?.lastName}
         />
 
         <StyledInput<'email'>
@@ -54,7 +57,7 @@ const RegisterForm = ({ submit, error }: Props) => {
           name="email"
           type="text"
           register={register('email')}
-          error={errors.email?.message}
+          error={errors.email?.message || backendErrors?.email}
         />
 
         <StyledInput<'password'>
@@ -62,27 +65,27 @@ const RegisterForm = ({ submit, error }: Props) => {
           name="password"
           type="password"
           register={register('password')}
-          error={errors.password?.message}
+          error={errors.password?.message || backendErrors?.password}
         />
 
-        <StyledInput<'confirmPassword'>
+        <StyledInput<'rePassword'>
           label="Confirm Password"
-          name="confirmPassword"
+          name="rePassword"
           type="password"
-          register={register('confirmPassword')}
-          error={errors.confirmPassword?.message}
+          register={register('rePassword')}
+          error={errors.rePassword?.message || backendErrors?.rePassword}
         />
 
-        <StyledInput<'registrationToken'>
+        {/* <StyledInput<'registrationToken'>
           label="Registration Token"
           name="registrationToken"
           type="text"
           register={register('registrationToken')}
-          error={errors.registrationToken?.message}
-        />
+          error={errors.registrationToken?.message || backendErrors?.registrationToken}
+        /> */}
 
         <button className="form__button" type="submit">
-          Register
+          {isLoading ? <Spinner /> : 'Register'}
         </button>
 
         <p className="form__note">

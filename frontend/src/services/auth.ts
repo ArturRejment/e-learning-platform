@@ -1,11 +1,18 @@
 import { eLearningPlatformApi } from '../apis';
-import { LoginDto, LoginResponseDto } from '../types';
+import { LoginDto, LoginResponseDto, RegisterDto, User } from '../types';
 
 export const authApi = eLearningPlatformApi.injectEndpoints({
   endpoints: (build) => ({
     login: build.mutation<LoginResponseDto, LoginDto>({
       query: (credentials: LoginDto) => ({
-        url: 'login',
+        url: 'auth/token/obtain',
+        method: 'POST',
+        body: credentials,
+      }),
+    }),
+    register: build.mutation<User, RegisterDto>({
+      query: (credentials: RegisterDto) => ({
+        url: 'auth/register',
         method: 'POST',
         body: credentials,
       }),
@@ -13,7 +20,7 @@ export const authApi = eLearningPlatformApi.injectEndpoints({
   }),
 });
 
-export const { useLoginMutation } = authApi;
+export const { useLoginMutation, useRegisterMutation } = authApi;
 export const {
-  endpoints: { login },
+  endpoints: { login, register },
 } = authApi;

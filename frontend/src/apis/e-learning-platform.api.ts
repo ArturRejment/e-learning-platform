@@ -4,7 +4,7 @@ import type { RootState } from '../state';
 
 // Create our baseQuery instance
 const baseQuery = fetchBaseQuery({
-  baseUrl: `${process.env.REACT_APP_API_URL}`,
+  baseUrl: `${import.meta.env.VITE_API_URL}`,
   prepareHeaders: (headers, { getState }) => {
     // By default, if we have a token in the store, let's use that for authenticated requests
     const { accessToken } = (getState() as RootState).auth;
@@ -15,7 +15,7 @@ const baseQuery = fetchBaseQuery({
   },
 });
 
-const baseQueryWithRetry = retry(baseQuery, { maxRetries: 3 });
+const baseQueryWithRetry = retry(baseQuery, { maxRetries: 2 });
 
 /**
  * Create a base API to inject endpoints into elsewhere.

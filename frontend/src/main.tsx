@@ -1,14 +1,13 @@
-// styles
 import './styles.scss';
 
 import { StrictMode } from 'react';
 import ReactDOM from 'react-dom/client';
+import { Provider } from 'react-redux';
 
-// assets
 import { history } from './assets';
-// components
 import App from './components/App';
 import { CustomRouter } from './components/utils';
+import { store } from './state';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
@@ -16,8 +15,10 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <StrictMode>
-    <CustomRouter history={history}>
-      <App />
-    </CustomRouter>
+    <Provider store={store}>
+      <CustomRouter history={history}>
+        <App />
+      </CustomRouter>
+    </Provider>
   </StrictMode>,
 );

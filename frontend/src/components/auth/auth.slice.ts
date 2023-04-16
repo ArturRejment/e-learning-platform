@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { history, routerPaths } from '../../assets';
-import { login } from '../../services';
+import { login, register } from '../../services';
 import { LoginResponseDto, User } from '../../types';
 
 type InitialState = {
@@ -72,6 +72,37 @@ const authSlice = createSlice({
         state.isAuthenticated = false;
         state.isLoading = false;
         state.error = action?.error?.message || 'Incorrect credentials';
+      })
+      // REGISTER PENDING
+      .addMatcher(register.matchPending, (state) => {
+        state.isLoading = true;
+      })
+      // REGISTER FULFILLED
+      .addMatcher(
+        register.matchFulfilled,
+        (state, action: PayloadAction<User>) => {
+          localStorage.removeItem('accessToken');
+          localStorage.removeItem('refreshToken');
+          state.user = action.payload;
+          state.accessToken = null;
+          state.refreshToken = null;
+          state.isAuthenticated = false;
+          state.isLoading = false;
+          state.error = '';
+
+          history.push(routerPaths.login);
+        },
+      )
+      // REGISTER REJECTED
+      .addMatcher(register.matchRejected, (state, action) => {
+        localStorage.removeItem('accessToken');
+        localStorage.removeItem('refreshToken');
+        state.accessToken = null;
+        state.refreshToken = null;
+        state.user = null;
+        state.isAuthenticated = false;
+        state.isLoading = false;
+        state.error = action?.error?.message || 'User already exists';
       });
   },
 });
