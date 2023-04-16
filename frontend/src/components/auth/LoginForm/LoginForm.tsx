@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 import { routerPaths } from '../../../assets';
 import { LoginDto, loginDtoSchema } from '../../../types';
-import Spinner from '../../utils/Spinner';
+import { Spinner } from '../../utils';
 import StyledInput from '../StyledInput';
 
 type Props = {

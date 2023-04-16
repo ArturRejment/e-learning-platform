@@ -1,12 +1,12 @@
-import { useState, useLayoutEffect, PropsWithChildren } from 'react';
-import { Router } from 'react-router-dom';
 import { History } from 'history';
+import { PropsWithChildren, useLayoutEffect, useState } from 'react';
+import { Router } from 'react-router-dom';
 
 type CustomRouterProps = {
   history: History;
 };
 
-export const CustomRouter = ({
+const CustomRouter = ({
   history,
   ...props
 }: PropsWithChildren<CustomRouterProps>) => {
@@ -26,3 +26,5 @@ export const CustomRouter = ({
     />
   );
 };
+
+export default CustomRouter;
