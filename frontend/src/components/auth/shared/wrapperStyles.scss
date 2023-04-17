@@ -1,0 +1,23 @@
+@import '../../../style/colors';
+
+.wrapper {
+  background-color: $clr-primary;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  &__back-button {
+    color: white;
+    font-size: 1.3rem;
+    text-decoration: underline;
+    cursor: pointer;
+    padding: 0.5rem;
+    transition: all 0.4s ease-in-out;
+    align-self: flex-start;
+    margin: 20px;
+    margin-bottom: auto;
+  }
+}
