@@ -1,10 +1,13 @@
 from rest_framework import serializers
-from .models import Code
 
-class CodeGenerateSerializer(serializers.ModelSerializer):
+class CodeGenerateSerializer(serializers.Serializer):
     count = serializers.IntegerField()
-    code = serializers.CharField(read_only=True)
 
     class Meta:
-        model = Code
-        fields =  "__all__"
+        fields = ('count')
+
+    def validate(self, data):
+        if data['count'] < 1:
+            raise serializers.ValidationError("Number of codes must be greater than 0.")
+        return data
+    
