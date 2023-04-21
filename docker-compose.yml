@@ -1,0 +1,29 @@
+version: '3.9'
+
+services:
+
+  elearning_db:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: postgres_user
+      POSTGRES_PASSWORD: postgres_password
+      POSTGRES_DB: postgres_db
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data/
+    ports:
+      - "5432:5432"
+
+  elearning_backend:
+    build: ./backend
+    command: sh -c "
+      poetry install --no-interaction
+      && /wait
+      && poetry run python manage.py migrate
+      && poetry run python manage.py runserver 0.0.0.0:8005
+      "
+    volumes:
+      - ./backend/:/backend/
+    ports:
+      - "8005:8005"
+    depends_on:
+      - elearning_db
