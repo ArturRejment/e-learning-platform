@@ -11,9 +11,9 @@ export const registerDtoSchema = z
       .string()
       .min(8, { message: 'Password must be at least 8 characters' }),
     rePassword: z.string().min(1, { message: 'Confirm Password is required' }),
-    // registrationToken: z
-    //   .string()
-    //   .min(1, { message: 'Registration Token is required' }),
+    registrationToken: z
+      .string()
+      .min(1, { message: 'Registration Token is required' }),
   })
   .refine((data) => data.password === data.rePassword, {
     path: ['confirmPassword'],
