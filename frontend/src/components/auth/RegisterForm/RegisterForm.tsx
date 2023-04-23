@@ -76,13 +76,13 @@ const RegisterForm = ({ submit, error, backendErrors, isLoading }: Props) => {
           error={errors.rePassword?.message || backendErrors?.rePassword}
         />
 
-        {/* <StyledInput<'registrationToken'>
+        <StyledInput<'registrationToken'>
           label="Registration Token"
           name="registrationToken"
           type="text"
           register={register('registrationToken')}
           error={errors.registrationToken?.message || backendErrors?.registrationToken}
-        /> */}
+        />
 
         <button className="form__button" type="submit">
           {isLoading ? <Spinner /> : 'Register'}
