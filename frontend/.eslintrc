@@ -39,6 +39,7 @@
     "react/no-unescaped-entities": "off",
     "react/require-default-props": "off",
     "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
+    "import/prefer-default-export": "off",
     "no-param-reassign": [
       "error",
       {
@@ -76,6 +77,13 @@
         "required": {
           "some": ["nesting", "id"]
         }
+      }
+    ],
+    "prefer-const": [
+      "error",
+      {
+        "destructuring": "any",
+        "ignoreReadBeforeAssign": false
       }
     ]
   },

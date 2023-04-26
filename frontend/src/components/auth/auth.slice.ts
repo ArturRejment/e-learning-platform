@@ -3,6 +3,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { history, routerPaths } from '../../assets';
 import { login, register } from '../../services';
 import { LoginResponseDto, User } from '../../types';
+import { Token } from '../../types/token';
 
 type InitialState = {
   accessToken: string | null;
@@ -37,6 +38,13 @@ const authSlice = createSlice({
       state.user = null;
       state.isAuthenticated = false;
       state.isLoading = false;
+      state.error = '';
+    },
+    tokenRefreshed: (state, action: PayloadAction<string>) => {
+      const access = action.payload;
+      localStorage.setItem('accessToken', access);
+      state.accessToken = access;
+      state.isAuthenticated = true;
       state.error = '';
     },
   },
@@ -107,6 +115,6 @@ const authSlice = createSlice({
   },
 });
 
-export const { logout } = authSlice.actions;
+export const { logout, tokenRefreshed } = authSlice.actions;
 
 export default authSlice.reducer;
