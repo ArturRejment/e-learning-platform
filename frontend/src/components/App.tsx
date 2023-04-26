@@ -4,6 +4,7 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 
 import { ROUTER_PATH } from '../assets';
 import { useAppSelector } from '../hooks';
+import Navbar from '../navigation/Navbar/index';
 import { useVerifyTokenQuery } from '../services';
 import Login from './auth/Login';
 import Register from './auth/Register';
@@ -11,7 +12,11 @@ import CodeGeneration from './code-generation/CodeGeneration';
 import CourseCodeGeneration from './course/CourseCodeGeneration';
 import CourseDetail from './course/CourseDetail';
 import JoinCourse from './course/JoinCourse';
+import About from './home/About';
+import Contact from './home/Contact';
+import Course from './home/Course';
 import Home from './home/Home';
+import Lesson from './home/Lesson';
 import { PrivateRoute } from './utils';
 
 const App = () => {
