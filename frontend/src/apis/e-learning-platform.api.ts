@@ -4,6 +4,7 @@ import type {
   FetchBaseQueryError,
 } from '@reduxjs/toolkit/query';
 import { createApi, fetchBaseQuery, retry } from '@reduxjs/toolkit/query/react';
+import { Mutex } from 'async-mutex';
 
 import { logout, tokenRefreshed } from '../components/auth/auth.actions';
 import type { RootState } from '../state';
@@ -22,37 +23,56 @@ const baseQuery = fetchBaseQuery({
   },
 });
 
+const mutex = new Mutex();
+
 const baseQueryWithReauth: BaseQueryFn<
   string | FetchArgs,
   unknown,
   FetchBaseQueryError
 > = async (args, api, extraOptions) => {
+  // wait until the mutex is available without locking it
+  await mutex.waitForUnlock();
+
   let result = await baseQuery(args, api, extraOptions);
 
   if (!result.error || result.error.status !== 401) return result;
 
-  const refreshToken = localStorage.getItem('refreshToken');
-
-  // try to get a new token
-  const refreshResult = await baseQuery(
-    {
-      url: 'auth/token/refresh',
-      method: 'POST',
-      body: { refresh: refreshToken },
-    },
-    api,
-    extraOptions,
-  );
-
-  if (refreshResult.data) {
-    // store the new token
-    api.dispatch(tokenRefreshed(refreshResult.data as AccessToken));
-    // retry the initial query
-    result = await baseQuery(args, api, extraOptions);
-  } else {
-    // token not refreshed
-    api.dispatch(logout());
+  if (mutex.isLocked()) {
+    // wait until the mutex is available without locking it
+    await mutex.waitForUnlock();
+    return baseQuery(args, api, extraOptions);
   }
+
+  const release = await mutex.acquire();
+
+  try {
+    const refreshToken = localStorage.getItem('refreshToken');
+
+    // try to get a new token
+    const refreshResult = await baseQuery(
+      {
+        url: 'auth/token/refresh',
+        method: 'POST',
+        body: { refresh: refreshToken },
+      },
+      api,
+      extraOptions,
+    );
+
+    if (refreshResult.data) {
+      // store the new token
+      api.dispatch(tokenRefreshed(refreshResult.data as AccessToken));
+      // retry the initial query
+      result = await baseQuery(args, api, extraOptions);
+    } else {
+      // token not refreshed
+      api.dispatch(logout());
+    }
+  } finally {
+    // release must be called once the mutex should be released again
+    release();
+  }
+
   return result;
 };
 
