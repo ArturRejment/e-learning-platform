@@ -2,8 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { history, routerPaths } from '../../assets';
 import { login, register } from '../../services';
-import { LoginResponseDto, User } from '../../types';
-import { AccessToken } from '../../types/token';
+import { AccessToken, LoginResponseDto, User } from '../../types';
 import { logout, tokenRefreshed } from './auth.actions';
 
 type InitialState = {

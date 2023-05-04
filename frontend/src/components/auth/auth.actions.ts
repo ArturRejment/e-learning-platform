@@ -1,6 +1,6 @@
 import { createAction } from '@reduxjs/toolkit';
 
-import { AccessToken } from '../../types/token';
+import { AccessToken } from '../../types';
 
 const LOGOUT = 'auth/logout';
 const TOKEN_REFRESHED = 'auth/tokenRefreshed';

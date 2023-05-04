@@ -7,7 +7,7 @@ import { createApi, fetchBaseQuery, retry } from '@reduxjs/toolkit/query/react';
 
 import { logout, tokenRefreshed } from '../components/auth/auth.actions';
 import type { RootState } from '../state';
-import { AccessToken } from '../types/token';
+import { AccessToken } from '../types';
 
 // create baseQuery instance
 const baseQuery = fetchBaseQuery({
@@ -31,13 +31,18 @@ const baseQueryWithReauth: BaseQueryFn<
 
   if (!result.error || result.error.status !== 401) return result;
 
+  const refreshToken = localStorage.getItem('refreshToken');
+
   // try to get a new token
   const refreshResult = await baseQuery(
-    'auth/token/refresh',
+    {
+      url: 'auth/token/refresh',
+      method: 'POST',
+      body: { refresh: refreshToken },
+    },
     api,
     extraOptions,
   );
-  console.log('REFRESH RESULT', refreshResult);
 
   if (refreshResult.data) {
     // store the new token

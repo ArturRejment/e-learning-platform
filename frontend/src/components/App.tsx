@@ -3,12 +3,17 @@ import './App.scss';
 import { Navigate, Route, Routes } from 'react-router-dom';
 
 import { routerPaths } from '../assets';
+import { useAppSelector } from '../hooks';
+import { useVerifyTokenQuery } from '../services';
 import Login from './auth/Login';
 import Register from './auth/Register';
 import Home from './home/Home';
 import { PrivateRoute } from './utils';
 
 const App = () => {
+  const { accessToken } = useAppSelector(({ auth }) => auth);
+  useVerifyTokenQuery({ token: accessToken });
+
   return (
     <Routes>
       <Route path={routerPaths.login} element={<Login />} />

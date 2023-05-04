@@ -81,7 +81,10 @@ const RegisterForm = ({ submit, error, backendErrors, isLoading }: Props) => {
           name="registrationToken"
           type="text"
           register={register('registrationToken')}
-          error={errors.registrationToken?.message || backendErrors?.registrationToken}
+          error={
+            errors.registrationToken?.message ||
+            backendErrors?.registrationToken
+          }
         />
 
         <button className="form__button" type="submit">
