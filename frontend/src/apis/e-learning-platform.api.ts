@@ -5,8 +5,9 @@ import type {
 } from '@reduxjs/toolkit/query';
 import { createApi, fetchBaseQuery, retry } from '@reduxjs/toolkit/query/react';
 
-import { logout, tokenRefreshed } from '../components/auth/auth.slice';
+import { logout, tokenRefreshed } from '../components/auth/auth.actions';
 import type { RootState } from '../state';
+import { AccessToken } from '../types/token';
 
 // create baseQuery instance
 const baseQuery = fetchBaseQuery({
@@ -36,16 +37,17 @@ const baseQueryWithReauth: BaseQueryFn<
     api,
     extraOptions,
   );
+  console.log('REFRESH RESULT', refreshResult);
+
   if (refreshResult.data) {
     // store the new token
-    api.dispatch(tokenRefreshed(refreshResult.data.access));
+    api.dispatch(tokenRefreshed(refreshResult.data as AccessToken));
     // retry the initial query
     result = await baseQuery(args, api, extraOptions);
   } else {
     // token not refreshed
     api.dispatch(logout());
   }
-
   return result;
 };
 
