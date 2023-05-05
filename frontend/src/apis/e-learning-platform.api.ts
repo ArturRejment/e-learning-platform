@@ -1,12 +1,20 @@
+import type {
+  BaseQueryFn,
+  FetchArgs,
+  FetchBaseQueryError,
+} from '@reduxjs/toolkit/query';
 import { createApi, fetchBaseQuery, retry } from '@reduxjs/toolkit/query/react';
+import { Mutex } from 'async-mutex';
 
+import { logout, tokenRefreshed } from '../components/auth/auth.actions';
 import type { RootState } from '../state';
+import { AccessToken } from '../types';
 
-// Create our baseQuery instance
+// create baseQuery instance
 const baseQuery = fetchBaseQuery({
   baseUrl: `${import.meta.env.VITE_API_URL}`,
   prepareHeaders: (headers, { getState }) => {
-    // By default, if we have a token in the store, let's use that for authenticated requests
+    // by default, if we have a token in the store, let's use that for authenticated requests
     const { accessToken } = (getState() as RootState).auth;
     if (accessToken) {
       headers.set('Authorization', `Bearer ${accessToken}`);
@@ -15,7 +23,60 @@ const baseQuery = fetchBaseQuery({
   },
 });
 
-const baseQueryWithRetry = retry(baseQuery, { maxRetries: 2 });
+const mutex = new Mutex();
+
+const baseQueryWithReauth: BaseQueryFn<
+  string | FetchArgs,
+  unknown,
+  FetchBaseQueryError
+> = async (args, api, extraOptions) => {
+  // wait until the mutex is available without locking it
+  await mutex.waitForUnlock();
+
+  let result = await baseQuery(args, api, extraOptions);
+
+  if (!result.error || result.error.status !== 401) return result;
+
+  if (mutex.isLocked()) {
+    // wait until the mutex is available without locking it
+    await mutex.waitForUnlock();
+    return baseQuery(args, api, extraOptions);
+  }
+
+  const release = await mutex.acquire();
+
+  try {
+    const refreshToken = localStorage.getItem('refreshToken');
+
+    // try to get a new token
+    const refreshResult = await baseQuery(
+      {
+        url: 'auth/token/refresh',
+        method: 'POST',
+        body: { refresh: refreshToken },
+      },
+      api,
+      extraOptions,
+    );
+
+    if (refreshResult.data) {
+      // store the new token
+      api.dispatch(tokenRefreshed(refreshResult.data as AccessToken));
+      // retry the initial query
+      result = await baseQuery(args, api, extraOptions);
+    } else {
+      // token not refreshed
+      api.dispatch(logout());
+    }
+  } finally {
+    // release must be called once the mutex should be released again
+    release();
+  }
+
+  return result;
+};
+
+const baseQueryWithRetry = retry(baseQueryWithReauth, { maxRetries: 2 });
 
 /**
  * Create a base API to inject endpoints into elsewhere.

@@ -1,5 +1,5 @@
 import { eLearningPlatformApi } from '../apis';
-import { LoginDto, LoginResponseDto, RegisterDto, User } from '../types';
+import { LoginDto, LoginResponseDto, RegisterDto, Token, User } from '../types';
 
 export const authApi = eLearningPlatformApi.injectEndpoints({
   endpoints: (build) => ({
@@ -17,10 +17,18 @@ export const authApi = eLearningPlatformApi.injectEndpoints({
         body: credentials,
       }),
     }),
+    verifyToken: build.query<void, Token>({
+      query: (token: Token) => ({
+        url: 'auth/token/verify',
+        method: 'POST',
+        body: token,
+      }),
+    }),
   }),
 });
 
-export const { useLoginMutation, useRegisterMutation } = authApi;
+export const { useLoginMutation, useRegisterMutation, useVerifyTokenQuery } =
+  authApi;
 export const {
   endpoints: { login, register },
 } = authApi;
