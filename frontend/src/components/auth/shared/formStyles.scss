@@ -1,0 +1,61 @@
+@import '../../../style/colors';
+@import '../../../style/fonts';
+
+.form {
+  width: calc(100% - 40px);
+  max-width: 400px;
+  background-color: $clr-light;
+  padding: 60px 40px;
+  border-radius: 15px;
+  box-shadow: 0px 0px 40px -10px $clr-dark;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-bottom: auto;
+
+  &__header {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+
+  &__error-msg {
+    color: $clr-accent;
+    font-size: 1rem;
+    font-weight: 400;
+    margin-bottom: 20px;
+  }
+
+  &__button {
+    margin: 25px 0 45px 0;
+    width: 100%;
+    padding: 15px;
+    max-height: 100px;
+    border: none;
+    outline: none;
+    color: $clr-light;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+    background-image: linear-gradient(
+      to right,
+      $clr-accent 70%,
+      $clr-primary 99%
+    );
+    background-size: 300% 100%;
+
+    &:hover {
+      background-position: 100% 0;
+    }
+  }
+
+  &__note {
+    font-size: 0.8rem;
+    text-align: center;
+  }
+
+  &__accent-button {
+    text-decoration: none;
+    margin-left: 5px;
+    cursor: pointer;
+    color: $clr-accent;
+    font-weight: bold;
+  }
+}

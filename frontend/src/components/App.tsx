@@ -1,22 +1,30 @@
-import { Routes, Route, Navigate } from 'react-router-dom';
-//components
-import Home from './home/Home';
-import Login from './auth/Login';
-import Register from './auth/Register';
-//assets
-import { routerPaths } from '../assets';
-//styles
 import './App.scss';
 
-function App() {
+import { Navigate, Route, Routes } from 'react-router-dom';
+
+import { routerPaths } from '../assets';
+import { useAppSelector } from '../hooks';
+import { useVerifyTokenQuery } from '../services';
+import Login from './auth/Login';
+import Register from './auth/Register';
+import Home from './home/Home';
+import { PrivateRoute } from './utils';
+
+const App = () => {
+  const { accessToken } = useAppSelector(({ auth }) => auth);
+  useVerifyTokenQuery({ token: accessToken });
+
   return (
     <Routes>
       <Route path={routerPaths.login} element={<Login />} />
       <Route path={routerPaths.register} element={<Register />} />
-      <Route path={routerPaths.home} element={<Home />} />
+      <Route
+        path={routerPaths.home}
+        element={<PrivateRoute component={Home} />}
+      />
       <Route path="*" element={<Navigate to={routerPaths.home} replace />} />
     </Routes>
   );
-}
+};
 
 export default App;
