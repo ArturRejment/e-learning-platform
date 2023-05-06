@@ -2,6 +2,7 @@ import { configureStore, ConfigureStoreOptions } from '@reduxjs/toolkit';
 
 import { eLearningPlatformApi } from '../apis';
 import authReducer from '../components/auth/auth.slice';
+import courseReducer from '../components/course/course.slice';
 
 const createStore = (
   options?: ConfigureStoreOptions['preloadedState'] | undefined,
@@ -10,6 +11,7 @@ const createStore = (
     reducer: {
       [eLearningPlatformApi.reducerPath]: eLearningPlatformApi.reducer,
       auth: authReducer,
+      course: courseReducer,
     },
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware().concat(eLearningPlatformApi.middleware),
