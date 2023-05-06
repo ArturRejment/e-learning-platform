@@ -2,6 +2,7 @@ import './CourseList.scss';
 
 import { useGetCoursesQuery } from '../../../services';
 import { Spinner } from '../../utils';
+import CourseListElement from '../CourseListElement';
 
 const CourseList = () => {
   const { data, error, isLoading } = useGetCoursesQuery();
@@ -10,9 +11,10 @@ const CourseList = () => {
   if (error) return <div>Error</div>;
 
   return (
-    <div>
-      CourseList
-      {JSON.stringify(data)}
+    <div className="course_list">
+      {data?.map((course) => {
+        return <CourseListElement key={course.id} course={course} />;
+      })}
     </div>
   );
 };
