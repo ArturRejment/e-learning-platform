@@ -9,6 +9,7 @@ import Login from './auth/Login';
 import Register from './auth/Register';
 import Home from './home/Home';
 import { PrivateRoute } from './utils';
+import CourseDetail from './course/CourseDetail';
 
 const App = () => {
   const { accessToken } = useAppSelector(({ auth }) => auth);
@@ -18,6 +19,7 @@ const App = () => {
     <Routes>
       <Route path={routerPaths.login} element={<Login />} />
       <Route path={routerPaths.register} element={<Register />} />
+      <Route path={routerPaths.courseDetail} element={<CourseDetail />} />
       <Route
         path={routerPaths.home}
         element={<PrivateRoute component={Home} />}

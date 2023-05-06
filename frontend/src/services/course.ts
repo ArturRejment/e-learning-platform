@@ -9,10 +9,16 @@ export const courseApi = eLearningPlatformApi.injectEndpoints({
         method: 'GET',
       }),
     }),
+    getCourse: build.query<Course, string>({
+      query: (courseId) => ({
+        url: `course/${courseId}/`,
+        method: 'GET',
+      }),
+    }),
   }),
 });
 
-export const { useGetCoursesQuery } = courseApi;
+export const { useGetCoursesQuery, useGetCourseQuery } = courseApi;
 export const {
-  endpoints: { getCourses },
+  endpoints: { getCourses, getCourse },
 } = courseApi;
