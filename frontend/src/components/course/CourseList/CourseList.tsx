@@ -11,10 +11,12 @@ const CourseList = () => {
   if (error) return <div>Error</div>;
 
   return (
-    <div className="course_list">
-      {data?.map((course) => {
-        return <CourseListElement key={course.id} course={course} />;
-      })}
+    <div className="course-list">
+      {data?.map((course) => (
+        <div key={course.id}>
+          <CourseListElement course={course} />
+        </div>
+      ))}
     </div>
   );
 };

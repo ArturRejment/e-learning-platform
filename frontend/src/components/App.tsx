@@ -7,9 +7,9 @@ import { useAppSelector } from '../hooks';
 import { useVerifyTokenQuery } from '../services';
 import Login from './auth/Login';
 import Register from './auth/Register';
+import CourseDetail from './course/CourseDetail';
 import Home from './home/Home';
 import { PrivateRoute } from './utils';
-import CourseDetail from './course/CourseDetail';
 
 const App = () => {
   const { accessToken } = useAppSelector(({ auth }) => auth);

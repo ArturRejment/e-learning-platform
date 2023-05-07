@@ -1,15 +1,15 @@
 import { useParams } from 'react-router-dom';
+
 import { useGetCourseQuery } from '../../../services';
-import { Course } from '../../../types';
 
 const CourseDetail = () => {
-  const { id } = useParams();
-  const { data } = useGetCourseQuery(id);
+  const { id = '' } = useParams();
+  const { data: { name, description } = {} } = useGetCourseQuery(id);
 
   return (
-    <div className="course_detail">
-      <div>{data?.name}</div>
-      <div>{data?.description}</div>
+    <div className="course-detail">
+      <div>{name}</div>
+      <div>{description}</div>
     </div>
   );
 };
