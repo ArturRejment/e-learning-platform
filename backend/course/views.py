@@ -1,8 +1,10 @@
-from rest_framework import viewsets
+from rest_framework import viewsets, status
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
+from rest_framework.response import Response
 
+from code_generate.models import CourseJoinCode
 from course.models import Course
-from course.serializers import CourseSerializer
+from course.serializers import CourseSerializer, JoinCourseSerializer
 
 
 class CourseViewSet(viewsets.ModelViewSet):
@@ -16,3 +18,21 @@ class CourseViewSet(viewsets.ModelViewSet):
         ):
             return [IsAuthenticated]
         return [IsAdminUser]
+
+
+class JoinCourseViewSet(viewsets.ViewSet):
+    permission_classes = [IsAuthenticated]
+    serializer_class = JoinCourseSerializer
+
+    def create(self, request):
+        serializer = self.serializer_class(data=request.data)
+        serializer.is_valid(raise_exception=True)
+
+        try:
+            code = CourseJoinCode.objects.get(code=serializer.data["code"])
+        except CourseJoinCode.DoesNotExists:
+            return Response("Invalid code", status=status.HTTP_400_BAD_REQUEST)
+
+        code.course.trainees.add(request.user)
+        code.delete()
+        return Response()

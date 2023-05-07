@@ -4,10 +4,11 @@ from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 from rest_framework.routers import DefaultRouter
 
 from code_generate.views import CodeGenerateViewSet, CourseJoinCodeViewSet
-from course.views import CourseViewSet
+from course.views import CourseViewSet, JoinCourseViewSet
 
 router = DefaultRouter()
 router.register(r"course", CourseViewSet, basename="course")
+router.register(r"join/course", JoinCourseViewSet, basename="join-course")
 router.register(r"code_generate", CodeGenerateViewSet, basename="code_generate")
 router.register(
     r"course-join-codes", CourseJoinCodeViewSet, basename="course-join-codes"
