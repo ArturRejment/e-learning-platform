@@ -4,4 +4,5 @@ export const routerPaths = {
   home: '/',
   admin: '/admin',
   courseDetail: 'course/:id',
+  joinCourse: 'join-course',
 };

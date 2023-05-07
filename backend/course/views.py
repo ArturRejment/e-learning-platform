@@ -30,8 +30,8 @@ class JoinCourseViewSet(viewsets.ViewSet):
 
         try:
             code = CourseJoinCode.objects.get(code=serializer.data["code"])
-        except CourseJoinCode.DoesNotExists:
-            return Response("Invalid code", status=status.HTTP_400_BAD_REQUEST)
+        except CourseJoinCode.DoesNotExist:
+            return Response({"code": "Invalid code"}, status=status.HTTP_400_BAD_REQUEST)
 
         code.course.trainees.add(request.user)
         code.delete()
