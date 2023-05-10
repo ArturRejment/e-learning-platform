@@ -1,6 +1,6 @@
 import './Lesson.scss';
 
-import Navbar from '../../../navigation/Navbar/index'
+import Navbar from '../../navigation/Navbar/index'
 
 const Lesson = () => {
     return (

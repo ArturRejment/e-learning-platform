@@ -1,0 +1,122 @@
+@import '../../../style/colors';
+
+$height: 60px;
+$fontSize: 20px;
+
+.navbar {
+    display: grid;
+    grid-template-columns: $height 1fr;
+    grid-template-rows: repeat(1, $height);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    background-color: $clr-primary;
+    overflow: hidden;
+    height: $height;
+}
+/**/
+.navbar__logo {
+    
+    height: $height;
+    width: $height;
+    background-color: white;
+}
+
+.navbar__logo img {
+    max-height: $height;
+    max-width: $height;
+}
+
+.navbar__buttons {
+
+
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(1, $height);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+
+    text-align: center;
+    height: $height;
+    padding-top: 0px;
+}
+
+.navbar__button {
+   
+    height: $height;
+}
+
+.navbar__button a {
+    padding-top: calc(($height - $fontSize)/2);
+    padding-bottom: calc(($height - $fontSize)/2);
+    text-align: center;
+    display: block;
+    color: $clr-light;
+    align-content: center;
+    padding-left: 20px;
+    padding-right: 20px;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+
+.navbar__button a:hover {
+    background-color: $clr-light-grey;
+    color: black;
+}
+.navbar__button:hover {
+    background-color: $clr-light-grey;
+    color: black;
+  }
+
+
+
+.navbar__button__dropbtn {
+    padding-top: calc(($height - $fontSize)/2);
+    padding-bottom: calc(($height - $fontSize)/2)-3;
+    text-align: center;
+    color: $clr-light;
+    align-content: center;
+    width: 100%;
+    text-decoration: none;
+    font-size: 20px;
+    background-color: $clr-primary;
+    border-right-width: 0px;
+    border-top-width: 0px;
+    border-left-width: 0px;
+    border-bottom-width: 0px;
+}
+
+
+.navbar__button__dropbtn:hover {
+    background-color: $clr-light-grey;
+    color: black;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: $clr-primary;
+    text-align:center;
+    
+}
+
+.dropdown-content a {
+    
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.dropdown-content a:hover {
+    background-color: $clr-light-grey;
+}
+
+/* show on hover*/
+.navbar__button:hover .dropdown-content {
+    display: block;
+  }
+
+
+  
