@@ -1,5 +1,7 @@
 import { eLearningPlatformApi } from '../apis';
 import { Course } from '../types';
+import { CourseCodeGenerationDto } from '../types/course-code-generation.dto';
+import { JoinCourseDto } from '../types/join-course.dto';
 
 export const courseApi = eLearningPlatformApi.injectEndpoints({
   endpoints: (build) => ({
@@ -15,10 +17,29 @@ export const courseApi = eLearningPlatformApi.injectEndpoints({
         method: 'GET',
       }),
     }),
+    joinCourse: build.mutation<void, JoinCourseDto>({
+      query: (code: JoinCourseDto) => ({
+        url: 'join/course/',
+        method: 'POST',
+        body: code,
+      }),
+    }),
+    generateCourseCodes: build.mutation<string[], CourseCodeGenerationDto>({
+      query: (data: CourseCodeGenerationDto) => ({
+        url: 'course-join-codes/',
+        method: 'POST',
+        body: data,
+      }),
+    }),
   }),
 });
 
-export const { useGetCoursesQuery, useGetCourseQuery } = courseApi;
 export const {
-  endpoints: { getCourses, getCourse },
+  useGetCoursesQuery,
+  useGetCourseQuery,
+  useJoinCourseMutation,
+  useGenerateCourseCodesMutation,
+} = courseApi;
+export const {
+  endpoints: { getCourses, getCourse, joinCourse, generateCourseCodes },
 } = courseApi;
