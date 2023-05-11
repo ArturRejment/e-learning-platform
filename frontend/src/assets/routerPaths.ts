@@ -3,6 +3,7 @@ export const routerPaths = {
   register: '/register',
   home: '/',
   admin: '/admin',
-  courseDetail: 'course/:id',
-  joinCourse: 'join-course',
+  courseDetail: '/course/:id',
+  joinCourse: '/join-course',
+  courseCodesGeneration: '/generate-course-codes',
 };

@@ -1,14 +1,16 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { getCourses } from '../../services';
+import { generateCourseCodes, getCourses } from '../../services';
 import { Course } from '../../types';
 
 type InitialState = {
   courses: Course[];
+  codes: string[];
 };
 
 const initialState: InitialState = {
   courses: [],
+  codes: [],
 };
 
 const courseSlice = createSlice({
@@ -25,7 +27,13 @@ const courseSlice = createSlice({
       )
       .addMatcher(getCourses.matchRejected, (state) => {
         state.courses = [];
-      });
+      })
+      .addMatcher(
+        generateCourseCodes.matchFulfilled,
+        (state, action: PayloadAction<string[]>) => {
+          state.codes = action.payload;
+        },
+      );
   },
 });
 
