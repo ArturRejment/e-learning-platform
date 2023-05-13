@@ -2,7 +2,7 @@ import './App.scss';
 
 import { Navigate, Route, Routes } from 'react-router-dom';
 
-import { routerPaths } from '../assets';
+import { RouterPath } from '../assets';
 import { useAppSelector } from '../hooks';
 import { useVerifyTokenQuery } from '../services';
 import Login from './auth/Login';
@@ -19,19 +19,19 @@ const App = () => {
 
   return (
     <Routes>
-      <Route path={routerPaths.login} element={<Login />} />
-      <Route path={routerPaths.register} element={<Register />} />
-      <Route path={routerPaths.courseDetail} element={<CourseDetail />} />
-      <Route path={routerPaths.joinCourse} element={<JoinCourse />} />
+      <Route path={RouterPath.Login} element={<Login />} />
+      <Route path={RouterPath.Register} element={<Register />} />
+      <Route path={RouterPath.CourseDetail} element={<CourseDetail />} />
+      <Route path={RouterPath.JoinCourse} element={<JoinCourse />} />
       <Route
-        path={routerPaths.courseCodesGeneration}
+        path={RouterPath.CourseCodesGeneration}
         element={<CourseCodeGeneration />}
       />
       <Route
-        path={routerPaths.home}
+        path={RouterPath.Home}
         element={<PrivateRoute component={Home} />}
       />
-      <Route path="*" element={<Navigate to={routerPaths.home} replace />} />
+      <Route path="*" element={<Navigate to={RouterPath.Home} replace />} />
     </Routes>
   );
 };

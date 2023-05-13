@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { history, routerPaths } from '../../assets';
+import { history, RouterPath } from '../../assets';
 import { login, register } from '../../services';
 import { AccessToken, LoginResponseDto, User } from '../../types';
 import { logout, tokenRefreshed } from './auth.actions';
@@ -68,7 +68,7 @@ const authSlice = createSlice({
           state.isLoading = false;
           state.error = '';
 
-          history.push(routerPaths.home);
+          history.push(RouterPath.Home);
         },
       )
       // LOGIN REJECTED
@@ -99,7 +99,7 @@ const authSlice = createSlice({
           state.isLoading = false;
           state.error = '';
 
-          history.push(routerPaths.login);
+          history.push(RouterPath.Login);
         },
       )
       // REGISTER REJECTED

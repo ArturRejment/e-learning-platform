@@ -2,7 +2,7 @@ import './Home.scss';
 
 import { Link } from 'react-router-dom';
 
-import { routerPaths } from '../../../assets';
+import { RouterPath } from '../../../assets';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { logout } from '../../auth/auth.actions';
 import CourseList from '../../course/CourseList';
@@ -16,7 +16,7 @@ const Home = () => {
     <div>
       Home
       {!isAuthenticated ? (
-        <Link to={routerPaths.login}>Login</Link>
+        <Link to={RouterPath.Login}>Login</Link>
       ) : (
         <button type="button" onClick={() => dispatch(logout())}>
           Logout

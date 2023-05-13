@@ -1,7 +1,7 @@
 import { ComponentType } from 'react';
 import { Navigate } from 'react-router-dom';
 
-import { routerPaths } from '../../assets';
+import { RouterPath } from '../../assets';
 import { useAppSelector } from '../../hooks';
 
 type PrivateRouteProps = {
@@ -16,7 +16,7 @@ const PrivateRoute = ({ component: Component, ...rest }: PrivateRouteProps) => {
     return <h2>Loading...</h2>;
   }
   if (!isAuthenticated || accessToken === null || refreshToken === null) {
-    return <Navigate replace to={routerPaths.login} />;
+    return <Navigate replace to={RouterPath.Login} />;
   }
   return <Component {...rest} />;
 };
