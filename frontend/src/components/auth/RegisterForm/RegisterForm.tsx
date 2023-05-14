@@ -4,7 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 
-import { routerPaths } from '../../../assets';
+import { RouterPath } from '../../../assets';
 import { RegisterDto, registerDtoSchema } from '../../../types';
 import { Spinner } from '../../utils';
 import StyledInput from '../StyledInput';
@@ -93,7 +93,7 @@ const RegisterForm = ({ submit, error, backendErrors, isLoading }: Props) => {
 
         <p className="form__note">
           Already have an account?
-          <Link className="form__accent-button" to={routerPaths.login}>
+          <Link className="form__accent-button" to={RouterPath.Login}>
             Login
           </Link>
         </p>
