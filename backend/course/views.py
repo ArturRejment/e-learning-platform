@@ -1,4 +1,4 @@
-from rest_framework import viewsets, status
+from rest_framework import status, viewsets
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
 from rest_framework.response import Response
 
@@ -31,7 +31,9 @@ class JoinCourseViewSet(viewsets.ViewSet):
         try:
             code = CourseJoinCode.objects.get(code=serializer.data["code"])
         except CourseJoinCode.DoesNotExist:
-            return Response({"code": "Invalid code"}, status=status.HTTP_400_BAD_REQUEST)
+            return Response(
+                {"code": "Invalid code"}, status=status.HTTP_400_BAD_REQUEST
+            )
 
         code.course.trainees.add(request.user)
         code.delete()

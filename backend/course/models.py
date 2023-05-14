@@ -27,3 +27,6 @@ class Course(models.Model):
         verbose_name="uczestnicy kursu",
         related_name="trainees",
     )
+
+    def __str__(self):
+        return self.name
