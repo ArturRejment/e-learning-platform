@@ -22,3 +22,15 @@ class ExamSerializer(serializers.ModelSerializer):
     class Meta:
         model = Exam
         fields = ("id", "description", "questions")
+
+
+class ExamineExamSerializer(serializers.Serializer):
+    question_id = serializers.IntegerField()
+    answer = serializers.CharField(max_length=1)
+
+    def validate(self, attrs):
+        if attrs["answer"] not in ExamQuestion.CorrectAnswer.values:
+            raise serializers.ValidationError(
+                {"answer": f"Invalid value {attrs['answer']} for answer"}
+            )
+        return attrs

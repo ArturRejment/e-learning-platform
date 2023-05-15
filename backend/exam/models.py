@@ -17,6 +17,17 @@ class Exam(models.Model):
     def __str__(self):
         return f"Exam for {self.course} course"
 
+    def examine(self, data) -> int:
+        questions: list[ExamQuestion] = self.questions.all()
+        correct_answers_count = 0
+
+        for question in questions:
+            answer = next((sub for sub in data if sub["question_id"] == question.id))
+            if answer.get("answer") == question.correct_answer:
+                correct_answers_count += 1
+
+        return correct_answers_count
+
 
 class ExamQuestion(models.Model):
     class CorrectAnswer(models.TextChoices):
