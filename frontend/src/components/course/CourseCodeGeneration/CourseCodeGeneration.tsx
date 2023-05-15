@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import { useGenerateCourseCodesMutation } from '../../../services';
-import { CourseCodeGenerationDto } from '../../../types/course-code-generation.dto';
+import { CourseCodeGenerationDto } from '../../../types/dtos';
 import CourseCodeGenerationForm from '../CourseCodeGenerationForm';
 
 const CourseCodeGeneration = () => {

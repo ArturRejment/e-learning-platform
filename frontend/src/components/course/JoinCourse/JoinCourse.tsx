@@ -1,7 +1,8 @@
 import { useState } from 'react';
 
 import { useJoinCourseMutation } from '../../../services';
-import { FormError, JoinCourseDto } from '../../../types';
+import { FormError } from '../../../types';
+import { JoinCourseDto } from '../../../types/dtos';
 import JoinCourseForm from '../JoinCourseForm';
 
 const JoinCourse = () => {

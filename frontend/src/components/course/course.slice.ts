@@ -1,10 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { generateCourseCodes, getCourses } from '../../services';
-import { Course } from '../../types';
+import { CourseDto } from '../../types/dtos';
 
 type InitialState = {
-  courses: Course[];
+  courses: CourseDto[];
   codes: string[];
 };
 
@@ -21,7 +21,7 @@ const courseSlice = createSlice({
     builder
       .addMatcher(
         getCourses.matchFulfilled,
-        (state, action: PayloadAction<Course[]>) => {
+        (state, action: PayloadAction<CourseDto[]>) => {
           state.courses = action.payload;
         },
       )

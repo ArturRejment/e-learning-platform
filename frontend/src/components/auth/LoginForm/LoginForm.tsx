@@ -5,14 +5,14 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 
 import { ROUTER_PATH } from '../../../assets';
-import { LoginDto, loginDtoSchema } from '../../../types';
+import { LoginRequestDto, loginRequestDtoSchema } from '../../../types/dtos';
 import StyledInput from '../../common/StyledInput';
 import { Spinner } from '../../utils';
 
 type Props = {
-  submit: (data: LoginDto, reset: () => void) => void;
+  submit: (data: LoginRequestDto, reset: () => void) => void;
   error: string;
-  backendErrors: Partial<LoginDto>;
+  backendErrors: Partial<LoginRequestDto>;
   isLoading: boolean;
 };
 
@@ -22,11 +22,11 @@ const LoginForm = ({ submit, error, backendErrors, isLoading }: Props) => {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<LoginDto>({
-    resolver: zodResolver(loginDtoSchema),
+  } = useForm<LoginRequestDto>({
+    resolver: zodResolver(loginRequestDtoSchema),
   });
 
-  const onSubmit: SubmitHandler<LoginDto> = (data) => {
+  const onSubmit: SubmitHandler<LoginRequestDto> = (data) => {
     submit(data, reset);
   };
 

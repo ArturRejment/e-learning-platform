@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-export const registerDtoSchema = z
+export const registerRequestDtoSchema = z
   .object({
     firstName: z.string().optional(),
     lastName: z.string().optional(),
@@ -20,4 +20,4 @@ export const registerDtoSchema = z
     message: "Passwords don't match",
   });
 
-export type RegisterDto = z.infer<typeof registerDtoSchema>;
+export type RegisterRequestDto = z.infer<typeof registerRequestDtoSchema>;

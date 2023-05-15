@@ -3,10 +3,10 @@ import './CourseListElement.scss';
 import { Link } from 'react-router-dom';
 
 import { createPath, ROUTER_PATH } from '../../../assets';
-import { Course } from '../../../types';
+import { CourseDto } from '../../../types/dtos';
 
 type Props = {
-  course: Course;
+  course: CourseDto;
 };
 
 const CourseListElement = ({ course }: Props) => {

@@ -5,14 +5,17 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 
 import { ROUTER_PATH } from '../../../assets';
-import { RegisterDto, registerDtoSchema } from '../../../types';
+import {
+  RegisterRequestDto,
+  registerRequestDtoSchema,
+} from '../../../types/dtos';
 import StyledInput from '../../common/StyledInput';
 import { Spinner } from '../../utils';
 
 type Props = {
-  submit: (data: RegisterDto, reset: () => void) => void;
+  submit: (data: RegisterRequestDto, reset: () => void) => void;
   error: string;
-  backendErrors: Partial<RegisterDto>;
+  backendErrors: Partial<RegisterRequestDto>;
   isLoading: boolean;
 };
 
@@ -22,11 +25,11 @@ const RegisterForm = ({ submit, error, backendErrors, isLoading }: Props) => {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<RegisterDto>({
-    resolver: zodResolver(registerDtoSchema),
+  } = useForm<RegisterRequestDto>({
+    resolver: zodResolver(registerRequestDtoSchema),
   });
 
-  const onSubmit: SubmitHandler<RegisterDto> = (data) => {
+  const onSubmit: SubmitHandler<RegisterRequestDto> = (data) => {
     submit(data, reset);
   };
 

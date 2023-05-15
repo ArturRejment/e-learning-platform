@@ -4,10 +4,10 @@ import Select from 'react-select';
 
 import { useGetCoursesQuery } from '../../../services';
 import {
-  Course,
   CourseCodeGenerationDto,
   courseCodeGenerationDtoSchema,
-} from '../../../types';
+  CourseDto,
+} from '../../../types/dtos';
 import StyledInput from '../../common/StyledInput';
 import { Spinner } from '../../utils';
 
@@ -38,7 +38,7 @@ const CourseCodeGenerationForm = ({ submit, error, isLoading }: Props) => {
   } = useController({ name: 'courseId', control });
 
   const { data = [] } = useGetCoursesQuery();
-  const options: Option[] = data?.map(({ name, id }: Course) => ({
+  const options: Option[] = data?.map(({ name, id }: CourseDto) => ({
     label: name,
     value: id,
   }));
