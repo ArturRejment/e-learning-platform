@@ -1,11 +1,8 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
-import {
-  JoinCourseDto,
-  joinCourseDtoSchema,
-} from '../../../types/join-course.dto';
-import StyledInput from '../../auth/StyledInput';
+import { JoinCourseDto, joinCourseDtoSchema } from '../../../types';
+import StyledInput from '../../common/StyledInput';
 import { Spinner } from '../../utils';
 
 type Props = {

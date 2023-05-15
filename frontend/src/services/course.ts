@@ -1,7 +1,5 @@
 import { eLearningPlatformApi } from '../apis';
-import { Course } from '../types';
-import { CourseCodeGenerationDto } from '../types/course-code-generation.dto';
-import { JoinCourseDto } from '../types/join-course.dto';
+import { Course, CourseCodeGenerationDto, JoinCourseDto } from '../types';
 
 export const courseApi = eLearningPlatformApi.injectEndpoints({
   endpoints: (build) => ({

@@ -3,7 +3,7 @@ import '../shared/wrapperStyles.scss';
 import { useState } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 
-import { RouterPath } from '../../../assets';
+import { ROUTER_PATH } from '../../../assets';
 import { useAppSelector } from '../../../hooks';
 import { useLoginMutation } from '../../../services';
 import { FormError, LoginDto } from '../../../types';
@@ -29,10 +29,10 @@ const Login = () => {
   };
 
   return isAuthenticated ? (
-    <Navigate to={RouterPath.Home} />
+    <Navigate to={ROUTER_PATH.HOME} />
   ) : (
     <div className="wrapper">
-      <Link className="wrapper__back-button" to={RouterPath.Home}>
+      <Link className="wrapper__back-button" to={ROUTER_PATH.HOME}>
         Back
       </Link>
       <LoginForm

@@ -2,7 +2,7 @@ import './CourseListElement.scss';
 
 import { Link } from 'react-router-dom';
 
-import { createPath, RouterPath } from '../../../assets';
+import { createPath, ROUTER_PATH } from '../../../assets';
 import { Course } from '../../../types';
 
 type Props = {
@@ -18,7 +18,7 @@ const CourseListElement = ({ course }: Props) => {
       <div>
         <Link
           to={createPath({
-            path: RouterPath.CourseDetail,
+            path: ROUTER_PATH.COURSE_DETAIL,
             params: { courseId: id },
           })}
         >

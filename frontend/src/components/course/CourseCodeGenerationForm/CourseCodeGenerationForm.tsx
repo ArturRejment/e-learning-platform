@@ -1,13 +1,14 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useState } from 'react';
 import { SubmitHandler, useController, useForm } from 'react-hook-form';
 import Select from 'react-select';
 
+import { useGetCoursesQuery } from '../../../services';
 import {
+  Course,
   CourseCodeGenerationDto,
   courseCodeGenerationDtoSchema,
-} from '../../../types/course-code-generation.dto';
-import StyledInput from '../../auth/StyledInput';
+} from '../../../types';
+import StyledInput from '../../common/StyledInput';
 import { Spinner } from '../../utils';
 
 type Option = {
@@ -19,15 +20,9 @@ type Props = {
   submit: (postData: CourseCodeGenerationDto, reset: () => void) => void;
   error: string;
   isLoading: boolean;
-  options: Option[];
 };
 
-const CourseCodeGenerationForm = ({
-  submit,
-  error,
-  isLoading,
-  options,
-}: Props) => {
+const CourseCodeGenerationForm = ({ submit, error, isLoading }: Props) => {
   const {
     register,
     handleSubmit,
@@ -42,26 +37,19 @@ const CourseCodeGenerationForm = ({
     field: { value, onChange, ...restCourseIdField },
   } = useController({ name: 'courseId', control });
 
-  const [selectedCourseId, setSelectedCourseId] = useState<string | null>(null);
+  const { data = [] } = useGetCoursesQuery();
+  const options: Option[] = data?.map(({ name, id }: Course) => ({
+    label: name,
+    value: id,
+  }));
 
-  const onSelectChange = (option: Option | null) => {
-    const val = option?.value ?? null;
-    setSelectedCourseId(val);
-    onChange(val);
-  };
+  const onSelectChange = (option: Option | null) =>
+    onChange(option?.value ?? null);
 
-  const resetForm = () => {
-    reset();
-    setSelectedCourseId(null);
-  };
+  const onSubmit: SubmitHandler<CourseCodeGenerationDto> = (postData) =>
+    submit(postData, reset);
 
-  const onSubmit: SubmitHandler<CourseCodeGenerationDto> = (postData) => {
-    submit(postData, resetForm);
-  };
-
-  const selectedOption = selectedCourseId
-    ? options.find((option) => option.value === selectedCourseId)
-    : undefined;
+  const selected = options?.find((option) => option.value === value) ?? null;
 
   return (
     <div className="form">
@@ -80,10 +68,11 @@ const CourseCodeGenerationForm = ({
         <Select
           options={options}
           isClearable
-          value={selectedOption}
+          value={selected}
           onChange={onSelectChange}
           {...restCourseIdField}
         />
+        <p className="styled-input__error">{errors.courseId?.message}</p>
 
         <button className="form__button" type="submit">
           {isLoading ? <Spinner /> : 'Generate'}
