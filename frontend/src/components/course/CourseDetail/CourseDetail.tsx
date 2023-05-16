@@ -4,7 +4,7 @@ import { RouterPathParams } from '../../../assets';
 import { useGetCourseQuery } from '../../../services';
 
 const CourseDetail = () => {
-  const { courseId = '' } = useParams<RouterPathParams['CourseDetail']>();
+  const { courseId = '' } = useParams<RouterPathParams['COURSE_DETAIL']>();
   const { data: { name, description } = {} } = useGetCourseQuery(courseId);
 
   return (

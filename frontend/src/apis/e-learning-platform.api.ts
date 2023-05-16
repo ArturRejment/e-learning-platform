@@ -8,7 +8,7 @@ import { Mutex } from 'async-mutex';
 
 import { logout, tokenRefreshed } from '../components/auth/auth.actions';
 import type { RootState } from '../state';
-import { AccessToken } from '../types';
+import { AccessTokenDto } from '../types/dtos';
 
 // create baseQuery instance
 const baseQuery = fetchBaseQuery({
@@ -61,7 +61,7 @@ const baseQueryWithReauth: BaseQueryFn<
 
     if (refreshResult.data) {
       // store the new token
-      api.dispatch(tokenRefreshed(refreshResult.data as AccessToken));
+      api.dispatch(tokenRefreshed(refreshResult.data as AccessTokenDto));
       // retry the initial query
       result = await baseQuery(args, api, extraOptions);
     } else {

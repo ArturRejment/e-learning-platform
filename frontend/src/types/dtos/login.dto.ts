@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-export const loginDtoSchema = z.object({
+export const loginRequestDtoSchema = z.object({
   email: z.string().min(1, { message: 'Email is required' }).email({
     message: 'Must be a valid email',
   }),
@@ -9,7 +9,7 @@ export const loginDtoSchema = z.object({
     .min(6, { message: 'Password must be at least 6 characters' }),
 });
 
-export type LoginDto = z.infer<typeof loginDtoSchema>;
+export type LoginRequestDto = z.infer<typeof loginRequestDtoSchema>;
 
 export type LoginResponseDto = {
   access: string;

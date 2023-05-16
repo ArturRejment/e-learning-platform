@@ -4,15 +4,15 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 
-import { RouterPath } from '../../../assets';
-import { LoginDto, loginDtoSchema } from '../../../types';
+import { ROUTER_PATH } from '../../../assets';
+import { LoginRequestDto, loginRequestDtoSchema } from '../../../types/dtos';
+import StyledInput from '../../common/StyledInput';
 import { Spinner } from '../../utils';
-import StyledInput from '../StyledInput';
 
 type Props = {
-  submit: (data: LoginDto, reset: () => void) => void;
+  submit: (data: LoginRequestDto, reset: () => void) => void;
   error: string;
-  backendErrors: Partial<LoginDto>;
+  backendErrors: Partial<LoginRequestDto>;
   isLoading: boolean;
 };
 
@@ -22,11 +22,11 @@ const LoginForm = ({ submit, error, backendErrors, isLoading }: Props) => {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<LoginDto>({
-    resolver: zodResolver(loginDtoSchema),
+  } = useForm<LoginRequestDto>({
+    resolver: zodResolver(loginRequestDtoSchema),
   });
 
-  const onSubmit: SubmitHandler<LoginDto> = (data) => {
+  const onSubmit: SubmitHandler<LoginRequestDto> = (data) => {
     submit(data, reset);
   };
 
@@ -58,7 +58,7 @@ const LoginForm = ({ submit, error, backendErrors, isLoading }: Props) => {
 
         <p className="form__note">
           Don't have an account?
-          <Link className="form__accent-button" to={RouterPath.Register}>
+          <Link className="form__accent-button" to={ROUTER_PATH.REGISTER}>
             Register
           </Link>
         </p>
