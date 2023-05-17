@@ -1,4 +1,4 @@
-from rest_framework.serializers import ModelSerializer, Serializer, CharField
+from rest_framework.serializers import CharField, ModelSerializer, Serializer
 
 from course.models import Course
 

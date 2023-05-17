@@ -1,24 +1,15 @@
 import { useState } from 'react';
 
-import {
-  useGenerateCourseCodesMutation,
-  useGetCoursesQuery,
-} from '../../../services';
-import { CourseCodeGenerationDto } from '../../../types/course-code-generation.dto';
+import { useGenerateCourseCodesMutation } from '../../../services';
+import { CourseCodeGenerationDto } from '../../../types/dtos';
 import CourseCodeGenerationForm from '../CourseCodeGenerationForm';
 
 const CourseCodeGeneration = () => {
   const [error, setError] = useState<string>('');
   const [generateCourseCodes, { isLoading, data: codes }] =
     useGenerateCourseCodesMutation();
-  const { data = [] } = useGetCoursesQuery();
 
-  const options = data?.map(({ name, id }) => ({
-    label: name,
-    value: id,
-  }));
-
-  const handleJoinCourse = async (
+  const handleSubmit = async (
     postData: CourseCodeGenerationDto,
     reset: () => void,
   ) => {
@@ -26,19 +17,22 @@ const CourseCodeGeneration = () => {
       await generateCourseCodes(postData).unwrap();
       reset();
     } catch (err) {
-      setError('Codes Generation Unsuccessfull!');
+      setError('Codes Generation Unsuccessful!');
     }
   };
 
   return (
     <div className="wrapper">
       <CourseCodeGenerationForm
-        submit={handleJoinCourse}
+        submit={handleSubmit}
         error={error}
         isLoading={isLoading}
-        options={options}
       />
-      {codes}
+      <div>
+        {codes?.map((code) => (
+          <p key={code}>{code}</p>
+        ))}
+      </div>
     </div>
   );
 };

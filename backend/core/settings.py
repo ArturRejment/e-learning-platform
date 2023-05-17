@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     "authentication",
     "course",
     "code_generate",
+    "exam",
 ]
 
 MIDDLEWARE = [

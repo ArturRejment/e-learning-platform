@@ -1,17 +1,19 @@
 import { eLearningPlatformApi } from '../apis';
-import { Course } from '../types';
-import { CourseCodeGenerationDto } from '../types/course-code-generation.dto';
-import { JoinCourseDto } from '../types/join-course.dto';
+import {
+  CourseCodeGenerationDto,
+  CourseDto,
+  JoinCourseDto,
+} from '../types/dtos';
 
 export const courseApi = eLearningPlatformApi.injectEndpoints({
   endpoints: (build) => ({
-    getCourses: build.query<Course[], void>({
+    getCourses: build.query<CourseDto[], void>({
       query: () => ({
         url: 'course/',
         method: 'GET',
       }),
     }),
-    getCourse: build.query<Course, string>({
+    getCourse: build.query<CourseDto, string>({
       query: (courseId) => ({
         url: `course/${courseId}/`,
         method: 'GET',

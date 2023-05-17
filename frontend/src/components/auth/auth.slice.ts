@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { history, RouterPath } from '../../assets';
+import { history, ROUTER_PATH } from '../../assets';
 import { login, register } from '../../services';
-import { AccessToken, LoginResponseDto, User } from '../../types';
+import { AccessTokenDto, LoginResponseDto, UserDto } from '../../types/dtos';
 import { logout, tokenRefreshed } from './auth.actions';
 
 type InitialState = {
@@ -10,7 +10,7 @@ type InitialState = {
   refreshToken: string | null;
   isAuthenticated: boolean;
   isLoading: boolean;
-  user: User | null;
+  user: UserDto | null;
   error: string;
 };
 
@@ -44,13 +44,16 @@ const authSlice = createSlice({
         state.error = '';
       })
       // TOKEN REFRESHED
-      .addCase(tokenRefreshed, (state, action: PayloadAction<AccessToken>) => {
-        const { access } = action.payload;
-        localStorage.setItem('accessToken', access);
-        state.accessToken = access;
-        state.isAuthenticated = true;
-        state.error = '';
-      })
+      .addCase(
+        tokenRefreshed,
+        (state, action: PayloadAction<AccessTokenDto>) => {
+          const { access } = action.payload;
+          localStorage.setItem('accessToken', access);
+          state.accessToken = access;
+          state.isAuthenticated = true;
+          state.error = '';
+        },
+      )
       // LOGIN PENDING
       .addMatcher(login.matchPending, (state) => {
         state.isLoading = true;
@@ -68,7 +71,7 @@ const authSlice = createSlice({
           state.isLoading = false;
           state.error = '';
 
-          history.push(RouterPath.Home);
+          history.push(ROUTER_PATH.HOME);
         },
       )
       // LOGIN REJECTED
@@ -89,7 +92,7 @@ const authSlice = createSlice({
       // REGISTER FULFILLED
       .addMatcher(
         register.matchFulfilled,
-        (state, action: PayloadAction<User>) => {
+        (state, action: PayloadAction<UserDto>) => {
           localStorage.removeItem('accessToken');
           localStorage.removeItem('refreshToken');
           state.user = action.payload;
@@ -99,7 +102,7 @@ const authSlice = createSlice({
           state.isLoading = false;
           state.error = '';
 
-          history.push(RouterPath.Login);
+          history.push(ROUTER_PATH.LOGIN);
         },
       )
       // REGISTER REJECTED
@@ -111,7 +114,7 @@ const authSlice = createSlice({
         state.user = null;
         state.isAuthenticated = false;
         state.isLoading = false;
-        state.error = action?.error?.message || 'User already exists';
+        state.error = action?.error?.message || 'UserDto already exists';
       });
   },
 });

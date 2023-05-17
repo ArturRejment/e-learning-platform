@@ -1,23 +1,23 @@
-export const RouterPath = {
-  Login: '/login',
-  Register: '/register',
-  Home: '/',
-  Admin: '/admin',
-  CourseDetail: '/course/:courseId',
-  JoinCourse: '/join-course',
-  CourseCodesGeneration: '/generate-course-codes',
-  CodesGeneration: '/generate-codes',
+export const ROUTER_PATH = {
+  LOGIN: '/login',
+  REGISTER: '/register',
+  HOME: '/',
+  ADMIN: '/admin',
+  COURSE_DETAIL: '/course/:courseId',
+  JOIN_COURSE: '/join-course',
+  COURSE_CODE_GENERATION: '/generate-course-codes',
+  CODE_GENERATION: '/generate-codes',
 } as const;
 
 type CreatePathArgs =
-  | { path: typeof RouterPath.Login }
-  | { path: typeof RouterPath.Register }
-  | { path: typeof RouterPath.Home }
-  | { path: typeof RouterPath.Admin }
-  | { path: typeof RouterPath.CourseDetail; params: { courseId: string } }
-  | { path: typeof RouterPath.JoinCourse }
-  | { path: typeof RouterPath.CourseCodesGeneration }
-  | { path: typeof RouterPath.CodesGeneration };
+  | { path: typeof ROUTER_PATH.LOGIN }
+  | { path: typeof ROUTER_PATH.REGISTER }
+  | { path: typeof ROUTER_PATH.HOME }
+  | { path: typeof ROUTER_PATH.ADMIN }
+  | { path: typeof ROUTER_PATH.COURSE_DETAIL; params: { courseId: string } }
+  | { path: typeof ROUTER_PATH.JOIN_COURSE }
+  | { path: typeof ROUTER_PATH.COURSE_CODE_GENERATION }
+  | { path: typeof ROUTER_PATH.CODE_GENERATION };
 
 export function createPath(args: CreatePathArgs) {
   // routes without params
@@ -30,7 +30,7 @@ export function createPath(args: CreatePathArgs) {
   );
 }
 
-type RouterPathType = typeof RouterPath;
+type RouterPathType = typeof ROUTER_PATH;
 type PathParams<T> = T extends { params: infer P } ? P : never;
 type ValueOf<T> = T[keyof T];
 type KeyOfValue<T, V> = ValueOf<{ [K in keyof T]: T[K] extends V ? K : never }>;

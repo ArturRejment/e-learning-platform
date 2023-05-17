@@ -5,6 +5,7 @@ from rest_framework.routers import DefaultRouter
 
 from code_generate.views import CodeGenerateViewSet, CourseJoinCodeViewSet
 from course.views import CourseViewSet, JoinCourseViewSet
+from exam.views import ExamViewSet
 
 router = DefaultRouter()
 router.register(r"course", CourseViewSet, basename="course")
@@ -13,6 +14,7 @@ router.register(r"code_generate", CodeGenerateViewSet, basename="code_generate")
 router.register(
     r"course-join-codes", CourseJoinCodeViewSet, basename="course-join-codes"
 )
+router.register(r"exam", ExamViewSet, basename="exam")
 
 
 urlpatterns = [

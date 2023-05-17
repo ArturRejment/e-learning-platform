@@ -4,7 +4,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import {
   CodeGenerationDto,
   codeGenerationDtoSchema,
-} from '../../../types/code-generation.dto';
+} from '../../../types/dtos/code-generation.dto';
 import StyledInput from '../../auth/StyledInput';
 import { Spinner } from '../../utils';
 

@@ -1,24 +1,30 @@
 import { eLearningPlatformApi } from '../apis';
-import { LoginDto, LoginResponseDto, RegisterDto, Token, User } from '../types';
+import {
+  LoginRequestDto,
+  LoginResponseDto,
+  RegisterRequestDto,
+  TokenDto,
+  UserDto,
+} from '../types/dtos';
 
 export const authApi = eLearningPlatformApi.injectEndpoints({
   endpoints: (build) => ({
-    login: build.mutation<LoginResponseDto, LoginDto>({
-      query: (credentials: LoginDto) => ({
+    login: build.mutation<LoginResponseDto, LoginRequestDto>({
+      query: (credentials: LoginRequestDto) => ({
         url: 'auth/token/obtain',
         method: 'POST',
         body: credentials,
       }),
     }),
-    register: build.mutation<User, RegisterDto>({
-      query: (credentials: RegisterDto) => ({
+    register: build.mutation<UserDto, RegisterRequestDto>({
+      query: (credentials: RegisterRequestDto) => ({
         url: 'auth/register',
         method: 'POST',
         body: credentials,
       }),
     }),
-    verifyToken: build.query<void, Token>({
-      query: (token: Token) => ({
+    verifyToken: build.query<void, TokenDto>({
+      query: (token: TokenDto) => ({
         url: 'auth/token/verify',
         method: 'POST',
         body: token,
