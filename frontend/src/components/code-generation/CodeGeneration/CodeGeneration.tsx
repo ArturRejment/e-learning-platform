@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import { useGenerateCodesMutation } from '../../../services';
-import { CodeGenerationDto } from '../../../types/dtos/code-generation.dto';
+import { CodeGenerationDto } from '../../../types/dtos';
 import CodeGenerationForm from '../CodeGenerationForm';
 
 const CodeGeneration = () => {

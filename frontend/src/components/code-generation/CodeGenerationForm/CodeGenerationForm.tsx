@@ -4,8 +4,8 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import {
   CodeGenerationDto,
   codeGenerationDtoSchema,
-} from '../../../types/dtos/code-generation.dto';
-import StyledInput from '../../auth/StyledInput';
+} from '../../../types/dtos';
+import StyledInput from '../../common/StyledInput';
 import { Spinner } from '../../utils';
 
 type Props = {
@@ -49,7 +49,6 @@ const CodeGenerationForm = ({ submit, error, isLoading }: Props) => {
         <button className="form__button" type="submit">
           {isLoading ? <Spinner /> : 'Generate'}
         </button>
-        
       </form>
     </div>
   );
