@@ -7,6 +7,7 @@ import { useAppSelector } from '../hooks';
 import { useVerifyTokenQuery } from '../services';
 import Login from './auth/Login';
 import Register from './auth/Register';
+import CodeGeneration from './code-generation/CodeGeneration';
 import CourseCodeGeneration from './course/CourseCodeGeneration';
 import CourseDetail from './course/CourseDetail';
 import JoinCourse from './course/JoinCourse';
@@ -27,6 +28,7 @@ const App = () => {
         path={ROUTER_PATH.COURSE_CODE_GENERATION}
         element={<CourseCodeGeneration />}
       />
+      <Route path={RouterPath.CodesGeneration} element={<CodeGeneration />} />
       <Route
         path={ROUTER_PATH.HOME}
         element={<PrivateRoute component={Home} />}
