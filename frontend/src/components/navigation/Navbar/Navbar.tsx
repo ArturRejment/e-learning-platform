@@ -1,47 +1,54 @@
 import './Navbar.scss';
 
-import { Link, Navigate } from 'react-router-dom';
+import { FaBars } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
-import { routerPaths } from '../../../assets';
-import logo from '../../../img/logo.png';
+import { ROUTER_PATH } from '../../../assets';
+import { useAppDispatch, useAppSelector } from '../../../hooks';
+import { logout } from '../../auth/auth.actions';
 
-/*
- * TODO
- * log out
- */
 const Navbar = () => {
+  const dispatch = useAppDispatch();
+  const isAuthenticated: boolean = useAppSelector(
+    ({ auth }) => auth.isAuthenticated,
+  );
   return (
-    <div className="navbar">
-      <div className="navbar__logo">
-        <img src={logo} alt="Logo import error" />
-      </div>
-      <div className="navbar__buttons">
-        <div className="navbar__button">
-          {' '}
-          <Link to={routerPaths.home}>Home</Link>
-        </div>
-        <div className="navbar__button">
-          <button className="navbar__button__dropbtn" type="button">
-            My Courses
-          </button>
-          <div className="dropdown-content">
-            <Link to={routerPaths.course}>Default course name 1</Link>
-            <Link to={routerPaths.course}>Sample course </Link>
-            <Link to={routerPaths.course}>
-              Sample name with different lenght
+    <nav className="navbar">
+      <div className="navbar__wrapper">
+        <Link className="navbar__item" to={ROUTER_PATH.HOME}>
+          Home
+        </Link>
+
+        <div className="navbar__container">
+          <Link className="navbar__item" to={ROUTER_PATH.CONTACT}>
+            Contact
+          </Link>
+          <Link className="navbar__item" to={ROUTER_PATH.ABOUT}>
+            About
+          </Link>
+          {!isAuthenticated ? (
+            <Link
+              className="navbar__item navbar__item--login"
+              to={ROUTER_PATH.LOGIN}
+            >
+              Login
             </Link>
-          </div>
+          ) : (
+            <button
+              type="button"
+              className="navbar__item navbar__item--logout"
+              onClick={() => dispatch(logout())}
+            >
+              Logout
+            </button>
+          )}
         </div>
-        <div className="navbar__button">
-          {' '}
-          <Link to={routerPaths.contact}>Contact</Link>{' '}
-        </div>
-        <div className="navbar__button">
-          {' '}
-          <Link to={routerPaths.about}>About</Link>{' '}
+
+        <div className="navbar__icon">
+          <FaBars />
         </div>
       </div>
-    </div>
+    </nav>
   );
 };
 
