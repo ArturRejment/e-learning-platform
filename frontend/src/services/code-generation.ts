@@ -1,5 +1,5 @@
 import { eLearningPlatformApi } from '../apis';
-import { CodeGenerationDto } from '../types';
+import { CodeGenerationDto } from '../types/dtos';
 
 export const codeApi = eLearningPlatformApi.injectEndpoints({
   endpoints: (build) => ({

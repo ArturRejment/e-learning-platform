@@ -9,7 +9,7 @@ const CodeGeneration = () => {
   const [generateCodes, { isLoading, data: codes }] =
     useGenerateCodesMutation();
 
-  const handleJoinCourse = async (
+  const handleSubmit = async (
     postData: CodeGenerationDto,
     reset: () => void,
   ) => {
@@ -17,14 +17,14 @@ const CodeGeneration = () => {
       await generateCodes(postData).unwrap();
       reset();
     } catch (err) {
-      setError('Codes Generation Unsuccessfull!');
+      setError('Codes Generation Unsuccessful!');
     }
   };
 
   return (
     <div className="wrapper">
       <CodeGenerationForm
-        submit={handleJoinCourse}
+        submit={handleSubmit}
         error={error}
         isLoading={isLoading}
       />
