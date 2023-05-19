@@ -29,9 +29,8 @@ const RegisterForm = ({ submit, error, backendErrors, isLoading }: Props) => {
     resolver: zodResolver(registerRequestDtoSchema),
   });
 
-  const onSubmit: SubmitHandler<RegisterRequestDto> = (data) => {
+  const onSubmit: SubmitHandler<RegisterRequestDto> = (data) =>
     submit(data, reset);
-  };
 
   return (
     <div className="form">
