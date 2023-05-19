@@ -1,0 +1,79 @@
+@import '../../../style/colors';
+@import '../../../style/media-queries';
+@import '../../../style/globals';
+
+.navbar {
+  width: 100%;
+  height: $navbar-height;
+  display: flex;
+  justify-content: center;
+  background-color: $clr-light;
+
+  &__wrapper {
+    margin: 0 20px;
+    width: 100%;
+    max-width: 1100px;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__container {
+    display: none;
+
+    @include tablet {
+      display: flex;
+      align-items: center;
+      gap: 4rem;
+    }
+  }
+
+  &__item {
+    text-decoration: none;
+    border: none;
+    outline: none;
+    background: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+
+    &:hover {
+      color: $clr-primary;
+    }
+
+    &--login {
+      background-color: $clr-light;
+      color: $clr-primary;
+      border: thin solid $clr-primary;
+      border-radius: 20px;
+
+      &:hover {
+        background-color: $clr-primary;
+        color: $clr-light;
+      }
+    }
+
+    &--logout {
+      background-color: $clr-primary;
+      color: $clr-light;
+      border: thin solid $clr-primary;
+      border-radius: 20px;
+
+      &:hover {
+        background-color: $clr-light;
+        color: $clr-primary;
+      }
+    }
+  }
+
+  &__icon {
+    cursor: pointer;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+
+    @include tablet {
+      display: none;
+    }
+  }
+}
