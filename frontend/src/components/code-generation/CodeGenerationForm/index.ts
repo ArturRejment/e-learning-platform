@@ -1,3 +1,3 @@
-import CourseCodeGenerationForm from './CodeGenerationForm';
+import CodeGenerationForm from './CodeGenerationForm';
 
-export default CourseCodeGenerationForm;
+export default CodeGenerationForm;
