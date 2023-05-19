@@ -15,7 +15,7 @@ import About from './home/About';
 import Contact from './home/Contact';
 import Home from './home/Home';
 import Navbar from './navigation/Navbar';
-import { PrivateRoute } from './utils';
+import { PrivateRoute, UnauthenticatedOnlyRoute } from './utils';
 
 const App = () => {
   const { accessToken } = useAppSelector(({ auth }) => auth);
@@ -48,8 +48,14 @@ const App = () => {
           element={<PrivateRoute component={Home} />}
         />
       </Route>
-      <Route path={ROUTER_PATH.LOGIN} element={<Login />} />
-      <Route path={ROUTER_PATH.REGISTER} element={<Register />} />
+      <Route
+        path={ROUTER_PATH.LOGIN}
+        element={<UnauthenticatedOnlyRoute component={Login} />}
+      />
+      <Route
+        path={ROUTER_PATH.REGISTER}
+        element={<UnauthenticatedOnlyRoute component={Register} />}
+      />
       <Route path="*" element={<Navigate to={ROUTER_PATH.HOME} replace />} />
     </Routes>
   );
