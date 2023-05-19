@@ -24,13 +24,8 @@ const CodeGenerationForm = ({ submit, error, isLoading }: Props) => {
     resolver: zodResolver(codeGenerationDtoSchema),
   });
 
-  const resetForm = () => {
-    reset();
-  };
-
-  const onSubmit: SubmitHandler<CodeGenerationDto> = (postData) => {
-    submit(postData, resetForm);
-  };
+  const onSubmit: SubmitHandler<CodeGenerationDto> = (postData) =>
+    submit(postData, reset);
 
   return (
     <div className="form">
