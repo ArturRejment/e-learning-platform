@@ -1,12 +1,9 @@
-import { useState } from 'react';
-
 import { useGenerateCourseCodesMutation } from '../../../services';
 import { CourseCodeGenerationDto } from '../../../types/dtos';
 import CourseCodeGenerationForm from '../CourseCodeGenerationForm';
 
 const CourseCodeGeneration = () => {
-  const [error, setError] = useState<string>('');
-  const [generateCourseCodes, { isLoading, data: codes }] =
+  const [generateCourseCodes, { isLoading, data: codes, error }] =
     useGenerateCourseCodesMutation();
 
   const handleSubmit = async (
@@ -16,16 +13,14 @@ const CourseCodeGeneration = () => {
     try {
       await generateCourseCodes(postData).unwrap();
       reset();
-    } catch (err) {
-      setError('Codes Generation Unsuccessful!');
-    }
+    } catch {}
   };
 
   return (
-    <div className="wrapper">
+    <div className="course-code-generation">
       <CourseCodeGenerationForm
         submit={handleSubmit}
-        error={error}
+        error={error ? 'Codes Generation Unsuccessful!' : ''}
         isLoading={isLoading}
       />
       <div>

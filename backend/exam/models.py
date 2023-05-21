@@ -5,7 +5,9 @@ from course.models import Course
 
 
 class Exam(models.Model):
-    course = models.ForeignKey(to=Course, on_delete=models.CASCADE)
+    course = models.ForeignKey(
+        to=Course, on_delete=models.CASCADE, related_name="exams"
+    )
 
     passing_threshold = models.IntegerField(
         verbose_name="Passing threshold in %",

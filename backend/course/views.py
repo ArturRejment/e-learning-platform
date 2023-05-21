@@ -4,12 +4,20 @@ from rest_framework.response import Response
 
 from code_generate.models import CourseJoinCode
 from course.models import Course
-from course.serializers import CourseSerializer, JoinCourseSerializer
+from course.serializers import (
+    CourseDetailSerializer,
+    CourseSerializer,
+    JoinCourseSerializer,
+)
 
 
 class CourseViewSet(viewsets.ModelViewSet):
     queryset = Course.objects.all()
-    serializer_class = CourseSerializer
+
+    def get_serializer_class(self):
+        if self.action == "retrieve":
+            return CourseDetailSerializer
+        return CourseSerializer
 
     def get_permission_classes(self):
         if self.action in (

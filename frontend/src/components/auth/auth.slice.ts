@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { history, ROUTER_PATH } from '../../assets';
-import { login, register } from '../../services';
+import { getUser, login, register } from '../../services';
 import { AccessTokenDto, LoginResponseDto, UserDto } from '../../types/dtos';
 import { logout, tokenRefreshed } from './auth.actions';
 
@@ -11,7 +11,6 @@ type InitialState = {
   isAuthenticated: boolean;
   isLoading: boolean;
   user: UserDto | null;
-  error: string;
 };
 
 const initialAccessToken = localStorage.getItem('accessToken');
@@ -23,7 +22,6 @@ const initialState: InitialState = {
   isAuthenticated: !!initialAccessToken,
   isLoading: false,
   user: null,
-  error: '',
 };
 
 const authSlice = createSlice({
@@ -38,10 +36,9 @@ const authSlice = createSlice({
         localStorage.removeItem('refreshToken');
         state.accessToken = null;
         state.refreshToken = null;
-        state.user = null;
         state.isAuthenticated = false;
         state.isLoading = false;
-        state.error = '';
+        state.user = null;
       })
       // TOKEN REFRESHED
       .addCase(
@@ -51,7 +48,6 @@ const authSlice = createSlice({
           localStorage.setItem('accessToken', access);
           state.accessToken = access;
           state.isAuthenticated = true;
-          state.error = '';
         },
       )
       // LOGIN PENDING
@@ -69,52 +65,55 @@ const authSlice = createSlice({
           state.refreshToken = refresh;
           state.isAuthenticated = true;
           state.isLoading = false;
-          state.error = '';
 
           history.push(ROUTER_PATH.HOME);
         },
       )
       // LOGIN REJECTED
-      .addMatcher(login.matchRejected, (state, action) => {
+      .addMatcher(login.matchRejected, (state) => {
         localStorage.removeItem('accessToken');
         localStorage.removeItem('refreshToken');
         state.accessToken = null;
         state.refreshToken = null;
-        state.user = null;
         state.isAuthenticated = false;
         state.isLoading = false;
-        state.error = action?.error?.message || 'Incorrect credentials';
+        state.user = null;
       })
       // REGISTER PENDING
       .addMatcher(register.matchPending, (state) => {
         state.isLoading = true;
       })
       // REGISTER FULFILLED
-      .addMatcher(
-        register.matchFulfilled,
-        (state, action: PayloadAction<UserDto>) => {
-          localStorage.removeItem('accessToken');
-          localStorage.removeItem('refreshToken');
-          state.user = action.payload;
-          state.accessToken = null;
-          state.refreshToken = null;
-          state.isAuthenticated = false;
-          state.isLoading = false;
-          state.error = '';
-
-          history.push(ROUTER_PATH.LOGIN);
-        },
-      )
-      // REGISTER REJECTED
-      .addMatcher(register.matchRejected, (state, action) => {
+      .addMatcher(register.matchFulfilled, (state) => {
         localStorage.removeItem('accessToken');
         localStorage.removeItem('refreshToken');
         state.accessToken = null;
         state.refreshToken = null;
-        state.user = null;
         state.isAuthenticated = false;
         state.isLoading = false;
-        state.error = action?.error?.message || 'UserDto already exists';
+
+        history.push(ROUTER_PATH.LOGIN);
+      })
+      // REGISTER REJECTED
+      .addMatcher(register.matchRejected, (state) => {
+        localStorage.removeItem('accessToken');
+        localStorage.removeItem('refreshToken');
+        state.accessToken = null;
+        state.refreshToken = null;
+        state.isAuthenticated = false;
+        state.isLoading = false;
+        state.user = null;
+      })
+      // GET USER FULFILLED
+      .addMatcher(
+        getUser.matchFulfilled,
+        (state, action: PayloadAction<UserDto>) => {
+          state.user = action.payload;
+        },
+      )
+      // GET USER REJECTED
+      .addMatcher(getUser.matchRejected, (state) => {
+        state.user = null;
       });
   },
 });

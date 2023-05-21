@@ -13,6 +13,17 @@ class CourseSerializer(ModelSerializer):
         )
 
 
+class CourseDetailSerializer(ModelSerializer):
+    class Meta:
+        model = Course
+        fields = (
+            "id",
+            "name",
+            "description",
+            "exams",
+        )
+
+
 class JoinCourseSerializer(Serializer):
     code = CharField(required=True)
 

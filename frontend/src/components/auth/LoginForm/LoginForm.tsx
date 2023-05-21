@@ -12,11 +12,10 @@ import { Spinner } from '../../utils';
 type Props = {
   submit: (data: LoginRequestDto, reset: () => void) => void;
   error: string;
-  backendErrors: Partial<LoginRequestDto>;
   isLoading: boolean;
 };
 
-const LoginForm = ({ submit, error, backendErrors, isLoading }: Props) => {
+const LoginForm = ({ submit, error, isLoading }: Props) => {
   const {
     register,
     handleSubmit,
@@ -26,9 +25,8 @@ const LoginForm = ({ submit, error, backendErrors, isLoading }: Props) => {
     resolver: zodResolver(loginRequestDtoSchema),
   });
 
-  const onSubmit: SubmitHandler<LoginRequestDto> = (data) => {
+  const onSubmit: SubmitHandler<LoginRequestDto> = (data) =>
     submit(data, reset);
-  };
 
   return (
     <div className="form">
@@ -41,7 +39,7 @@ const LoginForm = ({ submit, error, backendErrors, isLoading }: Props) => {
           name="email"
           type="text"
           register={register('email')}
-          error={errors.email?.message || backendErrors?.email}
+          error={errors.email?.message}
         />
 
         <StyledInput<'password'>
@@ -49,7 +47,7 @@ const LoginForm = ({ submit, error, backendErrors, isLoading }: Props) => {
           name="password"
           type="password"
           register={register('password')}
-          error={errors.password?.message || backendErrors?.password}
+          error={errors.password?.message}
         />
 
         <button className="form__button" type="submit">
