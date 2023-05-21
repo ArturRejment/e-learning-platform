@@ -1,18 +1,19 @@
 import './VideoDetail.scss';
 
-const VideoDetail = () => {
-  // dodanie videoId  -> pobieranie danych z bazy
-  const baseUrl = 'https://www.youtube.com/embed/';
-  const title = 'Film 1';
-  const url = `${baseUrl}1FZvV2lSM5Q`;
+type Props = {
+  title: string;
+  url: string;
+};
+
+const VideoDetail = ({ title, url }: Props) => {
+  // żeby można było wyświetlić film z yt należy podać url = https://www.youtube.com/embed/{id}
 
   return (
     <div className="video-detail">
       <h3>{title}</h3>
       <div>
         <iframe
-          width="560"
-          height="315"
+          className="video-iframe"
           src={url}
           title="YouTube video"
           allowFullScreen
