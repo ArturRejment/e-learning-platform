@@ -1,5 +1,6 @@
 import './App.scss';
 
+import { useState } from 'react';
 import { Navigate, Outlet, Route, Routes } from 'react-router-dom';
 
 import { ROUTER_PATH } from '../assets';
@@ -15,18 +16,25 @@ import About from './home/About';
 import Contact from './home/Contact';
 import Home from './home/Home';
 import Navbar from './navigation/Navbar';
+import Sidebar from './navigation/Sidebar';
 import { PrivateRoute, UnauthenticatedOnlyRoute } from './utils';
 
 const App = () => {
   const { accessToken } = useAppSelector(({ auth }) => auth);
   useVerifyTokenQuery({ token: accessToken });
+  const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
+
+  const toggleSidebar = () => {
+    setIsSidebarOpen((prevOpen) => !prevOpen);
+  };
 
   return (
     <Routes>
       <Route
         element={
           <>
-            <Navbar />
+            <Navbar toggleSidebar={toggleSidebar} />
+            <Sidebar toggle={toggleSidebar} isOpen={isSidebarOpen} />
             <Outlet />
           </>
         }
