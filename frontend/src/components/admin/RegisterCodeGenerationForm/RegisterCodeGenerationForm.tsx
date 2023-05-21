@@ -2,34 +2,34 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 import {
-  CodeGenerationDto,
-  codeGenerationDtoSchema,
+  RegisterCodeGenerationDto,
+  registerCodeGenerationDtoSchema,
 } from '../../../types/dtos';
 import StyledInput from '../../common/StyledInput';
 import { Spinner } from '../../utils';
 
 type Props = {
-  submit: (postData: CodeGenerationDto, reset: () => void) => void;
+  submit: (postData: RegisterCodeGenerationDto, reset: () => void) => void;
   error: string;
   isLoading: boolean;
 };
 
-const CodeGenerationForm = ({ submit, error, isLoading }: Props) => {
+const RegisterCodeGenerationForm = ({ submit, error, isLoading }: Props) => {
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<CodeGenerationDto>({
-    resolver: zodResolver(codeGenerationDtoSchema),
+  } = useForm<RegisterCodeGenerationDto>({
+    resolver: zodResolver(registerCodeGenerationDtoSchema),
   });
 
-  const onSubmit: SubmitHandler<CodeGenerationDto> = (postData) =>
+  const onSubmit: SubmitHandler<RegisterCodeGenerationDto> = (postData) =>
     submit(postData, reset);
 
   return (
     <div className="form">
-      <h1 className="form__header">Generate codes</h1>
+      <h1 className="form__header">Generate registration codes</h1>
       {error && <h2 className="form__error-msg">{error}</h2>}
 
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -49,4 +49,4 @@ const CodeGenerationForm = ({ submit, error, isLoading }: Props) => {
   );
 };
 
-export default CodeGenerationForm;
+export default RegisterCodeGenerationForm;

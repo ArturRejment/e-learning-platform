@@ -28,6 +28,9 @@ const Navbar = ({ toggleSidebar }: Props) => {
               Admin
             </Link>
           )}
+          <Link className="navbar__item" to={ROUTER_PATH.JOIN_COURSE}>
+            Join Course
+          </Link>
           <Link className="navbar__item" to={ROUTER_PATH.CONTACT}>
             Contact
           </Link>

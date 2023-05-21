@@ -45,6 +45,13 @@ const Sidebar = ({ toggle, isOpen }: Props) => {
         <Link
           className="sidebar__item"
           onClick={toggle}
+          to={ROUTER_PATH.JOIN_COURSE}
+        >
+          Join Course
+        </Link>
+        <Link
+          className="sidebar__item"
+          onClick={toggle}
           to={ROUTER_PATH.CONTACT}
         >
           Contact
