@@ -15,9 +15,8 @@ type Props = {
 
 const Sidebar = ({ toggle, isOpen }: Props) => {
   const dispatch = useAppDispatch();
-  const isAuthenticated: boolean = useAppSelector(
-    ({ auth }) => auth.isAuthenticated,
-  );
+  const { isAuthenticated, user } = useAppSelector(({ auth }) => auth);
+
   const sidebarClassName = classNames('sidebar', { open: isOpen });
 
   return (
@@ -34,6 +33,15 @@ const Sidebar = ({ toggle, isOpen }: Props) => {
         <Link className="sidebar__item" onClick={toggle} to={ROUTER_PATH.HOME}>
           Home
         </Link>
+        {user?.isSuperuser && (
+          <Link
+            className="sidebar__item"
+            onClick={toggle}
+            to={ROUTER_PATH.ADMIN}
+          >
+            Admin
+          </Link>
+        )}
         <Link
           className="sidebar__item"
           onClick={toggle}

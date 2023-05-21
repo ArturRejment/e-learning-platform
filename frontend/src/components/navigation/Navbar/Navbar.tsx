@@ -13,9 +13,8 @@ type Props = {
 
 const Navbar = ({ toggleSidebar }: Props) => {
   const dispatch = useAppDispatch();
-  const isAuthenticated: boolean = useAppSelector(
-    ({ auth }) => auth.isAuthenticated,
-  );
+  const { isAuthenticated, user } = useAppSelector(({ auth }) => auth);
+
   return (
     <nav className="navbar">
       <div className="navbar__wrapper">
@@ -24,6 +23,11 @@ const Navbar = ({ toggleSidebar }: Props) => {
         </Link>
 
         <div className="navbar__container">
+          {user?.isSuperuser && (
+            <Link className="navbar__item" to={ROUTER_PATH.ADMIN}>
+              Admin
+            </Link>
+          )}
           <Link className="navbar__item" to={ROUTER_PATH.CONTACT}>
             Contact
           </Link>

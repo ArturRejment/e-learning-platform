@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { history, ROUTER_PATH } from '../../assets';
 import { login, register } from '../../services';
-import { AccessTokenDto, LoginResponseDto } from '../../types/dtos';
+import { AccessTokenDto, LoginResponseDto, UserDto } from '../../types/dtos';
 import { logout, tokenRefreshed } from './auth.actions';
 
 type InitialState = {
@@ -10,6 +10,7 @@ type InitialState = {
   refreshToken: string | null;
   isAuthenticated: boolean;
   isLoading: boolean;
+  user: UserDto | null;
 };
 
 const initialAccessToken = localStorage.getItem('accessToken');
@@ -20,6 +21,7 @@ const initialState: InitialState = {
   refreshToken: initialRefreshToken,
   isAuthenticated: !!initialAccessToken,
   isLoading: false,
+  user: null,
 };
 
 const authSlice = createSlice({
