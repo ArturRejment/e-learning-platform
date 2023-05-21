@@ -4,8 +4,7 @@ import { useState } from 'react';
 import { Navigate, Outlet, Route, Routes } from 'react-router-dom';
 
 import { ROUTER_PATH } from '../assets';
-import { useAppSelector } from '../hooks';
-import { useVerifyTokenQuery } from '../services';
+import { useGetUserQuery } from '../services';
 import AdminPage from './admin/AdminPage';
 import Login from './auth/Login';
 import Register from './auth/Register';
@@ -23,8 +22,7 @@ import {
 } from './utils';
 
 const App = () => {
-  const { accessToken } = useAppSelector(({ auth }) => auth);
-  useVerifyTokenQuery({ token: accessToken });
+  useGetUserQuery();
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
 
   const toggleSidebar = () => {
