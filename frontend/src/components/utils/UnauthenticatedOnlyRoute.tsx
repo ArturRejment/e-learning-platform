@@ -9,17 +9,17 @@ type Props = {
   component: ComponentType;
 };
 
-const PrivateRoute = ({ component: Component, ...rest }: Props) => {
+const UnauthenticatedOnlyRoute = ({ component: Component, ...rest }: Props) => {
   const { isAuthenticated, isLoading, accessToken, refreshToken } =
     useAppSelector(({ auth }) => auth);
 
   if (isLoading) {
     return <FullPageSpinner />;
   }
-  if (!isAuthenticated || accessToken === null || refreshToken === null) {
-    return <Navigate replace to={ROUTER_PATH.LOGIN} />;
+  if (isAuthenticated && accessToken !== null && refreshToken !== null) {
+    return <Navigate replace to={ROUTER_PATH.HOME} />;
   }
   return <Component {...rest} />;
 };
 
-export default PrivateRoute;
+export default UnauthenticatedOnlyRoute;

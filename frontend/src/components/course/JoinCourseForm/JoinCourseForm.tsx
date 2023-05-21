@@ -22,9 +22,7 @@ const JoinCourseForm = ({ submit, error, backendErrors, isLoading }: Props) => {
     resolver: zodResolver(joinCourseDtoSchema),
   });
 
-  const onSubmit: SubmitHandler<JoinCourseDto> = (data) => {
-    submit(data, reset);
-  };
+  const onSubmit: SubmitHandler<JoinCourseDto> = (data) => submit(data, reset);
 
   return (
     <div className="form">
