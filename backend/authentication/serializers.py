@@ -9,7 +9,13 @@ from code_generate.models import Code
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = get_user_model()
-        exclude = ["password"]
+        fields = (
+            "id",
+            "first_name",
+            "last_name",
+            "email",
+            "is_superuser",
+        )
 
 
 class UserRegisterSerializer(serializers.ModelSerializer):
