@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { history, ROUTER_PATH } from '../../assets';
-import { login, register } from '../../services';
-import { AccessTokenDto, LoginResponseDto } from '../../types/dtos';
+import { getUser, login, register } from '../../services';
+import { AccessTokenDto, LoginResponseDto, UserDto } from '../../types/dtos';
 import { logout, tokenRefreshed } from './auth.actions';
 
 type InitialState = {
@@ -10,6 +10,7 @@ type InitialState = {
   refreshToken: string | null;
   isAuthenticated: boolean;
   isLoading: boolean;
+  user: UserDto | null;
 };
 
 const initialAccessToken = localStorage.getItem('accessToken');
@@ -20,6 +21,7 @@ const initialState: InitialState = {
   refreshToken: initialRefreshToken,
   isAuthenticated: !!initialAccessToken,
   isLoading: false,
+  user: null,
 };
 
 const authSlice = createSlice({
@@ -36,6 +38,7 @@ const authSlice = createSlice({
         state.refreshToken = null;
         state.isAuthenticated = false;
         state.isLoading = false;
+        state.user = null;
       })
       // TOKEN REFRESHED
       .addCase(
@@ -74,6 +77,7 @@ const authSlice = createSlice({
         state.refreshToken = null;
         state.isAuthenticated = false;
         state.isLoading = false;
+        state.user = null;
       })
       // REGISTER PENDING
       .addMatcher(register.matchPending, (state) => {
@@ -98,6 +102,18 @@ const authSlice = createSlice({
         state.refreshToken = null;
         state.isAuthenticated = false;
         state.isLoading = false;
+        state.user = null;
+      })
+      // GET USER FULFILLED
+      .addMatcher(
+        getUser.matchFulfilled,
+        (state, action: PayloadAction<UserDto>) => {
+          state.user = action.payload;
+        },
+      )
+      // GET USER REJECTED
+      .addMatcher(getUser.matchRejected, (state) => {
+        state.user = null;
       });
   },
 });

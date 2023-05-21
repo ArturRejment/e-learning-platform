@@ -17,7 +17,7 @@ const CourseCodeGeneration = () => {
   };
 
   return (
-    <div className="wrapper">
+    <div className="course-code-generation">
       <CourseCodeGenerationForm
         submit={handleSubmit}
         error={error ? 'Codes Generation Unsuccessful!' : ''}

@@ -1,32 +1,41 @@
 import './App.scss';
 
+import { useState } from 'react';
 import { Navigate, Outlet, Route, Routes } from 'react-router-dom';
 
 import { ROUTER_PATH } from '../assets';
-import { useAppSelector } from '../hooks';
-import { useVerifyTokenQuery } from '../services';
+import { useGetUserQuery } from '../services';
+import AdminPage from './admin/AdminPage';
 import Login from './auth/Login';
 import Register from './auth/Register';
-import CodeGeneration from './code-generation/CodeGeneration';
-import CourseCodeGeneration from './course/CourseCodeGeneration';
 import CourseDetail from './course/CourseDetail';
 import JoinCourse from './course/JoinCourse';
 import About from './home/About';
 import Contact from './home/Contact';
 import Home from './home/Home';
 import Navbar from './navigation/Navbar';
-import { PrivateRoute, UnauthenticatedOnlyRoute } from './utils';
+import Sidebar from './navigation/Sidebar';
+import {
+  AdminOnlyRoute,
+  PrivateRoute,
+  UnauthenticatedOnlyRoute,
+} from './utils';
 
 const App = () => {
-  const { accessToken } = useAppSelector(({ auth }) => auth);
-  useVerifyTokenQuery({ token: accessToken });
+  useGetUserQuery();
+  const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
+
+  const toggleSidebar = () => {
+    setIsSidebarOpen((prevOpen) => !prevOpen);
+  };
 
   return (
     <Routes>
       <Route
         element={
           <>
-            <Navbar />
+            <Navbar toggleSidebar={toggleSidebar} />
+            <Sidebar toggle={toggleSidebar} isOpen={isSidebarOpen} />
             <Outlet />
           </>
         }
@@ -36,18 +45,16 @@ const App = () => {
         <Route path={ROUTER_PATH.ABOUT} element={<About />} />
         <Route path={ROUTER_PATH.CONTACT} element={<Contact />} />
         <Route
-          path={ROUTER_PATH.COURSE_CODE_GENERATION}
-          element={<CourseCodeGeneration />}
+          path={ROUTER_PATH.ADMIN}
+          element={<AdminOnlyRoute component={AdminPage} />}
         />
-        <Route
-          path={ROUTER_PATH.CODE_GENERATION}
-          element={<CodeGeneration />}
-        />
+
         <Route
           path={ROUTER_PATH.HOME}
           element={<PrivateRoute component={Home} />}
         />
       </Route>
+
       <Route
         path={ROUTER_PATH.LOGIN}
         element={<UnauthenticatedOnlyRoute component={Login} />}
