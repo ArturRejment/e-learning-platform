@@ -3,6 +3,7 @@ from django.urls import include, path
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 from rest_framework.routers import DefaultRouter
 
+from authentication.views import UserViewSet
 from code_generate.views import CodeGenerateViewSet, CourseJoinCodeViewSet
 from course.views import CourseViewSet, JoinCourseViewSet
 from exam.views import ExamViewSet
@@ -15,6 +16,7 @@ router.register(
     r"course-join-codes", CourseJoinCodeViewSet, basename="course-join-codes"
 )
 router.register(r"exam", ExamViewSet, basename="exam")
+router.register(r"user", UserViewSet, basename="user")
 
 
 urlpatterns = [

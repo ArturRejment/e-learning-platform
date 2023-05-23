@@ -1,6 +1,7 @@
 export type UserDto = {
-  id: number;
+  id: string;
   firstName?: string;
   lastName?: string;
   email: string;
+  isSuperuser: boolean;
 };

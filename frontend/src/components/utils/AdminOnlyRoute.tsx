@@ -9,17 +9,22 @@ type Props = {
   component: ComponentType;
 };
 
-const PrivateRoute = ({ component: Component, ...rest }: Props) => {
-  const { isAuthenticated, isLoading, accessToken, refreshToken } =
+const AdminOnlyRoute = ({ component: Component, ...rest }: Props) => {
+  const { isAuthenticated, isLoading, accessToken, refreshToken, user } =
     useAppSelector(({ auth }) => auth);
 
   if (isLoading) {
     return <FullPageSpinner />;
   }
-  if (!isAuthenticated || accessToken === null || refreshToken === null) {
-    return <Navigate replace to={ROUTER_PATH.LOGIN} />;
+  if (
+    !isAuthenticated ||
+    accessToken === null ||
+    refreshToken === null ||
+    !user?.isSuperuser
+  ) {
+    return <Navigate replace to={ROUTER_PATH.HOME} />;
   }
   return <Component {...rest} />;
 };
 
-export default PrivateRoute;
+export default AdminOnlyRoute;

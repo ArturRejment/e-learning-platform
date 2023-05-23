@@ -7,11 +7,14 @@ import { ROUTER_PATH } from '../../../assets';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { logout } from '../../auth/auth.actions';
 
-const Navbar = () => {
+type Props = {
+  toggleSidebar: () => void;
+};
+
+const Navbar = ({ toggleSidebar }: Props) => {
   const dispatch = useAppDispatch();
-  const isAuthenticated: boolean = useAppSelector(
-    ({ auth }) => auth.isAuthenticated,
-  );
+  const { isAuthenticated, user } = useAppSelector(({ auth }) => auth);
+
   return (
     <nav className="navbar">
       <div className="navbar__wrapper">
@@ -20,6 +23,14 @@ const Navbar = () => {
         </Link>
 
         <div className="navbar__container">
+          {user?.isSuperuser && (
+            <Link className="navbar__item" to={ROUTER_PATH.ADMIN}>
+              Admin
+            </Link>
+          )}
+          <Link className="navbar__item" to={ROUTER_PATH.JOIN_COURSE}>
+            Join Course
+          </Link>
           <Link className="navbar__item" to={ROUTER_PATH.CONTACT}>
             Contact
           </Link>
@@ -44,9 +55,14 @@ const Navbar = () => {
           )}
         </div>
 
-        <div className="navbar__icon">
+        <button
+          type="button"
+          className="navbar__icon"
+          onClick={toggleSidebar}
+          onKeyDown={toggleSidebar}
+        >
           <FaBars />
-        </div>
+        </button>
       </div>
     </nav>
   );
