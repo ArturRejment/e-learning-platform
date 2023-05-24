@@ -10,7 +10,7 @@ from .serializers import CodeGenerateSerializer, CourseJoinCodeCreateSerializer
 
 
 class CodeGenerateViewSet(viewsets.ViewSet):
-    permission_classes = [AllowAny]
+    permission_classes = [IsAdminUser]
     serializer_class = CodeGenerateSerializer
 
     def create(self, request):

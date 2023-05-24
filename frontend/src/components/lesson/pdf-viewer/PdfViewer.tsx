@@ -1,31 +1,32 @@
-/* eslint-disable @typescript-eslint/no-shadow */
-/* eslint-disable react/prop-types */
-/* eslint-disable react/button-has-type */
-/* eslint-disable import/no-extraneous-dependencies */
-import './pdf-viewer.scss';
+/* eslint-disable import/no-extraneous-dependencies */ //linia 5, z jakiegoś powodu nie działa
+import './PdfViewer.scss';
 
 import React, { useState } from 'react';
 import { Document, Page, pdfjs } from 'react-pdf';
 
+type Props = {
+  file: any;
+};
+
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
-const pdfViewer = ({ file }) => {
-  const [numPages, setNumPages] = useState(null);
-  const [pageNumber, setPageNumber] = useState(1);
+const PdfViewer = ({ file }: Props) => {
+  const [numPages1, setNumPages] = useState(null);
+  const [pageNumber1, setPageNumber] = useState(1);
 
   const onDocumentLoadSuccess = ({ numPages }) => {
     setNumPages(numPages);
   };
 
   const nextPage = () => {
-    if (pageNumber < numPages) {
-      setPageNumber(pageNumber + 1);
+    if (pageNumber1 < numPages1) {
+      setPageNumber(pageNumber1 + 1);
     }
   };
 
   const prevPage = () => {
-    if (pageNumber > 1) {
-      setPageNumber(pageNumber - 1);
+    if (pageNumber1 > 1) {
+      setPageNumber(pageNumber1 - 1);
     }
   };
 
@@ -38,23 +39,25 @@ const pdfViewer = ({ file }) => {
         className="pdf-container"
       >
         <Page
-          pageNumber={pageNumber}
+          pageNumber={pageNumber1}
           renderTextLayer={false}
           renderAnnotationLayer={false}
         />
       </Document>
       <div className="controls">
         <button
-          className="controls_but"
+          className="controls_button"
+          type="button"
           onClick={prevPage}
-          disabled={pageNumber === 1}
+          disabled={pageNumber1 === 1}
         >
           Prev
         </button>
         <button
-          className="controls_but"
+          className="controls_button"
+          type="button"
           onClick={nextPage}
-          disabled={pageNumber === numPages}
+          disabled={pageNumber1 === numPages1}
         >
           Next
         </button>
@@ -63,4 +66,4 @@ const pdfViewer = ({ file }) => {
   );
 };
 
-export default pdfViewer;
+export default PdfViewer;
