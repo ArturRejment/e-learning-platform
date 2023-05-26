@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */ //linia 5, z jakiegoś powodu nie działa
 import './PdfViewer.scss';
 
 import React, { useState } from 'react';
@@ -44,9 +43,9 @@ const PdfViewer = ({ file }: Props) => {
           renderAnnotationLayer={false}
         />
       </Document>
-      <div className="controls">
+      <div className="pdf-container__controls">
         <button
-          className="controls_button"
+          className="pdf-container__controls-button"
           type="button"
           onClick={prevPage}
           disabled={pageNumber1 === 1}
@@ -54,7 +53,7 @@ const PdfViewer = ({ file }: Props) => {
           Prev
         </button>
         <button
-          className="controls_button"
+          className="pdf-container__controls-button"
           type="button"
           onClick={nextPage}
           disabled={pageNumber1 === numPages1}
