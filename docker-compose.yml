@@ -9,7 +9,7 @@ services:
       POSTGRES_PASSWORD: postgres_password
       POSTGRES_DB: postgres_db
     volumes:
-      - ./postgres_data:/var/lib/postgresql/data/
+      - pgdata:/var/lib/postgresql/data/
     ports:
       - "5432:5432"
 
@@ -27,3 +27,5 @@ services:
       - "8005:8005"
     depends_on:
       - elearning_db
+volumes:
+  pgdata:
