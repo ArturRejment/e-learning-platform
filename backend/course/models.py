@@ -53,7 +53,7 @@ class Lesson(models.Model):
 
     pdf_file = models.FileField(upload_to="pdf", null=True, blank=True)
 
-    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name="lessons")
 
     def clean(self):
         if self.lesson_type == self.Type.PDF and not self.pdf_file:

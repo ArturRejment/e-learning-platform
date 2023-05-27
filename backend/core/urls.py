@@ -7,11 +7,12 @@ from rest_framework.routers import DefaultRouter
 
 from authentication.views import UserViewSet
 from code_generate.views import CodeGenerateViewSet, CourseJoinCodeViewSet
-from course.views import CourseViewSet, JoinCourseViewSet
+from course.views import CourseViewSet, JoinCourseViewSet, LessonViewSet
 from exam.views import ExamViewSet
 
 router = DefaultRouter()
 router.register(r"course", CourseViewSet, basename="course")
+router.register(r"lesson", LessonViewSet, basename="lesson")
 router.register(r"join/course", JoinCourseViewSet, basename="join-course")
 router.register(r"code_generate", CodeGenerateViewSet, basename="code_generate")
 router.register(
