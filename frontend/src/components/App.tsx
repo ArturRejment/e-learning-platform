@@ -41,18 +41,29 @@ const App = () => {
           </>
         }
       >
-        <Route path={ROUTER_PATH.COURSE_DETAIL} element={<CourseDetail />} />
-        <Route path={ROUTER_PATH.EXAM} element={<Exam />} />
-        <Route path={ROUTER_PATH.JOIN_COURSE} element={<JoinCourse />} />
         <Route path={ROUTER_PATH.ABOUT} element={<About />} />
         <Route path={ROUTER_PATH.CONTACT} element={<Contact />} />
+
         <Route
-          path={ROUTER_PATH.ADMIN}
-          element={<AdminOnlyRoute component={AdminPage} />}
+          path={ROUTER_PATH.COURSE_DETAIL}
+          element={<PrivateRoute component={CourseDetail} />}
+        />
+        <Route
+          path={ROUTER_PATH.EXAM}
+          element={<PrivateRoute component={Exam} />}
+        />
+        <Route
+          path={ROUTER_PATH.JOIN_COURSE}
+          element={<PrivateRoute component={JoinCourse} />}
         />
         <Route
           path={ROUTER_PATH.HOME}
           element={<PrivateRoute component={Home} />}
+        />
+
+        <Route
+          path={ROUTER_PATH.ADMIN}
+          element={<AdminOnlyRoute component={AdminPage} />}
         />
       </Route>
 
