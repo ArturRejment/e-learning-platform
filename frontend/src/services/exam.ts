@@ -1,5 +1,5 @@
 import { eLearningPlatformApi } from '../apis';
-import { ExamDto } from '../types/dtos';
+import { ExamAnswersRequestDto, ExamDto } from '../types/dtos';
 
 export const examApi = eLearningPlatformApi.injectEndpoints({
   endpoints: (build) => ({
@@ -9,10 +9,17 @@ export const examApi = eLearningPlatformApi.injectEndpoints({
         method: 'GET',
       }),
     }),
+    submitExamAnswers: build.mutation<void, ExamAnswersRequestDto>({
+      query: ({ examId, answers }) => ({
+        url: `exam/${examId}/examine`,
+        method: 'POST',
+        body: answers,
+      }),
+    }),
   }),
 });
 
-export const { useGetExamQuery } = examApi;
+export const { useGetExamQuery, useSubmitExamAnswersMutation } = examApi;
 export const {
-  endpoints: { getExam },
+  endpoints: { getExam, submitExamAnswers },
 } = examApi;

@@ -1,0 +1,27 @@
+@import '../../../style/colors';
+
+.radio-buttons {
+  padding: 20px 0;
+
+  &__header-label {
+    font-size: 1.2rem;
+    padding-bottom: 10px;
+  }
+
+  &__options {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  &__group {
+    display: flex;
+    gap: 10px;
+  }
+
+  &__error {
+    margin-top: 5px;
+    font-size: 0.9rem;
+    color: $clr-accent;
+  }
+}

@@ -1,10 +1,13 @@
-.exam-questions {
-  &__question-wrapper {
-    padding: 20px 0;
-  }
+@import '../../../style/colors';
 
-  &__question {
-    font-size: 1.2rem;
-    margin-bottom: 10px;
+.exam-questions {
+  &__button {
+    background-color: $clr-accent;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    color: $clr-light;
+    border-radius: 15px;
+    margin-top: 20px;
   }
 }

@@ -4,7 +4,7 @@ import { UseFormRegisterReturn } from 'react-hook-form';
 
 type Props<T extends string> = {
   label: string;
-  name: string;
+  name: T;
   type: 'text' | 'password' | 'number';
   register: UseFormRegisterReturn<T>;
   error?: string;
