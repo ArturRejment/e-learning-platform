@@ -14,6 +14,7 @@ class LessonListSerializer(ModelSerializer):
         fields = (
             "id",
             "name",
+            "lesson_type",
         )
 
 
