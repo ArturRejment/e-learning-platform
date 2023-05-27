@@ -35,7 +35,10 @@ const baseQueryWithReauth: BaseQueryFn<
 
   let result = await baseQuery(args, api, extraOptions);
 
-  if (!result.error || result.error.status !== 401) return result;
+  const shouldReturnEarly =
+    !result.error || ![401, 403].includes(result.error.status as number);
+
+  if (shouldReturnEarly) return result;
 
   if (mutex.isLocked()) {
     // wait until the mutex is available without locking it

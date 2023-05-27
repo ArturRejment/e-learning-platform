@@ -10,6 +10,7 @@ import Login from './auth/Login';
 import Register from './auth/Register';
 import CourseDetail from './course/CourseDetail';
 import JoinCourse from './course/JoinCourse';
+import Exam from './exam/Exam';
 import About from './home/About';
 import Contact from './home/Contact';
 import Home from './home/Home';
@@ -41,6 +42,7 @@ const App = () => {
         }
       >
         <Route path={ROUTER_PATH.COURSE_DETAIL} element={<CourseDetail />} />
+        <Route path={ROUTER_PATH.EXAM} element={<Exam />} />
         <Route path={ROUTER_PATH.JOIN_COURSE} element={<JoinCourse />} />
         <Route path={ROUTER_PATH.ABOUT} element={<About />} />
         <Route path={ROUTER_PATH.CONTACT} element={<Contact />} />

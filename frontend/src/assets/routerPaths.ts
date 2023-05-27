@@ -7,7 +7,7 @@ export const ROUTER_PATH = {
   JOIN_COURSE: '/join-course',
   ABOUT: '/about',
   CONTACT: '/contact',
-  EXAM: '/exam:examId',
+  EXAM: '/exam/:examId',
 } as const;
 
 type CreatePathArgs =

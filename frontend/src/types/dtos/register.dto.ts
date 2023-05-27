@@ -10,7 +10,7 @@ export const registerRequestDtoSchema = z
     password: z
       .string()
       .min(8, { message: 'Password must be at least 8 characters' }),
-    rePassword: z.string().min(1, { message: 'Confirm Password is required' }),
+    rePassword: z.string().min(8, { message: 'Confirm Password is required' }),
     registrationToken: z
       .string()
       .min(1, { message: 'Registration Token is required' }),
