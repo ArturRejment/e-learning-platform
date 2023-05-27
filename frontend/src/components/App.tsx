@@ -50,7 +50,6 @@ const App = () => {
           path={ROUTER_PATH.ADMIN}
           element={<AdminOnlyRoute component={AdminPage} />}
         />
-
         <Route
           path={ROUTER_PATH.HOME}
           element={<PrivateRoute component={Home} />}

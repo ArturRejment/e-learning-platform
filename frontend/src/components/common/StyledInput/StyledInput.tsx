@@ -1,22 +1,33 @@
 import './StyledInput.scss';
 
-import { UseFormRegisterReturn } from 'react-hook-form';
+import { ChangeEvent } from 'react';
+import { Control, FieldValues, Path, useController } from 'react-hook-form';
 
-type Props<T extends string> = {
+type Props<T extends FieldValues> = {
   label: string;
-  name: T;
+  name: Path<T>;
   type: 'text' | 'password' | 'number';
-  register: UseFormRegisterReturn<T>;
-  error?: string;
+  control: Control<T>;
+  externalError?: string;
 };
 
-const StyledInput = <T extends string>({
+const StyledInput = <T extends FieldValues>({
   label,
   name,
   type,
-  register,
-  error = '',
+  control,
+  externalError,
 }: Props<T>) => {
+  const {
+    field: { onChange, ...fieldRest },
+    fieldState: { error },
+  } = useController({ name, control });
+
+  const onInputChange = (e: ChangeEvent<HTMLInputElement>) =>
+    onChange(type === 'number' ? +e.target.value : e.target.value);
+
+  const errorMessage = error?.message || externalError;
+
   return (
     <div className="styled-input">
       <label htmlFor={name} className="styled-input__label">
@@ -27,12 +38,10 @@ const StyledInput = <T extends string>({
         className="styled-input__input"
         type={type}
         aria-label={name}
-        {...register}
-        onBlur={(e) => {
-          e.target.dispatchEvent(new Event('input', { bubbles: true }));
-        }}
+        onChange={onInputChange}
+        {...fieldRest}
       />
-      <p className="styled-input__error">{error}</p>
+      {errorMessage && <p className="styled-input__error">{errorMessage}</p>}
     </div>
   );
 };
