@@ -6,14 +6,14 @@ type Props = {
 };
 
 const VideoDetail = ({ title, url }: Props) => {
-  // żeby można było wyświetlić film z yt należy podać url = https://www.youtube.com/embed/{id}
+  // pass url to see video, e.g. https://www.youtube.com/embed/{id}
 
   return (
     <div className="video-detail">
       <h3>{title}</h3>
       <div>
         <iframe
-          className="video-iframe"
+          className="video-detail__iframe"
           src={url}
           title="YouTube video"
           allowFullScreen
