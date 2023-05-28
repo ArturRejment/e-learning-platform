@@ -17,17 +17,16 @@ export type QuestionDto = {
 
 export const examQuestionsFormSchema = z.record(
   z.string().min(1),
-  z.string().min(1),
+  z.union([z.literal('a'), z.literal('b'), z.literal('c'), z.literal('d')]),
 );
 
 export type ExamQuestionsForm = z.infer<typeof examQuestionsFormSchema>;
 
 export type ExamAnswersDto = {
-  answers: {
-    questionId: number;
-    answer: string;
-  }[];
-};
+  questionId: number;
+  answer: string;
+}[];
+
 export type ExamAnswersRequestDto = {
   examId: string;
   answers: ExamAnswersDto;

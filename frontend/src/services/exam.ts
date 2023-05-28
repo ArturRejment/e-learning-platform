@@ -11,7 +11,7 @@ export const examApi = eLearningPlatformApi.injectEndpoints({
     }),
     submitExamAnswers: build.mutation<void, ExamAnswersRequestDto>({
       query: ({ examId, answers }) => ({
-        url: `exam/${examId}/examine`,
+        url: `exam/${examId}/examine/`,
         method: 'POST',
         body: answers,
       }),
