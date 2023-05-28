@@ -14,27 +14,23 @@ class LessonListSerializer(ModelSerializer):
         fields = (
             "id",
             "name",
-            "lesson_type",
         )
 
 
 class LessonDetailSerializer(ModelSerializer):
-    resource = SerializerMethodField()
-
     class Meta:
         model = Lesson
         fields = (
             "id",
             "name",
-            "lesson_type",
-            "resource",
+            "description",
+            "video_title",
+            "video_description",
+            "video_url",
+            "pdf_title",
+            "pdf_description",
+            "pdf_url",
         )
-
-    def get_resource(self, lesson):
-        if lesson.lesson_type == lesson.Type.VIDEO:
-            return lesson.youtube_video_url
-        return lesson.pdf_file.url
-
 
 class CourseSerializer(ModelSerializer):
     class Meta:
