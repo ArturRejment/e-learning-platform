@@ -9,12 +9,14 @@ import {
 } from '../../../services';
 import { ExamAnswersDto } from '../../../types/dtos';
 import ExamQuestions from '../ExamQuestions';
+import ExamResultsModal from '../ExamResultsModal';
 
 const Exam = () => {
   const { examId = '' } = useParams<RouterPathParams['EXAM']>();
   const { data: { description = '', questions = [] } = {} } =
     useGetExamQuery(examId);
-  const [submitAnswers, { isLoading }] = useSubmitExamAnswersMutation();
+  const [submitAnswers, { isLoading, data: examResults }] =
+    useSubmitExamAnswersMutation();
 
   const handleSubmit = (answers: ExamAnswersDto, reset: () => void) => {
     submitAnswers({ examId, answers });
@@ -30,6 +32,7 @@ const Exam = () => {
         submit={handleSubmit}
         isLoading={isLoading}
       />
+      {examResults && <ExamResultsModal examResults={examResults} />}
     </div>
   );
 };

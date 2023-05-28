@@ -31,3 +31,9 @@ export type ExamAnswersRequestDto = {
   examId: string;
   answers: ExamAnswersDto;
 };
+
+export type ExamResultsDto = {
+  passed: boolean;
+  passingThreshold: number;
+  score: string;
+};
