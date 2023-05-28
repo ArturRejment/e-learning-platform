@@ -1,5 +1,7 @@
 .idea
-postgres_data/
 .vs
-node_modules
 .DS_Store
+
+node_modules
+postgres_data/
+uploads/

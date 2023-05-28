@@ -1,7 +1,36 @@
-from rest_framework.serializers import CharField, ModelSerializer, Serializer
+from rest_framework.serializers import (
+    CharField,
+    ModelSerializer,
+    Serializer,
+    SerializerMethodField,
+)
 
-from course.models import Course
+from course.models import Course, Lesson
 
+
+class LessonListSerializer(ModelSerializer):
+    class Meta:
+        model = Lesson
+        fields = (
+            "id",
+            "name",
+        )
+
+
+class LessonDetailSerializer(ModelSerializer):
+    class Meta:
+        model = Lesson
+        fields = (
+            "id",
+            "name",
+            "description",
+            "video_title",
+            "video_description",
+            "video_url",
+            "pdf_title",
+            "pdf_description",
+            "pdf_url",
+        )
 
 class CourseSerializer(ModelSerializer):
     class Meta:
@@ -14,6 +43,8 @@ class CourseSerializer(ModelSerializer):
 
 
 class CourseDetailSerializer(ModelSerializer):
+    lessons = LessonListSerializer(many=True)
+
     class Meta:
         model = Course
         fields = (
@@ -21,6 +52,7 @@ class CourseDetailSerializer(ModelSerializer):
             "name",
             "description",
             "exams",
+            "lessons",
         )
 
 

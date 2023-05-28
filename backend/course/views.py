@@ -1,13 +1,14 @@
-from rest_framework import status, viewsets
+from rest_framework import status, viewsets, mixins
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
 from rest_framework.response import Response
 
 from code_generate.models import CourseJoinCode
-from course.models import Course
+from course.models import Course, Lesson
 from course.serializers import (
     CourseDetailSerializer,
     CourseSerializer,
     JoinCourseSerializer,
+    LessonDetailSerializer,
 )
 
 
@@ -46,3 +47,9 @@ class JoinCourseViewSet(viewsets.ViewSet):
         code.course.trainees.add(request.user)
         code.delete()
         return Response()
+
+
+class LessonViewSet(viewsets.GenericViewSet, mixins.RetrieveModelMixin):
+    queryset = Lesson.objects.all()
+    permission_classes = [IsAuthenticated]
+    serializer_class = LessonDetailSerializer
