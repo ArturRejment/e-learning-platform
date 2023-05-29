@@ -1,0 +1,12 @@
+.exam {
+  margin: 0 20px;
+
+  &__name {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+  }
+
+  &__description {
+    padding: 20px 0;
+  }
+}

@@ -1,18 +1,18 @@
 @import '../../../../style/media-queries';
 
 .video-detail {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    flex-direction: column;
-    margin-right: auto;
-    margin-left: auto;
-    padding: 10px 20px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
+  margin-right: auto;
+  margin-left: auto;
+  padding: 10px 20px;
 
-    .video-iframe {
-        @include tablet {
-            width: 560px;
-            height: 315px;
-        }
+  &__iframe {
+    @include tablet {
+      width: 560px;
+      height: 315px;
     }
+  }
 }

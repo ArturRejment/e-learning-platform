@@ -23,18 +23,14 @@ type Props = {
 };
 
 const CourseCodeGenerationForm = ({ submit, error, isLoading }: Props) => {
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-    control,
-  } = useForm<CourseCodeGenerationDto>({
+  const { handleSubmit, reset, control } = useForm<CourseCodeGenerationDto>({
+    defaultValues: { amount: 1, courseId: undefined },
     resolver: zodResolver(courseCodeGenerationDtoSchema),
   });
 
   const {
     field: { value, onChange, ...restCourseIdField },
+    fieldState: { error: courseIdError },
   } = useController({ name: 'courseId', control });
 
   const { data = [] } = useGetCoursesQuery();
@@ -57,12 +53,11 @@ const CourseCodeGenerationForm = ({ submit, error, isLoading }: Props) => {
       {error && <h2 className="form__error-msg">{error}</h2>}
 
       <form onSubmit={handleSubmit(onSubmit)}>
-        <StyledInput<'amount'>
+        <StyledInput
           label="Amount"
           name="amount"
           type="number"
-          register={register('amount', { valueAsNumber: true })}
-          error={errors.amount?.message}
+          control={control}
         />
 
         <Select
@@ -72,7 +67,9 @@ const CourseCodeGenerationForm = ({ submit, error, isLoading }: Props) => {
           onChange={onSelectChange}
           {...restCourseIdField}
         />
-        <p className="styled-input__error">{errors.courseId?.message}</p>
+        {courseIdError && (
+          <p className="styled-input__error">{courseIdError.message}</p>
+        )}
 
         <button className="form__button" type="submit">
           {isLoading ? <Spinner /> : 'Generate'}

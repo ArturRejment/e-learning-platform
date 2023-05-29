@@ -13,12 +13,8 @@ type Props = {
 };
 
 const JoinCourseForm = ({ submit, error, backendErrors, isLoading }: Props) => {
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm<JoinCourseDto>({
+  const { control, handleSubmit, reset } = useForm<JoinCourseDto>({
+    defaultValues: { code: '' },
     resolver: zodResolver(joinCourseDtoSchema),
   });
 
@@ -30,12 +26,12 @@ const JoinCourseForm = ({ submit, error, backendErrors, isLoading }: Props) => {
       {error && <h2 className="form__error-msg">{error}</h2>}
 
       <form onSubmit={handleSubmit(onSubmit)}>
-        <StyledInput<'code'>
+        <StyledInput
           label="Code"
           name="code"
           type="text"
-          register={register('code')}
-          error={errors.code?.message || backendErrors?.code}
+          control={control}
+          externalError={backendErrors?.code}
         />
 
         <button className="form__button" type="submit">

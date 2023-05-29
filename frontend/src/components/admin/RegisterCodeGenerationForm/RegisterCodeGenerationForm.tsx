@@ -15,12 +15,8 @@ type Props = {
 };
 
 const RegisterCodeGenerationForm = ({ submit, error, isLoading }: Props) => {
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm<RegisterCodeGenerationDto>({
+  const { control, handleSubmit, reset } = useForm<RegisterCodeGenerationDto>({
+    defaultValues: { count: 1 },
     resolver: zodResolver(registerCodeGenerationDtoSchema),
   });
 
@@ -33,12 +29,11 @@ const RegisterCodeGenerationForm = ({ submit, error, isLoading }: Props) => {
       {error && <h2 className="form__error-msg">{error}</h2>}
 
       <form onSubmit={handleSubmit(onSubmit)}>
-        <StyledInput<'count'>
+        <StyledInput
           label="Amount"
           name="count"
           type="number"
-          register={register('count', { valueAsNumber: true })}
-          error={errors.count?.message}
+          control={control}
         />
 
         <button className="form__button" type="submit">

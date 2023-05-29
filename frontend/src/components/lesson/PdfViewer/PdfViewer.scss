@@ -1,0 +1,59 @@
+@import '../../../style/colors';
+
+.pdf-viewer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  @media print {
+    display: none;
+  }
+
+  &__document {
+    display: flex;
+    justify-content: center;
+  }
+
+  &__buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    max-width: 400px;
+  }
+
+  &__button {
+    background-color: $clr-primary;
+    border: none;
+    outline: none;
+    text-decoration: none;
+    cursor: pointer;
+    border-radius: 25px;
+    padding: 15px 25px;
+    color: $clr-light;
+    width: 100%;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    align-self: stretch;
+    will-change: transform;
+    transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+
+    &:disabled {
+      pointer-events: none;
+      opacity: 0.6;
+    }
+
+    &:hover {
+      background-color: $clr-accent;
+      box-shadow: $clr-grey 0 8px 15px;
+      transform: translateY(-2px);
+    }
+
+    &:active {
+      box-shadow: none;
+      transform: translateY(0);
+    }
+  }
+}

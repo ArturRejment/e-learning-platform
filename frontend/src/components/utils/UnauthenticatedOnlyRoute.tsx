@@ -3,19 +3,16 @@ import { Navigate } from 'react-router-dom';
 
 import { ROUTER_PATH } from '../../assets';
 import { useAppSelector } from '../../hooks';
-import FullPageSpinner from './FullPageSpinner';
 
 type Props = {
   component: ComponentType;
 };
 
 const UnauthenticatedOnlyRoute = ({ component: Component, ...rest }: Props) => {
-  const { isAuthenticated, isLoading, accessToken, refreshToken } =
-    useAppSelector(({ auth }) => auth);
+  const { isAuthenticated, accessToken, refreshToken } = useAppSelector(
+    ({ auth }) => auth,
+  );
 
-  if (isLoading) {
-    return <FullPageSpinner />;
-  }
   if (isAuthenticated && accessToken !== null && refreshToken !== null) {
     return <Navigate replace to={ROUTER_PATH.HOME} />;
   }

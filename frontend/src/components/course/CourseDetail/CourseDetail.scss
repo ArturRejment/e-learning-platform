@@ -1,0 +1,22 @@
+@import '../../../style/colors';
+
+.course-detail {
+  margin: 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  &__name {
+    font-size: 1.5rem;
+  }
+
+  &__exam {
+    padding: 15px 25px;
+    text-decoration: none;
+    cursor: pointer;
+    background-color: $clr-primary;
+    color: $clr-light;
+    width: fit-content;
+    border-radius: 20px;
+  }
+}

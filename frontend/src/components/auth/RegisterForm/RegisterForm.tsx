@@ -20,12 +20,15 @@ type Props = {
 };
 
 const RegisterForm = ({ submit, error, backendErrors, isLoading }: Props) => {
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm<RegisterRequestDto>({
+  const { control, handleSubmit, reset } = useForm<RegisterRequestDto>({
+    defaultValues: {
+      firstName: '',
+      lastName: '',
+      email: '',
+      password: '',
+      rePassword: '',
+      registrationToken: '',
+    },
     resolver: zodResolver(registerRequestDtoSchema),
   });
 
@@ -38,55 +41,52 @@ const RegisterForm = ({ submit, error, backendErrors, isLoading }: Props) => {
       {error && <h2 className="form__error-msg">{error}</h2>}
 
       <form onSubmit={handleSubmit(onSubmit)}>
-        <StyledInput<'firstName'>
+        <StyledInput
           label="First Name"
           name="firstName"
           type="text"
-          register={register('firstName')}
-          error={errors.firstName?.message || backendErrors?.firstName}
+          control={control}
+          externalError={backendErrors?.firstName}
         />
 
-        <StyledInput<'lastName'>
+        <StyledInput
           label="Last Name"
           name="lastName"
           type="text"
-          register={register('lastName')}
-          error={errors.lastName?.message || backendErrors?.lastName}
+          control={control}
+          externalError={backendErrors?.lastName}
         />
 
-        <StyledInput<'email'>
+        <StyledInput
           label="E-mail"
           name="email"
           type="text"
-          register={register('email')}
-          error={errors.email?.message || backendErrors?.email}
+          control={control}
+          externalError={backendErrors?.email}
         />
 
-        <StyledInput<'password'>
+        <StyledInput
           label="Password"
           name="password"
           type="password"
-          register={register('password')}
-          error={errors.password?.message || backendErrors?.password}
+          control={control}
+          externalError={backendErrors?.password}
         />
 
-        <StyledInput<'rePassword'>
+        <StyledInput
           label="Confirm Password"
           name="rePassword"
           type="password"
-          register={register('rePassword')}
-          error={errors.rePassword?.message || backendErrors?.rePassword}
+          control={control}
+          externalError={backendErrors?.rePassword}
         />
 
-        <StyledInput<'registrationToken'>
+        <StyledInput
           label="Registration Token"
           name="registrationToken"
           type="text"
-          register={register('registrationToken')}
-          error={
-            errors.registrationToken?.message ||
-            backendErrors?.registrationToken
-          }
+          control={control}
+          externalError={backendErrors?.registrationToken}
         />
 
         <button className="form__button" type="submit">

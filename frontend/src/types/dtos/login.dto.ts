@@ -6,7 +6,7 @@ export const loginRequestDtoSchema = z.object({
   }),
   password: z
     .string()
-    .min(6, { message: 'Password must be at least 6 characters' }),
+    .min(8, { message: 'Password must be at least 8 characters' }),
 });
 
 export type LoginRequestDto = z.infer<typeof loginRequestDtoSchema>;

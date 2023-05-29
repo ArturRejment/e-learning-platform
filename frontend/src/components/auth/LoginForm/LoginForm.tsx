@@ -16,12 +16,8 @@ type Props = {
 };
 
 const LoginForm = ({ submit, error, isLoading }: Props) => {
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm<LoginRequestDto>({
+  const { control, handleSubmit, reset } = useForm<LoginRequestDto>({
+    defaultValues: { email: '', password: '' },
     resolver: zodResolver(loginRequestDtoSchema),
   });
 
@@ -34,20 +30,18 @@ const LoginForm = ({ submit, error, isLoading }: Props) => {
       {error && <h2 className="form__error-msg">{error}</h2>}
 
       <form onSubmit={handleSubmit(onSubmit)}>
-        <StyledInput<'email'>
+        <StyledInput
           label="E-mail"
           name="email"
           type="text"
-          register={register('email')}
-          error={errors.email?.message}
+          control={control}
         />
 
-        <StyledInput<'password'>
+        <StyledInput
           label="Password"
           name="password"
           type="password"
-          register={register('password')}
-          error={errors.password?.message}
+          control={control}
         />
 
         <button className="form__button" type="submit">
