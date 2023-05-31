@@ -14,6 +14,7 @@ import Exam from './exam/Exam';
 import About from './home/About';
 import Contact from './home/Contact';
 import Home from './home/Home';
+import LessonDetail from './lesson/LessonDetail';
 import Navbar from './navigation/Navbar';
 import Sidebar from './navigation/Sidebar';
 import {
@@ -51,6 +52,10 @@ const App = () => {
         <Route
           path={ROUTER_PATH.EXAM}
           element={<PrivateRoute component={Exam} />}
+        />
+        <Route
+          path={ROUTER_PATH.LESSON_DETAIL}
+          element={<PrivateRoute component={LessonDetail} />}
         />
         <Route
           path={ROUTER_PATH.JOIN_COURSE}

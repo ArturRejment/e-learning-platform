@@ -8,6 +8,7 @@ export const ROUTER_PATH = {
   ABOUT: '/about',
   CONTACT: '/contact',
   EXAM: '/exam/:examId',
+  LESSON_DETAIL: '/lesson/:lessonId',
 } as const;
 
 type CreatePathArgs =
@@ -19,7 +20,8 @@ type CreatePathArgs =
   | { path: typeof ROUTER_PATH.JOIN_COURSE }
   | { path: typeof ROUTER_PATH.ABOUT }
   | { path: typeof ROUTER_PATH.CONTACT }
-  | { path: typeof ROUTER_PATH.EXAM; params: { examId: string } };
+  | { path: typeof ROUTER_PATH.EXAM; params: { examId: string } }
+  | { path: typeof ROUTER_PATH.LESSON_DETAIL; params: { lessonId: string } };
 
 export function createPath(args: CreatePathArgs) {
   // routes without params

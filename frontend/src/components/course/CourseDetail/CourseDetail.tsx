@@ -7,7 +7,7 @@ import { useGetCourseQuery } from '../../../services';
 
 const CourseDetail = () => {
   const { courseId = '' } = useParams<RouterPathParams['COURSE_DETAIL']>();
-  const { data: { name, description, exams } = {} } =
+  const { data: { name, description, exams, lessons } = {} } =
     useGetCourseQuery(courseId);
   return (
     <div className="course-detail">
@@ -25,6 +25,17 @@ const CourseDetail = () => {
         >
           {`Go to Exam ${idx + 1}`}
         </Link>
+      ))}
+      {lessons?.map(({ id: lessonId, name: lessonName }) => (
+        <Link
+          className="course-detail__exam"
+          key={lessonId}
+          title="Go to Lesson"
+          to={createPath({
+            path: ROUTER_PATH.LESSON_DETAIL,
+            params: { lessonId },
+          })}
+        >{`Go to Lesson: ${lessonName}`}</Link>
       ))}
     </div>
   );
