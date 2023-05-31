@@ -12,6 +12,7 @@ const VideoViewer = ({ title, url }: Props) => {
         className="video-viewer__iframe"
         src={url}
         title={title}
+        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture;"
         allowFullScreen
       />
     </div>
