@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 
 import { RouterPathParams } from '../../../assets';
 import { useGetLessonQuery } from '../../../services';
+import VideoDetail from '../video/VideoDetail';
 
 const LessonDetail = () => {
   const { lessonId = '' } = useParams<RouterPathParams['LESSON_DETAIL']>();
@@ -14,9 +15,9 @@ const LessonDetail = () => {
       pdfDescription,
       pdfTitle,
       pdfUrl,
-      videoDescription,
-      videoTitle,
-      videoUrl,
+      videoTitle = '',
+      videoUrl = '',
+      videoDescription = '',
     } = {},
   } = useGetLessonQuery(lessonId);
 
@@ -24,6 +25,11 @@ const LessonDetail = () => {
     <div className="lesson-detail">
       <div className="lesson-detail__name">{name}</div>
       <div className="lesson-detail__description">{description}</div>
+      <VideoDetail
+        title={videoTitle}
+        url={videoUrl}
+        description={videoDescription}
+      />
     </div>
   );
 };
