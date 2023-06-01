@@ -1,10 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { getCourses } from '../../services';
-import { CourseDto } from '../../types/dtos';
+import { CoursePreviewDto } from '../../types/dtos';
 
 type InitialState = {
-  courses: CourseDto[];
+  courses: CoursePreviewDto[];
 };
 
 const initialState: InitialState = {
@@ -20,7 +20,7 @@ const courseSlice = createSlice({
       // GET COURSES FULFILLED
       .addMatcher(
         getCourses.matchFulfilled,
-        (state, action: PayloadAction<CourseDto[]>) => {
+        (state, action: PayloadAction<CoursePreviewDto[]>) => {
           state.courses = action.payload;
         },
       )

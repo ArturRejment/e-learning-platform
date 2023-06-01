@@ -1,8 +1,49 @@
+@import '../../../style/colors';
+
 .course-list-element {
-  margin-top: 50px;
-  width: 100%;
   display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  gap: 25px;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 2rem;
+  border-radius: 15px;
+  background-color: $clr-light;
+  box-shadow: 0 0 18px 2px $clr-grey;
+
+  &__name {
+    font-size: 1.5rem;
+  }
+
+  &__description {
+    color: $clr-grey;
+  }
+
+  &__link {
+    border: 2px solid $clr-accent;
+    padding: 10px 20px;
+    width: max-content;
+    border-radius: 5px;
+    color: $clr-accent;
+    background-color: $clr-light;
+    text-decoration: none;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+
+    svg {
+      fill: $clr-accent;
+      transition: all 0.3s ease-in-out;
+    }
+
+    &:hover,
+    &:focus {
+      background-color: $clr-accent;
+      color: $clr-light;
+
+      svg {
+        fill: $clr-light;
+      }
+    }
+  }
 }

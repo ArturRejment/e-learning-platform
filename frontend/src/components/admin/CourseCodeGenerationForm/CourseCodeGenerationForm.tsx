@@ -6,7 +6,7 @@ import { useGetCoursesQuery } from '../../../services';
 import {
   CourseCodeGenerationDto,
   courseCodeGenerationDtoSchema,
-  CourseDto,
+  CoursePreviewDto,
 } from '../../../types/dtos';
 import StyledInput from '../../common/StyledInput';
 import { Spinner } from '../../utils';
@@ -34,7 +34,7 @@ const CourseCodeGenerationForm = ({ submit, error, isLoading }: Props) => {
   } = useController({ name: 'courseId', control });
 
   const { data = [] } = useGetCoursesQuery();
-  const options: Option[] = data?.map(({ name, id }: CourseDto) => ({
+  const options: Option[] = data?.map(({ name, id }: CoursePreviewDto) => ({
     label: name,
     value: id,
   }));
