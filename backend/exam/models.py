@@ -1,5 +1,6 @@
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
+from django.contrib.auth import get_user_model
 
 from course.models import Course
 
@@ -29,6 +30,20 @@ class Exam(models.Model):
                 correct_answers_count += 1
 
         return correct_answers_count
+
+
+class UserExam(models.Model):
+    exam = models.ForeignKey(Exam, on_delete=models.CASCADE, related_name="exam")
+    user = models.ForeignKey(
+        get_user_model(), on_delete=models.CASCADE, related_name="user"
+    )
+    passed = models.BooleanField()
+    timestamp = models.DateTimeField(auto_now_add=True)
+    obtained_percentage_score = models.DecimalField(max_digits=5, decimal_places=2)
+
+    def __str__(self):
+        status_message = "zdał" if self.passed else "nie zdał"
+        return f"Użytkownik {self.user} {status_message} w dniu {self.timestamp} egzaminu z kursu {self.exam.course}"
 
 
 class ExamQuestion(models.Model):

@@ -1,7 +1,6 @@
 import uuid
 
 from django.contrib.auth import get_user_model
-from django.core.exceptions import ValidationError
 from django.db import models
 
 
@@ -31,6 +30,17 @@ class Course(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_user_exam_status(self, user: "User") -> str:
+        from exam.models import UserExam
+
+        try:
+            user_exam = UserExam.objects.get(user=user, exam=self.exams.first())
+        except UserExam.DoesNotExist:
+            return "Not taken"
+        if user_exam.passed:
+            return "Passed"
+        return "Failed"
 
 
 class Lesson(models.Model):
