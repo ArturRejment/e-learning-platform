@@ -2,6 +2,7 @@ export * from './course.dto';
 export * from './course-code-generation.dto';
 export * from './exam.dto';
 export * from './join-course.dto';
+export * from './lesson.dto';
 export * from './login.dto';
 export * from './register.dto';
 export * from './register-code-generation.dto';

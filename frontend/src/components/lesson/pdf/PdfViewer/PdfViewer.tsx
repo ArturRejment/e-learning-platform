@@ -36,6 +36,7 @@ const PdfViewer = ({ file }: Props) => {
           pageNumber={pageNumber}
           renderTextLayer={false}
           renderAnnotationLayer={false}
+          className="pdf-viewer__page"
         />
       </Document>
       <div className="pdf-viewer__buttons">
