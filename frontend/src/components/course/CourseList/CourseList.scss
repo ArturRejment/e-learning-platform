@@ -1,8 +1,39 @@
+@import '../../../style/colors';
+
 .course-list {
-  margin: auto;
-  width: 70%;
   display: flex;
-  justify-content: space-evenly;
-  align-items: center;
   flex-direction: column;
+  justify-content: center;
+
+  &__info {
+    margin-top: 25vh;
+    color: $clr-grey;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+  }
+
+  &__join {
+    padding: 15px 25px;
+    background-color: $clr-accent;
+    color: $clr-light;
+    text-decoration: none;
+    border-radius: 25px;
+    border: 1px solid $clr-accent;
+    transition: all 0.3s ease-in-out;
+
+    &:hover {
+      box-shadow: $clr-accent 0 6px 10px;
+      background-color: $clr-light;
+      color: $clr-accent;
+    }
+  }
+
+  &__error {
+    margin-top: 20vh;
+    font-size: 1.5rem;
+    text-align: center;
+    color: $clr-grey;
+  }
 }
