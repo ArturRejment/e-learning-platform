@@ -13,7 +13,10 @@ from course.serializers import (
 
 
 class CourseViewSet(viewsets.ModelViewSet):
-    queryset = Course.objects.all()
+    def get_queryset(self):
+        if self.request.user.is_staff:
+            return Course.objects.all()
+        return Course.objects.filter(trainees=self.request.user)
 
     def get_serializer_class(self):
         if self.action == "retrieve":
