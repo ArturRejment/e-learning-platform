@@ -56,31 +56,7 @@
     position: absolute;
     bottom: 2rem;
     right: 3rem;
-    background-color: $clr-light;
-    border-radius: 100%;
-    box-shadow: 4px 4px 2px 0 color.scale($clr-dark, $alpha: -80%);
-
-    svg {
-      height: 100%;
-      width: 100%;
-    }
-
-    &.completed {
-      width: 3rem;
-      height: 3rem;
-
-      svg {
-        fill: $clr-success-200;
-      }
-    }
-
-    &.in-progress {
-      width: 2.5rem;
-      height: 2.5rem;
-
-      svg {
-        fill: $clr-light-grey;
-      }
-    }
+    width: 2.5rem;
+    height: 2.5rem;
   }
 }

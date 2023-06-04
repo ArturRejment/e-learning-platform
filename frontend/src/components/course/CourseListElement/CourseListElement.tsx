@@ -1,36 +1,25 @@
 import './CourseListElement.scss';
 
-import classNames from 'classnames';
-import {
-  FaCheckCircle,
-  FaHourglassHalf,
-  FaLongArrowAltRight,
-} from 'react-icons/fa';
+import { FaLongArrowAltRight } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
 import { createPath, ROUTER_PATH } from '../../../assets';
 import { CoursePreviewDto } from '../../../types/dtos';
+import CourseStatus from '../CourseStatus';
 
 type Props = {
   course: CoursePreviewDto;
 };
 
 const CourseListElement = ({ course }: Props) => {
-  const { id, name, description } = course;
+  const { id, name, description, examStatus } = course;
+
   return (
     <div className="course-list-element">
       <div className="course-list-element__name">{name}</div>
       <div className="course-list-element__description">{description}</div>
-      <div
-        className={classNames('course-list-element__status', {
-          completed: true,
-          'in-progress': false,
-        })}
-        title="Completed"
-        // title="In Progress"
-      >
-        <FaCheckCircle />
-        {/* <FaHourglassHalf /> */}
+      <div className="course-list-element__status">
+        <CourseStatus status={examStatus} />
       </div>
 
       <Link
