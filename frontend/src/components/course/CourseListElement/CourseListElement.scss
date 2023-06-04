@@ -1,15 +1,22 @@
 @use 'sass:color';
 @import '../../../style/colors';
+@import '../../../style/media-queries';
 
 .course-list-element {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  height: 100%;
+  width: 100%;
   padding: 2rem;
   border-radius: 15px;
   background-color: $clr-light;
   box-shadow: 0 0 18px 2px $clr-grey;
   position: relative;
+
+  @include tablet {
+    max-width: 600px;
+  }
 
   &__name {
     font-size: 1.5rem;
@@ -17,9 +24,17 @@
 
   &__description {
     color: $clr-grey;
+    margin-bottom: 4.5rem;
+    max-height: 250px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 11;
+    -webkit-box-orient: vertical;
   }
 
   &__link {
+    position: absolute;
+    bottom: 2rem;
     padding: 10px 20px;
     width: max-content;
     border-radius: 5px;

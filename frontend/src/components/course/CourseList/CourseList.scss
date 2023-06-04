@@ -1,12 +1,22 @@
 @import '../../../style/colors';
+@import '../../../style/media-queries';
 
 .course-list {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: 1fr;
+  max-width: 1900px;
   gap: 2.5rem;
   padding: 3rem 0;
   margin: 0 20px;
+
+  @include tablet {
+    grid-template-columns: 1fr 1fr;
+    grid-auto-rows: 1fr;
+  }
+
+  @include desktop {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
 
   &__info {
     margin-top: 25vh;
