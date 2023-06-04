@@ -32,18 +32,26 @@ class LessonDetailSerializer(ModelSerializer):
             "pdf_url",
         )
 
+
 class CourseSerializer(ModelSerializer):
+    exam_status = SerializerMethodField()
+
     class Meta:
         model = Course
         fields = (
             "id",
             "name",
             "description",
+            "exam_status",
         )
+
+    def get_exam_status(self, course):
+        return course.get_user_exam_status(self.context["request"].user)
 
 
 class CourseDetailSerializer(ModelSerializer):
     lessons = LessonListSerializer(many=True)
+    exam_status = SerializerMethodField()
 
     class Meta:
         model = Course
@@ -53,7 +61,11 @@ class CourseDetailSerializer(ModelSerializer):
             "description",
             "exams",
             "lessons",
+            "exam_status",
         )
+
+    def get_exam_status(self, course):
+        return course.get_user_exam_status(self.context["request"].user)
 
 
 class JoinCourseSerializer(Serializer):
