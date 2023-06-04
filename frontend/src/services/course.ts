@@ -13,6 +13,7 @@ export const courseApi = eLearningPlatformApi.injectEndpoints({
         url: 'course/',
         method: 'GET',
       }),
+      providesTags: ['Courses'],
     }),
     getCourse: build.query<CourseDetailDto, string>({
       query: (courseId) => ({
@@ -26,6 +27,7 @@ export const courseApi = eLearningPlatformApi.injectEndpoints({
         method: 'POST',
         body: code,
       }),
+      invalidatesTags: ['Courses'],
     }),
     generateCourseCodes: build.mutation<string[], CourseCodeGenerationDto>({
       query: (data: CourseCodeGenerationDto) => ({
