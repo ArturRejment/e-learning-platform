@@ -23,7 +23,7 @@ class ExamViewSet(viewsets.GenericViewSet, mixins.RetrieveModelMixin):
 
         if UserExam.objects.filter(user=request.user, exam=exam).exists():
             return Response(
-                "Nie możesz podejść ponownie do tego egzaminu",
+                "You cannot retake this exam",
                 status=HTTP_400_BAD_REQUEST,
             )
 

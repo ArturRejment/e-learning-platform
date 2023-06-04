@@ -42,8 +42,8 @@ class UserExam(models.Model):
     obtained_percentage_score = models.DecimalField(max_digits=5, decimal_places=2)
 
     def __str__(self):
-        status_message = "zdał" if self.passed else "nie zdał"
-        return f"Użytkownik {self.user} {status_message} w dniu {self.timestamp} egzaminu z kursu {self.exam.course}"
+        status_message = "passed" if self.passed else "failed"
+        return f"The user {self.user} {status_message} the {self.exam.course} course exam on {self.timestamp}"
 
 
 class ExamQuestion(models.Model):

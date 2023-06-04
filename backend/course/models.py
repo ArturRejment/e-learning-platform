@@ -13,18 +13,18 @@ class Course(models.Model):
     )
 
     name = models.CharField(
-        verbose_name="nazwa kursu",
+        verbose_name="course name",
         max_length=100,
     )
 
     description = models.TextField(
-        verbose_name="opis kursu",
+        verbose_name="course description",
         blank=True,
     )
 
     trainees = models.ManyToManyField(
         to=get_user_model(),
-        verbose_name="uczestnicy kursu",
+        verbose_name="course participants",
         related_name="trainees",
     )
 
