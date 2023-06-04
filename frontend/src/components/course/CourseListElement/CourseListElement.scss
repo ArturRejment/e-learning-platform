@@ -1,3 +1,4 @@
+@use 'sass:color';
 @import '../../../style/colors';
 
 .course-list-element {
@@ -8,6 +9,7 @@
   border-radius: 15px;
   background-color: $clr-light;
   box-shadow: 0 0 18px 2px $clr-grey;
+  position: relative;
 
   &__name {
     font-size: 1.5rem;
@@ -18,31 +20,66 @@
   }
 
   &__link {
-    border: 2px solid $clr-accent;
     padding: 10px 20px;
     width: max-content;
     border-radius: 5px;
-    color: $clr-accent;
-    background-color: $clr-light;
+    color: $clr-light;
+    background-color: $clr-accent;
     text-decoration: none;
     display: flex;
-    gap: 20px;
+    gap: 18px;
     align-items: center;
-    transition: all 0.3s ease-in-out;
     cursor: pointer;
+    box-shadow: 4px 4px 2px 0 color.scale($clr-dark, $alpha: -80%);
+    transition: all 0.15s ease-out;
 
     svg {
-      fill: $clr-accent;
-      transition: all 0.3s ease-in-out;
+      fill: $clr-light;
+      transition: all 0.15s ease-in-out;
     }
 
     &:hover,
     &:focus {
-      background-color: $clr-accent;
-      color: $clr-light;
+      background-color: color.scale($clr-accent, $lightness: 5%);
+      box-shadow: 8px 10px 5px 0 color.scale($clr-dark, $alpha: -90%);
+      transition: all 0.3s ease-out;
+      transform: translateY(-3px);
 
       svg {
-        fill: $clr-light;
+        transition: all 0.3s ease-out;
+        transform: translateX(4px);
+      }
+    }
+  }
+
+  &__status {
+    position: absolute;
+    bottom: 2rem;
+    right: 3rem;
+    background-color: $clr-light;
+    border-radius: 100%;
+    box-shadow: 4px 4px 2px 0 color.scale($clr-dark, $alpha: -80%);
+
+    svg {
+      height: 100%;
+      width: 100%;
+    }
+
+    &.completed {
+      width: 3rem;
+      height: 3rem;
+
+      svg {
+        fill: $clr-success-200;
+      }
+    }
+
+    &.in-progress {
+      width: 2.5rem;
+      height: 2.5rem;
+
+      svg {
+        fill: $clr-light-grey;
       }
     }
   }

@@ -1,6 +1,11 @@
 import './CourseListElement.scss';
 
-import { FaLongArrowAltRight } from 'react-icons/fa';
+import classNames from 'classnames';
+import {
+  FaCheckCircle,
+  FaHourglassHalf,
+  FaLongArrowAltRight,
+} from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
 import { createPath, ROUTER_PATH } from '../../../assets';
@@ -16,9 +21,18 @@ const CourseListElement = ({ course }: Props) => {
     <div className="course-list-element">
       <div className="course-list-element__name">{name}</div>
       <div className="course-list-element__description">{description}</div>
-      <div className="course-list-element__status">
-        Status: <span>Completed</span>
+      <div
+        className={classNames('course-list-element__status', {
+          completed: true,
+          'in-progress': false,
+        })}
+        title="Completed"
+        // title="In Progress"
+      >
+        <FaCheckCircle />
+        {/* <FaHourglassHalf /> */}
       </div>
+
       <Link
         className="course-list-element__link"
         to={createPath({
