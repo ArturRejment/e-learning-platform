@@ -1,7 +1,6 @@
 import uuid
 
 from django.contrib.auth import get_user_model
-from django.core.exceptions import ValidationError
 from django.db import models
 
 
@@ -14,23 +13,34 @@ class Course(models.Model):
     )
 
     name = models.CharField(
-        verbose_name="nazwa kursu",
+        verbose_name="course name",
         max_length=100,
     )
 
     description = models.TextField(
-        verbose_name="opis kursu",
+        verbose_name="course description",
         blank=True,
     )
 
     trainees = models.ManyToManyField(
         to=get_user_model(),
-        verbose_name="uczestnicy kursu",
+        verbose_name="course participants",
         related_name="trainees",
     )
 
     def __str__(self):
         return self.name
+
+    def get_user_exam_status(self, user: "User") -> str:
+        from exam.models import UserExam
+
+        try:
+            user_exam = UserExam.objects.get(user=user, exam=self.exams.first())
+        except UserExam.DoesNotExist:
+            return "Not taken"
+        if user_exam.passed:
+            return "Passed"
+        return "Failed"
 
 
 class Lesson(models.Model):
