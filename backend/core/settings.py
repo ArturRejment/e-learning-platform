@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     "course",
     "code_generate",
     "exam",
+    "rating",
 ]
 
 MIDDLEWARE = [

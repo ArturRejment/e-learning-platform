@@ -9,10 +9,12 @@ from authentication.views import UserViewSet
 from code_generate.views import CodeGenerateViewSet, CourseJoinCodeViewSet
 from course.views import CourseViewSet, JoinCourseViewSet, LessonViewSet
 from exam.views import ExamViewSet
+from rating.views import RatingViewSet
 
 router = DefaultRouter()
 router.register(r"course", CourseViewSet, basename="course")
 router.register(r"lesson", LessonViewSet, basename="lesson")
+router.register(r"rating", RatingViewSet, basename="rating")
 router.register(r"join/course", JoinCourseViewSet, basename="join-course")
 router.register(r"code_generate", CodeGenerateViewSet, basename="code_generate")
 router.register(
