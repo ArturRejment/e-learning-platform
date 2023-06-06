@@ -1,41 +1,52 @@
 import './Contact.scss';
 
+import {
+  useSubmitCourseFeedbackMutation,
+  useSubmitSiteFeedbackMutation,
+} from '../../../services/contact';
+
 const Contact = () => {
+  const HandleSubmitCourse = () => {
+    useSubmitCourseFeedbackMutation({});
+  };
+  const HandleSubmitSite = () => {
+    useSubmitSiteFeedbackMutation({});
+  };
+
   return (
-    <div className="body">
+    <div className="contact">
       <div className="corse_feedback">
-        <h1 className="course_feedback__header">
-          Podziel się z nami uwagami co do Twojego kursu
+        <h1 className="course-feedback__header">
+          Share your thoughts about the course!
         </h1>
-        <form className="course_feedback__form">
+        <form className="course-feedback__form" onSubmit={HandleSubmitCourse}>
           <input
-            className="course_feedback__course_name"
+            className="course-feedback__course-name"
             type="text"
-            placeholder="Nazwa Kursu"
+            placeholder="Course Name"
           />
-          <br />
           <input
-            className="course_feedback__feedback"
+            className="course-feedback__feedback"
             type="text"
-            placeholder="Uwagi do kursu"
+            placeholder="Course Feedback"
           />
-          <button className="corse_feedback__submit" type="submit">
-            {' '}
+          <button className="course-feedback__submit" type="submit">
+            {' Submit '}
           </button>
         </form>
       </div>
-      <div className="site_feedback">
-        <h1 className="site_feedback__header">
-          Podziel się z nami uwagami co do działania strony
+      <div className="site-feedback">
+        <h1 className="site-feedback__header">
+          Share your thoughts about the site!
         </h1>
-        <form className="site_feedback__form">
+        <form className="site-feedback__form" onSubmit={HandleSubmitSite}>
           <input
-            className="site_feedback__feedback"
+            className="site-feedback__feedback"
             type="text"
-            placeholder="Uwagi do funkcjonowania strony"
+            placeholder="Site Feedback"
           />
-          <button className="site_feedback__submit" type="submit">
-            {' '}
+          <button className="site-feedback__submit" type="submit">
+            {' Submit '}
           </button>
         </form>
       </div>
