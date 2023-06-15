@@ -5,7 +5,7 @@ from rest_framework.serializers import (
     SerializerMethodField,
 )
 
-from course.models import Course, Lesson
+from course.models import Course, Lesson, CourseFeedback, SiteFeedback
 
 
 class LessonListSerializer(ModelSerializer):
@@ -73,3 +73,18 @@ class JoinCourseSerializer(Serializer):
 
     class Meta:
         fields = ("code",)
+
+
+class CourseFeedbackSerializer(ModelSerializer):
+    class Meta:
+        model = CourseFeedback
+        fields = (
+            "course_feedback",
+            "course_name",
+        )
+
+
+class SiteFeedbackSerializer(ModelSerializer):
+    class Meta:
+        model = SiteFeedback
+        fields = ("site_feedback",)

@@ -3,12 +3,14 @@ from rest_framework.permissions import IsAdminUser, IsAuthenticated
 from rest_framework.response import Response
 
 from code_generate.models import CourseJoinCode
-from course.models import Course, Lesson
+from course.models import Course, Lesson, CourseFeedback, SiteFeedback
 from course.serializers import (
     CourseDetailSerializer,
     CourseSerializer,
     JoinCourseSerializer,
     LessonDetailSerializer,
+    CourseFeedbackSerializer,
+    SiteFeedbackSerializer,
 )
 
 
@@ -56,3 +58,15 @@ class LessonViewSet(viewsets.GenericViewSet, mixins.RetrieveModelMixin):
     queryset = Lesson.objects.all()
     permission_classes = [IsAuthenticated]
     serializer_class = LessonDetailSerializer
+
+
+class CourseFeedbackViewSet(viewsets.GenericViewSet, mixins.CreateModelMixin):
+    queryset = CourseFeedback.objects.all()
+    permission_classes = [IsAuthenticated]
+    serializer_class = CourseFeedbackSerializer
+
+
+class SiteFeedbackViewSet(viewsets.GenericViewSet, mixins.CreateModelMixin):
+    queryset = SiteFeedback.objects.all()
+    permission_classes = [IsAuthenticated]
+    serializer_class = SiteFeedbackSerializer

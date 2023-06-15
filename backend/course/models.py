@@ -72,3 +72,12 @@ class Lesson(models.Model):
     pdf_description = models.TextField(null=True, blank=True)
 
     course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name="lessons")
+
+
+class CourseFeedback(models.Model):
+    course_feedback = models.TextField()
+    course_name = models.TextField()
+
+
+class SiteFeedback(models.Model):
+    site_feedback = models.TextField()
