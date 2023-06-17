@@ -7,6 +7,8 @@
   height: 100%;
   background-color: $clr-light;
   background: linear-gradient(0deg, $clr-primary 10%, $clr-light 80%);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   display: flex;
   flex-direction: column;
   align-items: center;

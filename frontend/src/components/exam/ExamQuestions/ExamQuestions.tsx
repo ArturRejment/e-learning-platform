@@ -37,7 +37,7 @@ const ExamQuestions = ({ questions, submit, isLoading }: Props) => {
             <RadioButtons
               key={id}
               name={`${id}`}
-              label={question}
+              label={`${id}. ${question}`}
               control={control}
               options={[
                 { value: 'a', label: answerA },

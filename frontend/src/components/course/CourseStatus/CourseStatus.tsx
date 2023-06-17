@@ -5,7 +5,7 @@ import { FaCheckCircle, FaHourglassHalf, FaTimesCircle } from 'react-icons/fa';
 import { ExamStatus } from '../../../types/dtos';
 
 type Props = {
-  status: ExamStatus;
+  status: ExamStatus | undefined;
 };
 
 const CourseStatus = ({ status }: Props) => {
