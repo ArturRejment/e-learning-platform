@@ -5,10 +5,10 @@ import SiteFeedback from '../../feedback/SiteFeedback/index';
 
 const Contact = () => {
   return (
-    <>
+    <div className="contact">
       <CourseFeedback />
       <SiteFeedback />
-    </>
+    </div>
   );
 };
 

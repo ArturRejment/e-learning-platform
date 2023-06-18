@@ -5,14 +5,14 @@ export const contactApi = eLearningPlatformApi.injectEndpoints({
   endpoints: (build) => ({
     submitCourseFeedback: build.mutation<string, CourseFeedbackDto>({
       query: ({ courseName, courseFeedback }) => ({
-        url: '', //TODO Nie ma jeszcze endpointu. Trzeba go dorobić i wrzucić tu
+        url: '/course-feedback/',
         method: 'POST',
         body: { courseName, courseFeedback },
       }),
     }),
     submitSiteFeedback: build.mutation<string, SiteFeedbackDto>({
       query: ({ siteFeedback }) => ({
-        url: '',//TODO Nie ma jeszcze endpointu. Trzeba go dorobić i wrzucić tu
+        url: '/site-feedback/',
         method: 'POST',
         body: { siteFeedback },
       }),

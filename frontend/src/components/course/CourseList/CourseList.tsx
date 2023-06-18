@@ -16,16 +16,18 @@ const CourseList = () => {
       <div className="course-list__error">Something went wrong. Try again!</div>
     );
 
+  if (!data?.length)
+    return (
+      <h3 className="course-list__info">
+        You are not enrolled in any course
+        <Link className="course-list__join" to={ROUTER_PATH.JOIN_COURSE}>
+          Join Course
+        </Link>
+      </h3>
+    );
+
   return (
     <div className="course-list">
-      {!data?.length && (
-        <h3 className="course-list__info">
-          You are not enrolled in any course
-          <Link className="course-list__join" to={ROUTER_PATH.JOIN_COURSE}>
-            Join Course
-          </Link>
-        </h3>
-      )}
       {data?.map((course) => (
         <div key={course.id}>
           <CourseListElement course={course} />

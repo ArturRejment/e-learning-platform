@@ -8,6 +8,7 @@ export const examApi = eLearningPlatformApi.injectEndpoints({
         url: `exam/${examId}/`,
         method: 'GET',
       }),
+      providesTags: ['Exam'],
     }),
     submitExamAnswers: build.mutation<ExamResultsDto, ExamAnswersRequestDto>({
       query: ({ examId, answers }) => ({
