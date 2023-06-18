@@ -34,9 +34,6 @@ const Navbar = ({ toggleSidebar }: Props) => {
           <Link className="navbar__item" to={ROUTER_PATH.CONTACT}>
             Contact
           </Link>
-          <Link className="navbar__item" to={ROUTER_PATH.ABOUT}>
-            About
-          </Link>
           {!isAuthenticated ? (
             <Link
               className="navbar__item navbar__item--login"

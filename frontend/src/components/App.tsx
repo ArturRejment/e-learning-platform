@@ -9,7 +9,6 @@ import Register from './auth/Register';
 import CourseDetail from './course/CourseDetail';
 import JoinCourse from './course/JoinCourse';
 import Exam from './exam/Exam';
-import About from './home/About';
 import Contact from './home/Contact';
 import Home from './home/Home';
 import LessonDetail from './lesson/LessonDetail';
@@ -40,7 +39,6 @@ const App = () => {
           </>
         }
       >
-        <Route path={ROUTER_PATH.ABOUT} element={<About />} />
         <Route path={ROUTER_PATH.CONTACT} element={<Contact />} />
 
         <Route
