@@ -17,7 +17,20 @@ export type QuestionDto = {
 
 export const examQuestionsFormSchema = z.record(
   z.string().min(1),
-  z.union([z.literal('a'), z.literal('b'), z.literal('c'), z.literal('d')]),
+  z.union([
+    z.literal('a', {
+      errorMap: () => ({ message: 'You must choose an answer' }),
+    }),
+    z.literal('b', {
+      errorMap: () => ({ message: 'You must choose an answer' }),
+    }),
+    z.literal('c', {
+      errorMap: () => ({ message: 'You must choose an answer' }),
+    }),
+    z.literal('d', {
+      errorMap: () => ({ message: 'You must choose an answer' }),
+    }),
+  ]),
 );
 
 export type ExamQuestionsForm = z.infer<typeof examQuestionsFormSchema>;

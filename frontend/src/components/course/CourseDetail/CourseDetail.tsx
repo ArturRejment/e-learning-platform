@@ -22,6 +22,7 @@ const CourseDetail = () => {
       <div className="course-detail__description">{description}</div>
       <div className="course-detail__exams-wrapper">
         <p>Exams available for this course:</p>
+        {!exams?.length && <span>No exams</span>}
         <div className="course-detail__exams">
           {exams?.map((examId, idx) => (
             <Link
@@ -40,6 +41,7 @@ const CourseDetail = () => {
       </div>
       <div className="course-detail__lessons-wrapper">
         <p>Lessons available for this course:</p>
+        {!lessons?.length && <span>No lessons</span>}
         <div className="course-detail__lessons">
           {lessons?.map(({ id: lessonId, name: lessonName }) => (
             <Link

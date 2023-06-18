@@ -39,6 +39,12 @@
       color: $clr-grey;
       text-transform: uppercase;
     }
+
+    span {
+      font-size: 1rem;
+      margin-bottom: 15px;
+      color: $clr-grey;
+    }
   }
 
   &__exams,

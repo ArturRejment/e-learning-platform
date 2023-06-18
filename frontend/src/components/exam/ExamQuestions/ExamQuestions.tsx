@@ -15,29 +15,29 @@ import { parseExamQuestionsToExamAnswers } from '../helpers';
 
 type Props = {
   questions: QuestionDto[];
-  submit: (answers: ExamAnswersDto, reset: () => void) => void;
+  submit: (answers: ExamAnswersDto) => void;
   isLoading: boolean;
 };
 
 const ExamQuestions = ({ questions, submit, isLoading }: Props) => {
-  const { control, handleSubmit, reset } = useForm<ExamQuestionsForm>({
+  const { control, handleSubmit } = useForm<ExamQuestionsForm>({
     resolver: zodResolver(examQuestionsFormSchema),
   });
 
   const onSubmit: SubmitHandler<ExamQuestionsForm> = (data) => {
     const examAnswers = parseExamQuestionsToExamAnswers(data);
-    submit(examAnswers, reset);
+    submit(examAnswers);
   };
 
   return (
     <div className="exam-questions">
       <form onSubmit={handleSubmit(onSubmit)}>
         {questions?.map(
-          ({ id, question, answerA, answerB, answerC, answerD }) => (
+          ({ id, question, answerA, answerB, answerC, answerD }, idx) => (
             <RadioButtons
               key={id}
               name={`${id}`}
-              label={`${id}. ${question}`}
+              label={`${idx + 1}. ${question}`}
               control={control}
               options={[
                 { value: 'a', label: answerA },

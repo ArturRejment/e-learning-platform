@@ -1,0 +1,19 @@
+@import '../../../style/colors';
+
+.exam-error-modal {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  &__header {
+    text-align: center;
+    font-size: 1.4rem;
+    color: $clr-grey;
+  }
+
+  &__content {
+    color: $clr-accent;
+    text-transform: uppercase;
+    text-align: center;
+  }
+}
