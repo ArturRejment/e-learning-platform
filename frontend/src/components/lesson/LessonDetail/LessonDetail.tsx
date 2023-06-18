@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 
 import { RouterPathParams } from '../../../assets';
 import { useGetLessonQuery } from '../../../services';
+import { FullPageSpinner } from '../../utils';
 import PdfDetail from '../pdf/PdfDetail';
 import VideoDetail from '../video/VideoDetail';
 
@@ -20,7 +21,10 @@ const LessonDetail = () => {
       videoUrl = '',
       videoDescription = '',
     } = {},
+    isLoading,
   } = useGetLessonQuery(lessonId);
+
+  if (isLoading) return <FullPageSpinner />;
 
   return (
     <div className="lesson-detail">

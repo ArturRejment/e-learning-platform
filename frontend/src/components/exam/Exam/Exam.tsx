@@ -9,14 +9,17 @@ import {
   useSubmitExamAnswersMutation,
 } from '../../../services';
 import { ExamAnswersDto } from '../../../types/dtos';
+import { FullPageSpinner } from '../../utils';
 import ExamErrorModal from '../ExamErrorModal';
 import ExamQuestions from '../ExamQuestions';
 import ExamResultsModal from '../ExamResultsModal';
 
 const Exam = () => {
   const { examId = '' } = useParams<RouterPathParams['EXAM']>();
-  const { data: { description = '', questions = [] } = {} } =
-    useGetExamQuery(examId);
+  const {
+    data: { description = '', questions = [] } = {},
+    isLoading: isExamLoading,
+  } = useGetExamQuery(examId);
   const [submitAnswers, { isLoading, data: examResults, error }] =
     useSubmitExamAnswersMutation();
   const [examError, setExamError] = useState<string>('');
@@ -29,6 +32,8 @@ const Exam = () => {
 
   const handleSubmit = (answers: ExamAnswersDto) =>
     submitAnswers({ examId, answers });
+
+  if (isExamLoading) return <FullPageSpinner />;
 
   return (
     <div className="exam">

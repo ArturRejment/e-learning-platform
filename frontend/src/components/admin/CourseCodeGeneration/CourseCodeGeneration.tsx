@@ -1,6 +1,9 @@
+import './CourseCodeGeneration.scss';
+
 import { useGenerateCourseCodesMutation } from '../../../services';
 import { CourseCodeGenerationDto } from '../../../types/dtos';
 import CourseCodeGenerationForm from '../CourseCodeGenerationForm';
+import GeneratedCodes from '../GeneratedCodes';
 
 const CourseCodeGeneration = () => {
   const [generateCourseCodes, { isLoading, data: codes, error }] =
@@ -23,11 +26,9 @@ const CourseCodeGeneration = () => {
         error={error ? 'Codes Generation Unsuccessful!' : ''}
         isLoading={isLoading}
       />
-      <div>
-        {codes?.map((code) => (
-          <p key={code}>{code}</p>
-        ))}
-      </div>
+      {codes?.length && (
+        <GeneratedCodes header="Generated course codes:" codes={codes} />
+      )}
     </div>
   );
 };

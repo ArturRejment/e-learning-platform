@@ -1,3 +1,5 @@
+import '../shared/formStyles.scss';
+
 import { zodResolver } from '@hookform/resolvers/zod';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
@@ -24,9 +26,9 @@ const RegisterCodeGenerationForm = ({ submit, error, isLoading }: Props) => {
     submit(postData, reset);
 
   return (
-    <div className="form">
-      <h1 className="form__header">Generate registration codes</h1>
-      {error && <h2 className="form__error-msg">{error}</h2>}
+    <div className="admin-form">
+      <h1 className="admin-form__header">Generate registration codes</h1>
+      {error && <h2 className="admin-form__error-msg">{error}</h2>}
 
       <form onSubmit={handleSubmit(onSubmit)}>
         <StyledInput
@@ -36,7 +38,7 @@ const RegisterCodeGenerationForm = ({ submit, error, isLoading }: Props) => {
           control={control}
         />
 
-        <button className="form__button" type="submit">
+        <button className="admin-form__button" type="submit">
           {isLoading ? <Spinner /> : 'Generate'}
         </button>
       </form>

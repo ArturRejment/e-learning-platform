@@ -5,7 +5,7 @@ import RegisterCodeGeneration from '../RegisterCodeGeneration';
 
 const AdminPage = () => {
   return (
-    <div>
+    <div className="admin-page">
       <CourseCodeGeneration />
       <RegisterCodeGeneration />
     </div>

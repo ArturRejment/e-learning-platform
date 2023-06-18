@@ -4,12 +4,17 @@ import { Link, useParams } from 'react-router-dom';
 
 import { createPath, ROUTER_PATH, RouterPathParams } from '../../../assets';
 import { useGetCourseQuery } from '../../../services';
+import { FullPageSpinner } from '../../utils';
 import CourseStatus from '../CourseStatus';
 
 const CourseDetail = () => {
   const { courseId = '' } = useParams<RouterPathParams['COURSE_DETAIL']>();
-  const { data: { name, description, exams, lessons, examStatus } = {} } =
-    useGetCourseQuery(courseId);
+  const {
+    data: { name, description, exams, lessons, examStatus } = {},
+    isLoading,
+  } = useGetCourseQuery(courseId);
+
+  if (isLoading) return <FullPageSpinner />;
 
   return (
     <div className="course-detail">
