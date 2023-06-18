@@ -4,7 +4,7 @@ import CourseList from '../../course/CourseList';
 
 const Home = () => {
   return (
-    <div>
+    <div className="home">
       <CourseList />
     </div>
   );

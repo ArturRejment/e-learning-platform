@@ -32,6 +32,10 @@
     top: 2rem;
     font-size: 1.8rem;
     cursor: pointer;
+
+    svg {
+      fill: $clr-accent;
+    }
   }
 
   &__container {
@@ -46,12 +50,14 @@
     font-size: 1.2rem;
     text-align: center;
     transition: all 0.3s ease-in-out;
+    color: $clr-light;
     cursor: pointer;
 
     &--login {
       background-color: $clr-light;
       color: $clr-accent;
-      border: thin solid $clr-accent;
+      border: none;
+      outline: none;
       border-radius: 30px;
       padding: 20px 45px;
       box-shadow: 0px 0px 30px -10px $clr-dark;
@@ -65,7 +71,8 @@
     &--logout {
       background-color: $clr-accent;
       color: $clr-light;
-      border: thin solid $clr-accent;
+      border: none;
+      outline: none;
       border-radius: 30px;
       padding: 20px 45px;
       box-shadow: 0px 0px 30px -10px $clr-dark;

@@ -1,5 +1,8 @@
+import './RegisterCodeGeneration.scss';
+
 import { useGenerateRegisterCodesMutation } from '../../../services';
 import { RegisterCodeGenerationDto } from '../../../types/dtos';
+import GeneratedCodes from '../GeneratedCodes';
 import RegisterCodeGenerationForm from '../RegisterCodeGenerationForm';
 
 const RegisterCodeGeneration = () => {
@@ -23,9 +26,9 @@ const RegisterCodeGeneration = () => {
         error={error ? 'Registration Codes Generation Unsuccessful!' : ''}
         isLoading={isLoading}
       />
-      {codes?.map((code) => (
-        <p key={code}>{code}</p>
-      ))}
+      {codes?.length && (
+        <GeneratedCodes header="Generated registration codes:" codes={codes} />
+      )}
     </div>
   );
 };

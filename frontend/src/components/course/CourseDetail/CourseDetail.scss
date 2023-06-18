@@ -1,22 +1,83 @@
 @import '../../../style/colors';
+@import '../../../style/media-queries';
 
 .course-detail {
-  margin: 0 20px;
   display: flex;
   flex-direction: column;
+  margin: 0 auto;
+  max-width: 1100px;
+  width: calc(100% - 40px);
   gap: 20px;
 
   &__name {
-    font-size: 1.5rem;
+    font-size: 1.7rem;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    margin-bottom: 30px;
   }
 
-  &__exam {
-    padding: 15px 25px;
+  &__status {
+    height: 2.5rem;
+  }
+
+  &__description {
+    font-size: 1.15rem;
+    line-height: 1.8;
+    margin-bottom: 30px;
+  }
+
+  &__exams-wrapper,
+  &__lessons-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    p {
+      font-size: 1.2rem;
+      margin-bottom: 15px;
+      color: $clr-grey;
+      text-transform: uppercase;
+    }
+
+    span {
+      font-size: 1rem;
+      margin-bottom: 15px;
+      color: $clr-grey;
+    }
+  }
+
+  &__exams,
+  &__lessons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    @include tablet {
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+  }
+
+  &__exam,
+  &__lesson {
+    padding: 30px 60px;
     text-decoration: none;
+    font-size: 1.2rem;
     cursor: pointer;
-    background-color: $clr-primary;
-    color: $clr-light;
-    width: fit-content;
-    border-radius: 20px;
+    background-color: $clr-light;
+    color: $clr-primary;
+    text-align: center;
+    border: 4px solid $clr-primary;
+
+    @include tablet {
+      width: fit-content;
+    }
+  }
+
+  &__lesson {
+    background-color: $clr-light;
+    color: $clr-accent;
+    border: 4px solid $clr-accent;
   }
 }

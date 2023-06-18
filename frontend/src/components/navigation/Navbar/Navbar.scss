@@ -21,10 +21,15 @@
 
   &__container {
     display: none;
+    transition: all 0.3s ease-in-out;
 
     @include tablet {
       display: flex;
       align-items: center;
+      gap: 1.8rem;
+    }
+
+    @include desktop {
       gap: 4rem;
     }
   }

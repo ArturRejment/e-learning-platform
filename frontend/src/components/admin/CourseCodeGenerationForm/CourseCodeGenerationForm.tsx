@@ -1,3 +1,5 @@
+import '../shared/formStyles.scss';
+
 import { zodResolver } from '@hookform/resolvers/zod';
 import { SubmitHandler, useController, useForm } from 'react-hook-form';
 import Select from 'react-select';
@@ -6,7 +8,7 @@ import { useGetCoursesQuery } from '../../../services';
 import {
   CourseCodeGenerationDto,
   courseCodeGenerationDtoSchema,
-  CourseDto,
+  CoursePreviewDto,
 } from '../../../types/dtos';
 import StyledInput from '../../common/StyledInput';
 import { Spinner } from '../../utils';
@@ -34,7 +36,7 @@ const CourseCodeGenerationForm = ({ submit, error, isLoading }: Props) => {
   } = useController({ name: 'courseId', control });
 
   const { data = [] } = useGetCoursesQuery();
-  const options: Option[] = data?.map(({ name, id }: CourseDto) => ({
+  const options: Option[] = data?.map(({ name, id }: CoursePreviewDto) => ({
     label: name,
     value: id,
   }));
@@ -48,9 +50,9 @@ const CourseCodeGenerationForm = ({ submit, error, isLoading }: Props) => {
   const selected = options?.find((option) => option.value === value) ?? null;
 
   return (
-    <div className="form">
-      <h1 className="form__header">Generate joining codes for course</h1>
-      {error && <h2 className="form__error-msg">{error}</h2>}
+    <div className="admin-form">
+      <h1 className="admin-form__header">Generate joining codes for course</h1>
+      {error && <h2 className="admin-form__error-msg">{error}</h2>}
 
       <form onSubmit={handleSubmit(onSubmit)}>
         <StyledInput
@@ -68,10 +70,10 @@ const CourseCodeGenerationForm = ({ submit, error, isLoading }: Props) => {
           {...restCourseIdField}
         />
         {courseIdError && (
-          <p className="styled-input__error">{courseIdError.message}</p>
+          <p className="admin-form__error">{courseIdError.message}</p>
         )}
 
-        <button className="form__button" type="submit">
+        <button className="admin-form__button" type="submit">
           {isLoading ? <Spinner /> : 'Generate'}
         </button>
       </form>

@@ -1,13 +1,38 @@
 @import '../../../style/colors';
+@import '../../../style/media-queries';
 
 .exam-questions {
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+  }
+
   &__button {
     background-color: $clr-accent;
-    padding: 10px 15px;
+    padding: 25px 45px;
     border: none;
     cursor: pointer;
     color: $clr-light;
-    border-radius: 15px;
-    margin-top: 20px;
+    border-radius: 25px;
+    margin-top: 40px;
+    width: 100%;
+    transition: all 0.3s ease-in-out;
+    border: 2px solid $clr-accent;
+
+    &:hover {
+      background-color: $clr-light;
+      color: $clr-accent;
+
+      svg {
+        fill: $clr-accent;
+      }
+    }
+
+    @include tablet {
+      width: auto;
+      margin-left: auto;
+      margin-right: 50px;
+    }
   }
 }

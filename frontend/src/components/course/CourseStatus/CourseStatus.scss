@@ -1,0 +1,27 @@
+@use 'sass:color';
+@import '../../../style/colors';
+
+.course-status {
+  height: 100%;
+  width: 100%;
+  background-color: $clr-light;
+  border-radius: 100%;
+
+  &--failed {
+    fill: color.scale($clr-error, $alpha: -20%);
+  }
+
+  &--passed {
+    fill: $clr-success-200;
+  }
+
+  &--in-progress {
+    margin-top: 20%;
+    margin-left: 20%;
+    width: 80%;
+    height: 80%;
+    background-color: transparent;
+    border-radius: 0;
+    fill: $clr-light-grey;
+  }
+}

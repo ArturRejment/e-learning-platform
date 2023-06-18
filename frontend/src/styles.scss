@@ -1,6 +1,6 @@
-@import "./style/colors";
-@import "./style/fonts";
-@import "./style/media-queries";
+@import './style/colors';
+@import './style/fonts';
+@import './style/media-queries';
 
 * {
   box-sizing: border-box;
@@ -8,4 +8,9 @@
   margin: 0;
   font-family: $font-primary;
   color: $clr-dark;
+}
+
+html,
+body {
+  background-color: $clr-light;
 }

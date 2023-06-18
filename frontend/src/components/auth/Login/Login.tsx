@@ -1,8 +1,5 @@
 import '../shared/wrapperStyles.scss';
 
-import { Link } from 'react-router-dom';
-
-import { ROUTER_PATH } from '../../../assets';
 import { useLoginMutation } from '../../../services';
 import LoginForm from '../LoginForm';
 
@@ -11,9 +8,6 @@ const Login = () => {
 
   return (
     <div className="wrapper">
-      <Link className="wrapper__back-button" to={ROUTER_PATH.HOME}>
-        Back
-      </Link>
       <LoginForm
         submit={(data) => login(data)}
         error={error ? 'Login Unsuccessful!' : ''}

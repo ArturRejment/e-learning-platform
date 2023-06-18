@@ -1,0 +1,75 @@
+@import '../../../style/colors';
+@import '../../../style/media-queries';
+
+.admin-form {
+  width: calc(100% - 40px);
+  max-width: 400px;
+  background-color: $clr-light;
+  padding: 60px 40px;
+  border-radius: 35px;
+  box-shadow: 0px 0px 40px -10px $clr-dark;
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 0.3s ease-in-out;
+
+  @include tablet {
+    min-height: 480px;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    gap: 15px;
+  }
+
+  &__header {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+
+  &__error-msg {
+    color: $clr-accent;
+    font-size: 1rem;
+    font-weight: 400;
+    margin-bottom: 20px;
+  }
+
+  &__error {
+    text-align: left;
+    color: $clr-accent;
+    margin-top: 5px;
+    font-size: 0.8rem;
+  }
+
+  &__button {
+    margin-top: auto;
+    background-color: $clr-accent;
+    border: none;
+    outline: none;
+    text-decoration: none;
+    cursor: pointer;
+    border-radius: 35px;
+    padding: 20px 25px;
+    color: $clr-light;
+    width: 100%;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    will-change: transform;
+    transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+
+    &:hover {
+      background-color: $clr-accent;
+      box-shadow: $clr-grey 0 8px 15px;
+      transform: translateY(-2px);
+    }
+
+    &:active {
+      box-shadow: none;
+      transform: translateY(0);
+    }
+  }
+}

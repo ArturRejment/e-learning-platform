@@ -15,6 +15,7 @@ export const examApi = eLearningPlatformApi.injectEndpoints({
         method: 'POST',
         body: answers,
       }),
+      invalidatesTags: ['Courses'],
     }),
   }),
 });

@@ -1,44 +1,35 @@
 import './ExamResultsModal.scss';
 
 import Modal from 'react-modal';
-import { Link } from 'react-router-dom';
 
-import { ROUTER_PATH } from '../../../assets';
 import { ExamResultsDto } from '../../../types/dtos';
+import { modalStyles } from '../helpers';
+import ReturnHomeButton from '../ReturnHomeButton';
 
 Modal.setAppElement('#root');
-const modalStyles = {
-  content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)',
-    padding: '50px',
-  },
-};
 
 type Props = {
   examResults: ExamResultsDto;
 };
 
 const ExamResultsModal = ({
-  examResults: { score, passed, passingThreshold },
+  examResults: { score, passed, passingThreshold } = {} as ExamResultsDto,
 }: Props) => {
   return (
     <Modal isOpen style={modalStyles} contentLabel="Exam Results">
-      <div className="exam-results-modal__header">Exam Results</div>
-      <div className="exam-results-modal__score">Score: {score}</div>
-      <div className="exam-results-modal__passed">
-        Passed: {passed ? 'Yes' : 'No'}
+      <div className="exam-results-modal">
+        <div className="exam-results-modal__header">Exam Results</div>
+        <div className="exam-results-modal__score">
+          Score: <span>{score}</span>
+        </div>
+        <div className="exam-results-modal__passed">
+          Passed: <span>{passed ? 'Yes' : 'No'}</span>
+        </div>
+        <div className="exam-results-modal__passing-threshold">
+          Passing Threshold: {passingThreshold}%
+        </div>
+        <ReturnHomeButton />
       </div>
-      <div className="exam-results-modal__passing-threshold">
-        Passing Threshold: {passingThreshold}
-      </div>
-      <Link className="exam-results-modal__link" to={ROUTER_PATH.HOME}>
-        Return to Home
-      </Link>
     </Modal>
   );
 };

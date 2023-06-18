@@ -56,9 +56,6 @@ const Sidebar = ({ toggle, isOpen }: Props) => {
         >
           Contact
         </Link>
-        <Link className="sidebar__item" onClick={toggle} to={ROUTER_PATH.ABOUT}>
-          About
-        </Link>
         {!isAuthenticated ? (
           <Link
             className="sidebar__item sidebar__item--login"
