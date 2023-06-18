@@ -8,6 +8,7 @@ export const lessonApi = eLearningPlatformApi.injectEndpoints({
         url: `lesson/${lessonId}/`,
         method: 'GET',
       }),
+      providesTags: ['Lesson'],
     }),
   }),
 });

@@ -14,7 +14,7 @@ export const authApi = eLearningPlatformApi.injectEndpoints({
         method: 'POST',
         body: credentials,
       }),
-      invalidatesTags: ['User'],
+      invalidatesTags: ['User', 'Courses', 'Exam', 'Lesson'],
     }),
     register: build.mutation<UserDto, RegisterRequestDto>({
       query: (credentials: RegisterRequestDto) => ({

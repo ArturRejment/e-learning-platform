@@ -1,0 +1,23 @@
+@import '../../../style/colors';
+@import '../../../style/media-queries';
+@import '../../../style/globals';
+
+.contact {
+  background-color: $clr-light;
+  background: $gradient-background;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  width: 100%;
+  min-height: calc(100vh - $navbar-height);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+
+  @include tablet {
+    padding-top: 100px;
+    flex-direction: row;
+    align-items: flex-start;
+  }
+}
