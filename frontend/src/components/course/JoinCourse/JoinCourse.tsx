@@ -1,3 +1,5 @@
+import './JoinCourse.scss';
+
 import { useEffect, useState } from 'react';
 
 import { useJoinCourseMutation } from '../../../services';
@@ -25,7 +27,7 @@ const JoinCourse = () => {
   };
 
   return (
-    <div className="wrapper">
+    <div className="join-course">
       <JoinCourseForm
         submit={handleSubmit}
         error={error ? 'Joining Course Unsuccessful!' : ''}

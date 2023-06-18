@@ -1,3 +1,5 @@
+import './JoinCourseForm.scss';
+
 import { zodResolver } from '@hookform/resolvers/zod';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
@@ -21,9 +23,9 @@ const JoinCourseForm = ({ submit, error, backendErrors, isLoading }: Props) => {
   const onSubmit: SubmitHandler<JoinCourseDto> = (data) => submit(data, reset);
 
   return (
-    <div className="form">
-      <h1 className="form__header">Enroll for course</h1>
-      {error && <h2 className="form__error-msg">{error}</h2>}
+    <div className="join-course-form">
+      <h1 className="join-course-form__header">Enroll for course</h1>
+      {error && <h2 className="join-course-form__error-msg">{error}</h2>}
 
       <form onSubmit={handleSubmit(onSubmit)}>
         <StyledInput
@@ -34,7 +36,7 @@ const JoinCourseForm = ({ submit, error, backendErrors, isLoading }: Props) => {
           externalError={backendErrors?.code}
         />
 
-        <button className="form__button" type="submit">
+        <button className="join-course-form__button" type="submit">
           {isLoading ? <Spinner /> : 'Enroll'}
         </button>
       </form>

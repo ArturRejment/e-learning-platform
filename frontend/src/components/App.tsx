@@ -1,5 +1,3 @@
-import './App.scss';
-
 import { useState } from 'react';
 import { Navigate, Outlet, Route, Routes } from 'react-router-dom';
 
